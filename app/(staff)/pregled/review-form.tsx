@@ -16,7 +16,7 @@ function Submit() {
 export function ReviewForm({ submissionId }: { submissionId: string }) {
   const [state, formAction] = useFormState<ActionState, FormData>(reviewSubmission, {});
 
-  if (state.ok) return <p className="text-small text-accent">{copy.review.reviewed}</p>;
+  if (state.ok) return <p className="text-small text-accent-text">{copy.review.reviewed}</p>;
 
   return (
     <form action={formAction} className="space-y-3">
@@ -33,7 +33,7 @@ export function ReviewForm({ submissionId }: { submissionId: string }) {
         placeholder={copy.review.feedbackPlaceholder}
       />
       {state.error ? (
-        <p className="text-small" style={{ color: "var(--danger)" }}>
+        <p role="alert" className="text-small" style={{ color: "var(--danger)" }}>
           {state.error}
         </p>
       ) : null}

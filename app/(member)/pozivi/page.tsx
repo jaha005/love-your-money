@@ -24,8 +24,8 @@ export default async function CallsPage() {
             <li key={q.id}>
               <p className="text-small">{q.body}</p>
               {q.answered && q.answer ? (
-                <div className="mt-2 border-l-2 pl-3" style={{ borderColor: "var(--accent)" }}>
-                  <p className="text-tiny uppercase tracking-[0.12em] text-accent">
+                <div className="mt-2 border-l-2 pl-3" style={{ borderColor: "var(--accent-text)" }}>
+                  <p className="text-tiny uppercase tracking-[0.12em] text-accent-text">
                     {copy.program.coachLabel}
                   </p>
                   <p className="mt-1 text-small text-muted">{q.answer}</p>

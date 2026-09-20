@@ -21,13 +21,20 @@ export function mix(a: string, b: string, amount: number) {
 }
 
 // Sve izvedeno iz brand.colors da se cijela paleta mijenja s jednog mjesta.
+//
+// Zlatna iz brand.colors ima 2.75:1 na krem pozadini - dovoljno za površine
+// (dugme, tanka linija), premalo za tekst. Zato --accent-text: ista boja,
+// zatamnjena do 5.0:1. Zlatnu kao pozadinu uvijek prati tamni tekst (5.9:1).
 export const cssVars = {
   "--bg": brand.colors.bg,
   "--text": brand.colors.text,
   "--accent": brand.colors.accent,
-  "--accent-dark": mix(brand.colors.accent, brand.colors.text, 0.28),
+  "--accent-text": mix(brand.colors.accent, brand.colors.text, 0.35),
+  "--accent-dark": mix(brand.colors.accent, brand.colors.text, 0.15),
   "--muted": brand.colors.muted,
   "--line": brand.colors.line,
+  // Granica polja za unos mora imati 3:1 (WCAG 1.4.11), tanka linija kartice ne mora.
+  "--line-strong": mix(brand.colors.line, brand.colors.muted, 0.7),
   "--tint": mix(brand.colors.bg, brand.colors.accent, 0.1),
   "--danger": "#B0342B",
 } as const;

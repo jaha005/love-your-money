@@ -65,7 +65,7 @@ export function ReflectionCard({ existing }: { existing: WeeklyReflection | null
           <textarea id="next_step" name="next_step" rows={2} className="field" defaultValue={existing?.next_step ?? ""} />
         </div>
         {state.error ? (
-          <p className="text-small" style={{ color: "var(--danger)" }}>
+          <p role="alert" className="text-small" style={{ color: "var(--danger)" }}>
             {state.error}
           </p>
         ) : null}

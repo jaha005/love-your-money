@@ -69,7 +69,7 @@ export function CohortTable({
         cell: ({ row }) => (
           <Link
             href={`/kohorta/${row.original.member_id}`}
-            className="transition-colors hover:text-accent"
+            className="transition-colors hover:text-accent-text"
           >
             {row.original.full_name}
           </Link>
@@ -160,7 +160,7 @@ export function CohortTable({
               onClick={() => setFilter(f.key)}
               aria-pressed={filter === f.key}
               className={`rounded border px-3 py-1.5 text-small transition-colors ${
-                filter === f.key ? "border-accent text-accent" : "border-line text-muted hover:text-text"
+                filter === f.key ? "border-accent-text text-accent-text" : "border-line text-muted hover:text-text"
               }`}
             >
               {f.label}
@@ -178,7 +178,9 @@ export function CohortTable({
         </div>
       </div>
 
-      {message ? <p className="mb-4 text-small text-accent">{message}</p> : null}
+      <p role="status" aria-live="polite" className="mb-4 text-small text-accent-text">
+        {message}
+      </p>
 
       <div className="overflow-x-auto">
         <table className="w-full min-w-[720px] border-collapse text-small">
@@ -208,7 +210,7 @@ export function CohortTable({
             {table.getRowModel().rows.map((row) => (
               <tr key={row.id} className="border-b border-line">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-2 py-3.5 align-middle">
+                  <td key={cell.id} className="px-2 py-3.5 align-middle tabular-nums">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

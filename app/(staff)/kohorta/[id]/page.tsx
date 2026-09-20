@@ -175,7 +175,7 @@ export default async function MemberProfilePage({ params }: { params: { id: stri
                 <p className="mt-1 text-body">{e.title}</p>
                 {e.body ? <p className="mt-1 whitespace-pre-line text-small text-muted">{e.body}</p> : null}
                 {e.extra ? (
-                  <p className="mt-2 border-l-2 pl-3 text-small text-muted" style={{ borderColor: "var(--accent)" }}>
+                  <p className="mt-2 border-l-2 pl-3 text-small text-muted" style={{ borderColor: "var(--accent-text)" }}>
                     {e.extra}
                   </p>
                 ) : null}

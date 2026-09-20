@@ -41,9 +41,9 @@ export function WorksheetUpload({ name, defaultValue }: { name: string; defaultV
       />
       <input type="hidden" name={name} value={path} />
       {busy ? <p className="mt-1 text-tiny text-muted">{copy.common.loading}</p> : null}
-      {path && !busy ? <p className="mt-1 text-tiny text-accent">{path}</p> : null}
+      {path && !busy ? <p className="mt-1 text-tiny text-accent-text">{path}</p> : null}
       {error ? (
-        <p className="mt-1 text-tiny" style={{ color: "var(--danger)" }}>
+        <p role="alert" className="mt-1 text-tiny" style={{ color: "var(--danger)" }}>
           {error}
         </p>
       ) : null}

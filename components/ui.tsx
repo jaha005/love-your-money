@@ -7,7 +7,7 @@ export function StatusPill({ status }: { status: MemberStatus }) {
     status === "active"
       ? "border-line text-muted"
       : status === "slowing"
-        ? "border-accent text-accent"
+        ? "border-accent-text text-accent-text"
         : "border-[var(--danger)] text-[var(--danger)]";
   return (
     <span className={`inline-flex items-center rounded border px-2 py-0.5 text-tiny ${tone}`}>

@@ -186,3 +186,64 @@ mijenja cijelu aplikaciju i generisane PDF radne listove.
 
 Tanke linije umjesto sjena, radius 8 px, progres kao linija a ne krug, ikone samo
 u sidebaru (lucide, stroke 1.5), prazna stanja s rečenicom umjesto ilustracije.
+
+---
+
+## Video (Remotion)
+
+U `video/` je zaseban Remotion projekat s dvije kompozicije. Boje i fontovi
+dolaze iz istog `lib/brand.ts` kao aplikacija, a naslovi modula iz istog
+`scripts/content.ts` kao seed — ništa se ne prepisuje ručno.
+
+```bash
+cd video
+npm install
+npm run studio    # pregled uživo na http://localhost:3000
+npm run promo     # out/promo.mp4  (72 s, 1920x1080)
+npm run intros    # 8 klipova + poster sličice u ../public/intro/
+```
+
+**Promo** (`video/src/Promo.tsx`) — devet kadrova: naslov, problem,
+Početna članice, lekcija s diskusijom, zadatak i povratna informacija,
+raspored kohorte, filter na stale i podsjetnik, popis mogućnosti, zatvaranje.
+Bez snimljenog ekrana — sve je rekonstruisano iz istih dizajn tokena, pa
+ostaje tačno i kad se paleta promijeni.
+
+**ModuleIntro** (`video/src/ModuleIntro.tsx`) — šest sekundi naslovne kartice
+modula. `npm run intros` renderuje `public/intro/modul-1.mp4` … `modul-8.mp4`
+plus `.jpg` poster za svaki.
+
+Prva lekcija svakog modula prikaže taj klip iznad teksta
+(`components/module-intro-clip.tsx`): bez zvuka, bez kontrola, pušta se jednom.
+Ako je uključeno `prefers-reduced-motion`, prikaže se samo statična sličica.
+Ako klip nije izrenderovan, stranica ga jednostavno preskoči — ništa ne puca.
+
+> **Licenca:** Remotion je besplatan za pojedince i firme do 3 osobe; veće
+> firme trebaju company licencu. Za concept projekat i portfolio je u redu,
+> ali provjeri prije nego ga uključiš u naplativi klijentski posao.
+> https://remotion.dev/license
+
+---
+
+## Pristupačnost
+
+Provjereno i ispravljeno u posebnom prolazu:
+
+- **Kontrast.** Zlatna iz brand palete ima 2.75:1 na krem pozadini — dovoljno za
+  površinu, premalo za tekst. Zato `--accent-text` (#816826, 5.02:1) za sve
+  zlatne natpise, labele i fokus prsten, dok zlatna površina (dugme) nosi tamni
+  tekst (5.94:1). Granica polja za unos je `--line-strong` (3.22:1, WCAG 1.4.11);
+  tanka linija kartice ostaje mekana jer je dekorativna.
+- **Tipkovnica.** Vidljiv fokus prsten na svemu, „Preskoči na sadržaj" link,
+  `<main>` s id-om i `tabIndex={-1}`.
+- **Screen reader.** Sva polja imaju labelu (gdje je dizajn tražio samo
+  placeholder, labela je `sr-only`), greške nose `role="alert"`, poruka o
+  poslanom podsjetniku je `aria-live="polite"`, progres ima `role="progressbar"`.
+- **Kretanje.** `prefers-reduced-motion` gasi sve tranzicije i zamjenjuje intro
+  klip statičnom sličicom.
+- **Dodirne mete.** Dugmad i polja minimalno 44 px, stavke navigacije isto.
+- **Brojevi.** Tabela kohorte koristi `tabular-nums` da se kolone ne pomjeraju.
+
+Palette kontraste možeš ponovo izmjeriti u bilo kojem trenutku — vrijednosti su
+izvedene u `lib/colors.ts`, pa promjena akcenta u `brand.ts` automatski povuče
+i zatamnjenu varijantu.

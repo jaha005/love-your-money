@@ -42,7 +42,7 @@ export function LoginForm({ demoMode }: { demoMode: boolean }) {
           />
         </div>
         {state.error ? (
-          <p className="text-small" style={{ color: "var(--danger)" }}>
+          <p role="alert" className="text-small" style={{ color: "var(--danger)" }}>
             {state.error}
           </p>
         ) : null}

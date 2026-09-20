@@ -83,21 +83,21 @@ export function SubmitForm({
         />
         {uploading ? <p className="mt-1 text-tiny text-muted">{copy.common.loading}</p> : null}
         {filePath && !uploading ? (
-          <p className="mt-1 text-tiny text-accent">{copy.assignments.attachment}: {filePath.split("/").pop()}</p>
+          <p className="mt-1 text-tiny text-accent-text">{copy.assignments.attachment}: {filePath.split("/").pop()}</p>
         ) : null}
         {fileError ? (
-          <p className="mt-1 text-tiny" style={{ color: "var(--danger)" }}>
+          <p role="alert" className="mt-1 text-tiny" style={{ color: "var(--danger)" }}>
             {fileError}
           </p>
         ) : null}
       </div>
 
       {state.error ? (
-        <p className="text-small" style={{ color: "var(--danger)" }}>
+        <p role="alert" className="text-small" style={{ color: "var(--danger)" }}>
           {state.error}
         </p>
       ) : null}
-      {state.ok ? <p className="text-small text-accent">{copy.assignments.waiting}</p> : null}
+      {state.ok ? <p className="text-small text-accent-text">{copy.assignments.waiting}</p> : null}
 
       <button type="submit" className="btn-primary" disabled={uploading}>
         {submitLabel}

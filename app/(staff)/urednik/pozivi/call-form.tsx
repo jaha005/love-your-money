@@ -96,9 +96,9 @@ export function CallForm({
 
       <div className="flex items-center gap-3">
         <SaveButton />
-        {state.ok ? <span className="text-small text-accent">{state.message}</span> : null}
+        {state.ok ? <span className="text-small text-accent-text">{state.message}</span> : null}
         {state.error ? (
-          <span className="text-small" style={{ color: "var(--danger)" }}>
+          <span role="alert" className="text-small" style={{ color: "var(--danger)" }}>
             {state.error}
           </span>
         ) : null}

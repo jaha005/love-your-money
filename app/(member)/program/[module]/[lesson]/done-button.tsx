@@ -11,7 +11,7 @@ export function DoneButton({ lessonId, done }: { lessonId: string; done: boolean
   if (done) {
     return (
       <div className="flex items-center gap-3">
-        <span className="inline-flex items-center gap-2 text-small text-accent">
+        <span className="inline-flex items-center gap-2 text-small text-accent-text">
           <Check size={16} strokeWidth={2} />
           {copy.program.markedDone}
         </span>

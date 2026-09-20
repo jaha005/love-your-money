@@ -27,7 +27,7 @@ export default async function CommunityPage() {
                   {c.author?.role === "admin" ? (
                     <span
                       className="rounded border px-1.5 py-0.5 text-tiny"
-                      style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+                      style={{ borderColor: "var(--accent-text)", color: "var(--accent-text)" }}
                     >
                       {copy.program.coachLabel}
                     </span>
@@ -42,7 +42,7 @@ export default async function CommunityPage() {
                       href={`/program/${c.module.sort_order}/${
                         c.module.lessons.find((l) => l.id === c.lesson!.id)?.sort_order ?? 1
                       }`}
-                      className="text-accent underline underline-offset-2"
+                      className="text-accent-text-text underline underline-offset-2"
                     >
                       {c.lesson.title}
                     </Link>

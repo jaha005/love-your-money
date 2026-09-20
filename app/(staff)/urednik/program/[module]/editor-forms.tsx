@@ -15,11 +15,11 @@ import {
 function Status({ state }: { state: ActionState }) {
   if (state.error)
     return (
-      <span className="text-small" style={{ color: "var(--danger)" }}>
+      <span role="alert" className="text-small" style={{ color: "var(--danger)" }}>
         {state.error}
       </span>
     );
-  if (state.ok) return <span className="text-small text-accent">{state.message}</span>;
+  if (state.ok) return <span className="text-small text-accent-text">{state.message}</span>;
   return null;
 }
 

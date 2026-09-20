@@ -62,11 +62,11 @@ export default async function ProgressPage() {
                 style={{
                   backgroundColor:
                     m.state === "done"
-                      ? "var(--accent)"
+                      ? "var(--accent-text)"
                       : m.state === "current"
                         ? "var(--tint)"
                         : "var(--line)",
-                  border: m.state === "current" ? "1px solid var(--accent)" : undefined,
+                  border: m.state === "current" ? "1px solid var(--accent-text)" : undefined,
                   opacity: m.state === "locked" ? 0.5 : 1,
                 }}
               />

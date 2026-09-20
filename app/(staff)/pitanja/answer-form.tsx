@@ -27,7 +27,11 @@ export function AnswerForm({
   return (
     <form action={formAction} className="mt-3 space-y-3">
       <input type="hidden" name="question_id" value={questionId} />
+      <label className="sr-only" htmlFor={`answer-${questionId}`}>
+        {copy.questions.answerPlaceholder}
+      </label>
       <textarea
+        id={`answer-${questionId}`}
         name="answer"
         rows={3}
         className="field"
@@ -40,9 +44,9 @@ export function AnswerForm({
           {copy.questions.markAnswered}
         </label>
         <Submit />
-        {state.ok ? <span className="text-small text-accent">{copy.editor.saved}</span> : null}
+        {state.ok ? <span className="text-small text-accent-text">{copy.editor.saved}</span> : null}
         {state.error ? (
-          <span className="text-small" style={{ color: "var(--danger)" }}>
+          <span role="alert" className="text-small" style={{ color: "var(--danger)" }}>
             {state.error}
           </span>
         ) : null}

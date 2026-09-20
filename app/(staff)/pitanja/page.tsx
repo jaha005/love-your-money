@@ -67,7 +67,7 @@ export default async function QuestionsPage() {
                       {q.answered ? (
                         <span
                           className="rounded border px-1.5 py-0.5 text-tiny"
-                          style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+                          style={{ borderColor: "var(--accent-text)", color: "var(--accent-text)" }}
                         >
                           {copy.calls.answered}
                         </span>

@@ -31,7 +31,7 @@ export function AskForm({ callId }: { callId: string }) {
       />
       <input type="hidden" name="call_id" value={callId} />
       {state.error ? (
-        <p className="text-small" style={{ color: "var(--danger)" }}>
+        <p role="alert" className="text-small" style={{ color: "var(--danger)" }}>
           {state.error}
         </p>
       ) : null}

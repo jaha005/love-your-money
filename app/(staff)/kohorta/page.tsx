@@ -32,7 +32,7 @@ export default async function CohortPage() {
             .filter((r) => r.status === "stalled")
             .map((r) => (
               <li key={r.member_id}>
-                <Link href={`/kohorta/${r.member_id}`} className="text-small hover:text-accent">
+                <Link href={`/kohorta/${r.member_id}`} className="text-small hover:text-accent-text">
                   {r.full_name}
                 </Link>
                 <p className="text-tiny text-muted">
@@ -71,14 +71,14 @@ export default async function CohortPage() {
                   <p className="eyebrow">{m.sort_order}</p>
                   <p className="mb-4 mt-1 text-tiny leading-snug text-muted line-clamp-2">{m.title}</p>
                   {here.length === 0 ? (
-                    <p className="text-tiny text-muted/60">—</p>
+                    <p className="text-tiny text-muted">—</p>
                   ) : (
                     <ul className="space-y-2.5">
                       {here.map((r) => (
                         <li key={r.member_id}>
                           <Link
                             href={`/kohorta/${r.member_id}`}
-                            className="flex items-center gap-2 transition-colors hover:text-accent"
+                            className="flex items-center gap-2 transition-colors hover:text-accent-text"
                           >
                             <span className="relative">
                               <Avatar name={r.full_name} size={26} />

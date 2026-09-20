@@ -1,3 +1,5 @@
+import { existsSync } from "node:fs";
+import { join } from "node:path";
 import { notFound } from "next/navigation";
 import { requireRole } from "@/lib/auth";
 import { copy } from "@/lib/copy";
@@ -7,6 +9,7 @@ import { embedUrl } from "@/lib/video";
 import { Markdown } from "@/components/markdown";
 import { Discussion } from "@/components/discussion";
 import { Empty } from "@/components/ui";
+import { ModuleIntroClip } from "@/components/module-intro-clip";
 import { DoneButton } from "./done-button";
 
 export default async function LessonPage({
@@ -49,6 +52,12 @@ export default async function LessonPage({
 
   const video = embedUrl(lesson.video_url);
 
+  // Prva lekcija modula otvara se uvodnom karticom, ako je klip izrenderovan
+  // (video/ -> npm run intros). Bez fajla se jednostavno preskoči.
+  const showIntro =
+    lesson.sort_order === 1 &&
+    existsSync(join(process.cwd(), "public", "intro", `modul-${mod.sort_order}.jpg`));
+
   return (
     <article>
       <p className="eyebrow">
@@ -58,6 +67,12 @@ export default async function LessonPage({
       <p className="mt-2 text-small text-muted">
         {copy.common.lesson(lesson.sort_order)} · {copy.program.duration(lesson.duration_min)}
       </p>
+
+      {showIntro ? (
+        <div className="mt-7">
+          <ModuleIntroClip moduleOrder={mod.sort_order} title={mod.title} />
+        </div>
+      ) : null}
 
       {video ? (
         <div className="mt-7 overflow-hidden rounded border border-line">

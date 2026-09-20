@@ -19,7 +19,7 @@ export default async function ProgramEditorIndex() {
           <li key={m.id}>
             <Link
               href={`/urednik/program/${m.sort_order}`}
-              className="flex items-baseline justify-between gap-4 py-5 transition-colors hover:text-accent"
+              className="flex items-baseline justify-between gap-4 py-5 transition-colors hover:text-accent-text"
             >
               <div>
                 <p className="eyebrow">{copy.common.module(m.sort_order)}</p>

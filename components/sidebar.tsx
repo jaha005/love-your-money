@@ -62,11 +62,11 @@ export function Sidebar({
             key={item.href}
             href={item.href}
             aria-current={active ? "page" : undefined}
-            className={`flex items-center gap-3 rounded px-3 py-2 text-small transition-colors ${
+            className={`flex min-h-[44px] items-center gap-3 rounded px-3 py-2 text-small transition-colors ${
               active ? "bg-tint text-text" : "text-muted hover:text-text"
             }`}
           >
-            <Icon size={18} strokeWidth={1.5} className={active ? "text-accent" : ""} />
+            <Icon size={18} strokeWidth={1.5} className={active ? "text-accent-text-text" : ""} />
             {item.label}
           </Link>
         );

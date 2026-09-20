@@ -7,18 +7,19 @@ relativni na danas: rokovi, „prije 18 dana", sljedeći poziv za 4 dana).
 
 **0:00 — Uđi kao članica** (`clanica@demo.local`)
 
-Početna: „Dobrodošla nazad, Marija." · Modul 4 · Budžet bez odricanja · 2 od 3 lekcije.
-Klik **Nastavi lekciju** → video, tekst kao članak, **Preuzmi radni list (PDF)**.
-*(20 s)*
+Početna: „Dobrodošla nazad, Marija." · Modul 4 · Cijene i naplata · 2 od 3 lekcije.
+Klik **Nastavi lekciju** → uvodna kartica modula (Remotion klip), video, tekst kao
+članak, **Preuzmi radni list (PDF)**. *(20 s)*
 
 **0:20 — Diskusija ispod lekcije**
 
-Skrolaj na dno lekcije: komentar članice i Andrejin odgovor sa zlatnom labelom
-„Andreja". *(10 s)*
+Skrolaj na dno lekcije 4.3: Sarin komentar o avansu i Andrejin odgovor sa zlatnom
+labelom „Andreja". *(10 s)*
 
 **0:30 — Zadaci**
 
-`Zadaci` → otvori zadatak modula 3 → napiši par riječi → **Predaj**.
+`Zadaci` → otvori zadatak modula 3 „Budžet za sljedeći mjesec" (rok je danas) →
+napiši par riječi → **Predaj**.
 Odmah se vidi „Predano. Javit ćemo se s povratnom informacijom." *(10 s)*
 
 **0:40 — Pozivi**
@@ -57,3 +58,12 @@ koji članica vidi. *(5 s)*
 
 `Program` (vidi samo Andreja) → modul → naslov, datum otključavanja, tekst lekcije
 s previewom, upload PDF-a, rok zadatka. Obična forma, bez prevlačenja.
+
+
+---
+
+## Ako ti ne treba Loom
+
+`video/out/promo.mp4` je isti tok kao gore, samo renderovan: 72 sekunde, bez
+tvog glasa, spremno za portfolio ili prvi mail. Loom je bolji za razgovor s
+Andrejom, promo za oglas.

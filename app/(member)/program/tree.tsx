@@ -45,7 +45,7 @@ export function Tree({ modules }: { modules: TreeModule[] }) {
                   return (
                     <li
                       key={l.id}
-                      className="flex items-start gap-2 px-2 py-1.5 text-small text-muted/60"
+                      className="flex items-start gap-2 px-2 py-1.5 text-small text-muted"
                     >
                       <Lock size={14} strokeWidth={1.5} className="mt-1 shrink-0" />
                       <span className="line-clamp-2">{l.title}</span>
@@ -62,7 +62,7 @@ export function Tree({ modules }: { modules: TreeModule[] }) {
                       }`}
                     >
                       <span className="mt-1 w-3.5 shrink-0">
-                        {l.done ? <Check size={14} strokeWidth={2} className="text-accent" /> : null}
+                        {l.done ? <Check size={14} strokeWidth={2} className="text-accent-text-text" /> : null}
                       </span>
                       <span>{l.title}</span>
                     </Link>

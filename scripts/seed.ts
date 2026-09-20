@@ -400,7 +400,7 @@ async function main() {
     { member: "nika", module: 4, lesson: 1, daysAgo: 24, body: "Izračunala sam minimalnu satnicu. 72 eura. Naplaćujem 45. Sjedim i gledam u to.", reply: "Nika, to je najčešći razmak u grupi. Nemoj skakati odmah na 72 — sljedeća ponuda neka bude 58, pa idemo dalje." },
     { member: "ivana_b", module: 4, lesson: 2, daysAgo: 23, body: "Vježbala sam naglas deset puta. Prvih pet mi je bilo užasno." },
     { member: "dora", module: 4, lesson: 2, daysAgo: 22, body: "Ono „mogu prilagoditi cijenu ako smanjimo opseg\" je promijenilo cijeli razgovor s klijentom jučer.", reply: "To je rečenica koja cijenu veže za rad umjesto za tvoju volju da ugodiš. Odlično." },
-    { member: "sara", module: 4, lesson: 3, daysAgo: 21, body: "Avans od 30 posto mi je zvučao bezobrazno dok nisam vidjela da to svi rade." },
+    { member: "sara", module: 4, lesson: 3, daysAgo: 21, body: "Avans od 30 posto mi je zvučao bezobrazno dok nisam vidjela da to svi rade.", reply: "Sara, avans nije nepovjerenje nego standard. Klijent koji ga odbije obično je isti onaj koji kasni s ostatkom." },
     { member: "tea", module: 5, lesson: 1, daysAgo: 19, body: "Rezerva mi ispada 4200 eura. Sad kad znam broj, manje me je strah nego kad nisam znala." },
     { member: "lucija", module: 5, lesson: 2, daysAgo: 17, body: "Postavila sam trajni nalog na dan plaće. Nije me boljelo koliko sam mislila." },
     { member: "iva", module: 5, lesson: 3, daysAgo: 20, body: "„Neplanirano, nužno i hitno — sve tri, ne jedna od tri.\" Zapisala sam i zalijepila na frižider." },

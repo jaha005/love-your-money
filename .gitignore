@@ -9,3 +9,7 @@ npm-debug.log*
 .vercel
 *.tsbuildinfo
 next-env.d.ts
+
+# Remotion
+video/node_modules
+video/out

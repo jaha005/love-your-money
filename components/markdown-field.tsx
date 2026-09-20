@@ -37,7 +37,7 @@ export function MarkdownField({
               onClick={() => setPreview(t.key)}
               aria-pressed={preview === t.key}
               className={`rounded border px-2 py-0.5 text-tiny transition-colors ${
-                preview === t.key ? "border-accent text-accent" : "border-line text-muted"
+                preview === t.key ? "border-accent-text text-accent-text" : "border-line text-muted"
               }`}
             >
               {t.label}

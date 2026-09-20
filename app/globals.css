@@ -33,8 +33,20 @@
   textarea:focus-visible,
   select:focus-visible,
   [tabindex]:focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--accent-text);
     outline-offset: 2px;
+  }
+}
+
+/* Poštuj sistemsku postavku za smanjeno kretanje. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -45,11 +57,13 @@
   }
 
   .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded border px-4 py-2.5
-           text-small font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+    @apply inline-flex min-h-[44px] cursor-pointer items-center justify-center gap-2 rounded
+           border px-4 py-2.5 text-small font-medium transition-colors
+           disabled:cursor-not-allowed disabled:opacity-50;
   }
+  /* Tamni tekst na zlatnoj: 5.9:1. Krem na zlatnoj bio bi 2.75:1. */
   .btn-primary {
-    @apply btn border-accent text-bg;
+    @apply btn border-accent text-text;
     background-color: var(--accent);
   }
   .btn-primary:hover:not(:disabled) {
@@ -64,18 +78,18 @@
     border-color: var(--accent);
   }
   .btn-quiet {
-    @apply btn border-transparent bg-transparent px-2 py-1 text-muted;
+    @apply btn min-h-[36px] border-transparent bg-transparent px-2 py-1 text-muted;
   }
   .btn-quiet:hover:not(:disabled) {
     color: var(--text);
   }
 
   .field {
-    @apply w-full rounded border border-line bg-white/50 px-3 py-2.5 text-small text-text
-           placeholder:text-muted/70;
+    @apply min-h-[44px] w-full rounded border border-line-strong bg-white/60 px-3 py-2.5
+           text-small text-text placeholder:text-muted;
   }
   .field:focus {
-    border-color: var(--accent);
+    border-color: var(--accent-text);
   }
 
   .label {
@@ -88,6 +102,15 @@
 
   .hairline {
     @apply border-t border-line;
+  }
+
+  /* Preskoči navigaciju: vidljiv tek kad dobije fokus tipkovnicom. */
+  .skip-link {
+    @apply sr-only;
+  }
+  .skip-link:focus {
+    @apply not-sr-only fixed left-4 top-4 z-50 rounded border border-accent-text bg-bg
+           px-4 py-2 text-small text-text;
   }
 
   /* Progres = tanka linija, ne krug. */
@@ -129,13 +152,13 @@
 .prose-article strong { font-weight: 600; }
 .prose-article em { font-style: italic; }
 .prose-article blockquote {
-  border-left: 2px solid var(--accent);
+  border-left: 2px solid var(--accent-text);
   padding-left: 1em;
   color: var(--muted);
   font-style: italic;
 }
 .prose-article a {
-  color: var(--accent);
+  color: var(--accent-text);
   text-decoration: underline;
   text-underline-offset: 2px;
 }

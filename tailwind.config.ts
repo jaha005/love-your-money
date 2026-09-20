@@ -11,6 +11,8 @@ const config: Config = {
         accent: "rgb(var(--accent-rgb) / <alpha-value>)",
         muted: "rgb(var(--muted-rgb) / <alpha-value>)",
         line: "rgb(var(--line-rgb) / <alpha-value>)",
+        "line-strong": "rgb(var(--line-strong-rgb) / <alpha-value>)",
+        "accent-text": "rgb(var(--accent-text-rgb) / <alpha-value>)",
         tint: "rgb(var(--tint-rgb) / <alpha-value>)",
         danger: "rgb(var(--danger-rgb) / <alpha-value>)",
       },

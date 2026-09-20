@@ -76,7 +76,7 @@ export default async function AssignmentsPage() {
             return (
               <li key={a.id}>
                 {a.module_unlocked ? (
-                  <Link href={`/zadaci/${a.id}`} className="block transition-colors hover:text-accent">
+                  <Link href={`/zadaci/${a.id}`} className="block transition-colors hover:text-accent-text">
                     {inner}
                   </Link>
                 ) : (

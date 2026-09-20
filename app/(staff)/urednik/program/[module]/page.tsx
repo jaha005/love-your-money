@@ -31,7 +31,7 @@ export default async function ModuleEditor({ params }: { params: { module: strin
           <li key={m.id}>
             <Link
               href={`/urednik/program/${m.sort_order}`}
-              className={m.id === mod.id ? "text-accent" : "text-muted hover:text-text"}
+              className={m.id === mod.id ? "text-accent-text-text" : "text-muted hover:text-text"}
             >
               {m.sort_order}. {m.title}
             </Link>

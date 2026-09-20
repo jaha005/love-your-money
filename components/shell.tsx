@@ -21,10 +21,15 @@ export function Shell({
 }) {
   return (
     <div className="min-h-screen">
+      <a href="#sadrzaj" className="skip-link">
+        Preskoči na sadržaj
+      </a>
       <Sidebar items={items} userName={userName} userRole={userRole} signOut={signOut} />
       <div className="lg:pl-sidebar">
         <div className="mx-auto flex max-w-[1320px] flex-col gap-10 px-5 py-8 lg:flex-row lg:gap-12 lg:px-10 lg:py-12">
-          <main className="min-w-0 flex-1 lg:max-w-content">{children}</main>
+          <main id="sadrzaj" tabIndex={-1} className="min-w-0 flex-1 lg:max-w-content">
+            {children}
+          </main>
           {rail ? (
             <aside className="w-full shrink-0 lg:w-rail">
               <div className="lg:sticky lg:top-12">{rail}</div>

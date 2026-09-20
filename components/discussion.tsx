@@ -35,6 +35,7 @@ function CommentForm({
   autoFocus?: boolean;
   onDone?: () => void;
 }) {
+  const fieldId = `comment-${parentId ?? "root"}-${lessonId}`;
   const [state, formAction] = useFormState<ActionState, FormData>(async (prev, fd) => {
     const result = await addComment(prev, fd);
     if (result.ok) onDone?.();
@@ -45,7 +46,11 @@ function CommentForm({
     <form action={formAction} className="space-y-3" key={state.ok ? "sent" : "draft"}>
       <input type="hidden" name="lesson_id" value={lessonId} />
       {parentId ? <input type="hidden" name="parent_id" value={parentId} /> : null}
+      <label className="sr-only" htmlFor={fieldId}>
+        {copy.program.commentPlaceholder}
+      </label>
       <textarea
+        id={fieldId}
         name="body"
         rows={3}
         required
@@ -54,7 +59,7 @@ function CommentForm({
         placeholder={copy.program.commentPlaceholder}
       />
       {state.error ? (
-        <p className="text-small" style={{ color: "var(--danger)" }}>
+        <p role="alert" className="text-small" style={{ color: "var(--danger)" }}>
           {state.error}
         </p>
       ) : null}
@@ -80,7 +85,7 @@ function CommentBody({
           {isCoach ? (
             <span
               className="rounded border px-1.5 py-0.5 text-tiny"
-              style={{ borderColor: "var(--accent)", color: "var(--accent)" }}
+              style={{ borderColor: "var(--accent-text)", color: "var(--accent-text)" }}
             >
               {copy.program.coachLabel}
             </span>

@@ -90,7 +90,7 @@ export default async function AssignmentPage({ params }: { params: { id: string 
       ) : (
         <>
           {submission ? (
-            <p className="mb-6 text-small text-accent">{copy.assignments.waiting}</p>
+            <p className="mb-6 text-small text-accent-text">{copy.assignments.waiting}</p>
           ) : null}
           <SubmitForm
             assignmentId={a.id}
