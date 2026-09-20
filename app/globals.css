@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--bg);
+    color: var(--text);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--font-fraunces), Georgia, serif;
+    font-weight: 500;
+  }
+
+  ::selection {
+    background: var(--tint);
+  }
+
+  input, textarea, select {
+    font-size: 16px;
+  }
+
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Tanke linije umjesto sjena. */
+  .card {
+    @apply rounded border border-line bg-bg p-6;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded border px-4 py-2.5
+           text-small font-medium transition-colors disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  .btn-primary {
+    @apply btn border-accent text-bg;
+    background-color: var(--accent);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--accent-dark);
+    border-color: var(--accent-dark);
+  }
+  .btn-secondary {
+    @apply btn border-line bg-transparent text-text;
+  }
+  .btn-secondary:hover:not(:disabled) {
+    background-color: var(--tint);
+    border-color: var(--accent);
+  }
+  .btn-quiet {
+    @apply btn border-transparent bg-transparent px-2 py-1 text-muted;
+  }
+  .btn-quiet:hover:not(:disabled) {
+    color: var(--text);
+  }
+
+  .field {
+    @apply w-full rounded border border-line bg-white/50 px-3 py-2.5 text-small text-text
+           placeholder:text-muted/70;
+  }
+  .field:focus {
+    border-color: var(--accent);
+  }
+
+  .label {
+    @apply mb-1.5 block text-small font-medium text-text;
+  }
+
+  .eyebrow {
+    @apply text-tiny uppercase tracking-[0.12em] text-muted;
+  }
+
+  .hairline {
+    @apply border-t border-line;
+  }
+
+  /* Progres = tanka linija, ne krug. */
+  .meter {
+    @apply h-px w-full;
+    background-color: var(--line);
+  }
+  .meter > span {
+    @apply block h-px;
+    background-color: var(--accent);
+  }
+}
+
+/* Tekst lekcije se čita kao članak. */
+.prose-article {
+  font-size: 17px;
+  line-height: 1.7;
+}
+.prose-article > * + * {
+  margin-top: 1.1em;
+}
+.prose-article h2 {
+  font-size: 28px;
+  line-height: 1.2;
+  margin-top: 1.8em;
+}
+.prose-article h3 {
+  font-size: 20px;
+  line-height: 1.3;
+  margin-top: 1.5em;
+}
+.prose-article ul,
+.prose-article ol {
+  padding-left: 1.3em;
+}
+.prose-article ul { list-style: disc; }
+.prose-article ol { list-style: decimal; }
+.prose-article li + li { margin-top: 0.4em; }
+.prose-article strong { font-weight: 600; }
+.prose-article em { font-style: italic; }
+.prose-article blockquote {
+  border-left: 2px solid var(--accent);
+  padding-left: 1em;
+  color: var(--muted);
+  font-style: italic;
+}
+.prose-article a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.prose-article hr {
+  border-color: var(--line);
+}
+.prose-article code {
+  font-size: 0.9em;
+  background: var(--tint);
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
