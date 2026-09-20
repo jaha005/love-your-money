@@ -25,8 +25,10 @@ const db = createClient(url, serviceKey, {
 const PASSWORD = process.env.DEMO_PASSWORD || "demo1234";
 const TODAY = todayISO();
 
-// Raspored: modul n se otključava (8 - n) sedmica prije danas; modul 8 tek za sedmicu.
-const unlockFor = (order: number) => addDaysISO(TODAY, -(8 - order) * 7);
+// Kohorta je u sedmoj sedmici: moduli 1-7 su otključani (zadnji prije 3 dana),
+// modul 8 stiže za 4 dana - da se u stablu vidi i stanje "zaključano".
+const RELEASED = 7;
+const unlockFor = (order: number) => addDaysISO(TODAY, (order - RELEASED) * 7 - 3);
 // Rok zadatka: 5 sedmica nakon otključavanja modula.
 const dueFor = (order: number) => addDaysISO(unlockFor(order), 35);
 
@@ -134,16 +136,19 @@ const SUBMISSION_BODIES: Record<number, string[]> = {
     "Prva rečenica koje se sjećam je „nemamo za to\". Nije bila zla, samo je bila stalna. Novac se u našoj kući nije spominjao za stolom, nego u hodniku, tiho. Prepoznajem obrazac stezanja: sve mora biti opravdano, a kad potrošim nešto na sebe, dva dana nosim osjećaj da sam nešto ukrala. Da novac nije problem, ne bih računala u glavi prije nego naručim kavu i ne bih odgađala zubara treću godinu.",
     "Kod nas se o novcu nije govorilo uopće, što je valjda svoja vrsta poruke. Mama je vodila sve, tata nije znao koliko šta košta. Najbliži mi je obrazac izbjegavanja — ne otvaram aplikaciju banke, računi stoje neotvoreni dvije sedmice. Zadnji put mi je bilo neugodno kad mi je klijentica pitala za cijenu i ja sam se počela izvinjavati prije nego sam je izgovorila.",
     "Novac je kod nas bio razlog za svađu i naučila sam da je tema opasna. Danas radim isto: kad partner spomene troškove, ja se automatski branim. Obrazac je rasipanje kao olakšanje — poslije teške sedmice kupim nešto i to je jedini trenutak kad sam dobra prema sebi. Da novac nije problem, uzela bih petak popodne slobodno bez da to nekome pravdam.",
+    "Moja mama je vodila kućni budžet u bilježnici i nikad se nije žalila, ali sam vidjela kako broji sitniš pred kraj mjeseca. Naučila sam da se o tome ne priča. Danas imam pristojan prihod i još uvijek kupujem najjeftiniju varijantu svega, pa se poslije ljutim na sebe što mi ništa ne traje. Da novac nije problem, platila bih nekoga da mi pomogne oko kuće i ne bih to zvala luksuzom.",
   ],
   2: [
     "Fiksno 780 eura, promjenjivo 640, povremeno 210 prosječno, nevidljivo 94. Iznenadilo me nevidljivo — četiri pretplate koje ne koristim i provizije koje nisam ni primijetila. Očekivala sam da mi je hrana najveća stavka i to je tačno. Ne razumijem zašto mi je povremeno tako neravnomjerno raspoređeno, jedan mjesec 60, drugi 400.",
     "Fiksno 1120, promjenjivo 710, povremeno 265, nevidljivo 61. Iznenadilo me koliko odlazi na sitne kupovine „po dvije stvari\" — 14 odlazaka u trgovinu u četiri sedmice. Očekivala sam da je gorivo veće nego što jest. Ne razumijem kako da rasporedim registraciju auta koja dolazi u martu.",
     "Fiksno 690, promjenjivo 520, povremeno 180, nevidljivo 43. Iznenadilo me da je promjenjivo manje nego što sam mislila, ali povremeno dvostruko više. Očekivala sam da ću se osjećati loše kad vidim brojke, a zapravo mi je lakše. Ne razumijem zašto sam se ovoga toliko bojala.",
+    "Fiksno 950, promjenjivo 580, povremeno 320, nevidljivo 78. Iznenadilo me koliko je povremena kanta velika — registracija, rođendani i zubar u istom mjesecu daju 600 eura. Očekivala sam da je nevidljivo veće. Ne razumijem gdje da smjestim troškove za djecu, dio je fiksan a dio nije.",
   ],
   3: [
     "Fiksno 780, promjenjivo 600, povremeno 200 mjesečno odvajam, prostor za život 90 eura. Ostaje 140 koje idu u rezervu. Ako mjesec bude loš, prvo pada uplata u rezervu, ne prostor za život — naučila sam da mi taj dio drži plan.",
     "Fiksno 1120, promjenjivo 650, povremeno 250, prostor za život 120. Ostaje 180 za rezervu. Ako mjesec bude loš, pada polovina prostora za život i cijela uplata u rezervu, minimalne rate ostaju.",
     "Fiksno 690, promjenjivo 480, povremeno 180, prostor za život 70. Ostaje 210. Ako mjesec bude loš, prvo pada povremena kanta jer u njoj već imam nešto odvojeno od prošlog mjeseca.",
+    "Fiksno 950, promjenjivo 560, povremeno 300, prostor za život 100. Ostaje 90 i to mi je premalo, ali je istina. Ako mjesec bude loš, pada prostor za život na pola i ništa drugo — minimalne rate i povremena kanta ostaju netaknute.",
   ],
   4: [
     "Naplativih sati mjesečno: 62. Ciljani prihod nakon poreza: 1800. Fiksni troškovi posla: 240. Porez i doprinosi: 32 posto. Minimalna satnica mi ispada 48 eura, a trenutno naplaćujem 30. Ponuda koju sam poslala: „Za opseg od pet objava mjesečno, uključujući pripremu i objavu, cijena je 420 eura mjesečno. Rok plaćanja 15 dana od datuma računa, avans 30 posto.\" Nisam dodala nijednu rečenicu koja pregovara protiv mene i bilo mi je fizički neugodno.",
@@ -311,7 +316,7 @@ async function main() {
             module_id: mod.id,
             sort_order: j + 1,
             title: l.title,
-            video_url: l.video_url,
+            video_url: l.video_url ?? null,
             body: l.body,
             worksheet_path: worksheetPath,
             duration_min: l.duration_min,
@@ -378,9 +383,9 @@ async function main() {
   const submissionRows: Record<string, unknown>[] = [];
   const adminId = ids.get(admin.key)!;
 
-  for (const m of members) {
+  members.forEach((m, memberIndex) => {
     const memberId = ids.get(m.key)!;
-    m.submitted.forEach((order, idx) => {
+    m.submitted.forEach((order) => {
       const key = `${m.key}:${order}`;
       const pending = PENDING.has(key);
       // Predaja stiže par dana prije roka tog modula, ali nikad kasnije od
@@ -390,11 +395,12 @@ async function main() {
         daysUntil(dueFor(order)) * -1 + 3,
         m.lastActivity + 1,
       );
+      // Po članici, da dvije predaje istog modula u redu za pregled ne budu iste.
       const bodies = SUBMISSION_BODIES[order] ?? SUBMISSION_BODIES[1];
       submissionRows.push({
         assignment_id: assignmentIds[order - 1],
         member_id: memberId,
-        body: bodies[idx % bodies.length],
+        body: bodies[memberIndex % bodies.length],
         submitted_at: daysAgo(submittedDaysAgo, 19),
         status: pending ? "pending" : "reviewed",
         feedback: pending
@@ -405,7 +411,7 @@ async function main() {
         reviewed_at: pending ? null : daysAgo(Math.max(1, submittedDaysAgo - 2), 16),
       });
     });
-  }
+  });
   must(await db.from("submissions").insert(submissionRows).select("id"), "predaje");
   console.log(
     `✓ ${submissionRows.length} predaja (${PENDING.size} čeka pregled, ${submissionRows.length - PENDING.size} pregledano)`,

@@ -78,6 +78,8 @@ export const copy = {
     reply: "Odgovori",
     coachLabel: "Andreja",
     lockedBody: "Ova lekcija još nije otključana.",
+    videoPlaceholder: "Ovdje ide snimak lekcije.",
+    videoPlaceholderHint: "Andreja dodaje YouTube ili Vimeo link u uredniku programa.",
   },
 
   assignments: {

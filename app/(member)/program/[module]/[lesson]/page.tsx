@@ -68,12 +68,6 @@ export default async function LessonPage({
         {copy.common.lesson(lesson.sort_order)} · {copy.program.duration(lesson.duration_min)}
       </p>
 
-      {showIntro ? (
-        <div className="mt-7">
-          <ModuleIntroClip moduleOrder={mod.sort_order} title={mod.title} />
-        </div>
-      ) : null}
-
       {video ? (
         <div className="mt-7 overflow-hidden rounded border border-line">
           <div className="relative w-full" style={{ paddingTop: "56.25%" }}>
@@ -86,7 +80,23 @@ export default async function LessonPage({
             />
           </div>
         </div>
-      ) : null}
+      ) : showIntro ? (
+        // Prva lekcija modula otvara se uvodnom karticom umjesto praznog okvira.
+        <div className="mt-7">
+          <ModuleIntroClip moduleOrder={mod.sort_order} title={mod.title} />
+        </div>
+      ) : (
+        // Demo nema tuđih snimaka: mirno prazno mjesto dok Andreja ne doda svoj link.
+        <div className="mt-7 rounded border border-dashed border-line">
+          <div
+            className="flex w-full flex-col items-center justify-center gap-1 px-6 text-center"
+            style={{ aspectRatio: "16 / 9" }}
+          >
+            <p className="text-small text-muted">{copy.program.videoPlaceholder}</p>
+            <p className="text-tiny text-muted">{copy.program.videoPlaceholderHint}</p>
+          </div>
+        </div>
+      )}
 
       <div className="mt-8">
         <Markdown>{lesson.body}</Markdown>

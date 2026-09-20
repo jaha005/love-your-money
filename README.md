@@ -189,6 +189,15 @@ u sidebaru (lucide, stroke 1.5), prazna stanja s rečenicom umjesto ilustracije.
 
 ---
 
+## Video u lekcijama
+
+Seed **ne nosi tuđe snimke**. Lekcije bez videa prikažu mirno prazno mjesto
+("Ovdje ide snimak lekcije"), a prva lekcija svakog modula umjesto toga pušta
+svoj Remotion intro klip. Čim Andreja u uredniku zalijepi YouTube ili Vimeo
+link, lekcija prikaže pravi embed.
+
+---
+
 ## Video (Remotion)
 
 U `video/` je zaseban Remotion projekat s dvije kompozicije. Boje i fontovi

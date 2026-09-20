@@ -61,7 +61,12 @@ export default async function AssignmentsPage() {
                   <p className="eyebrow">{copy.common.module(a.module_order)}</p>
                   <p className="mt-1.5 font-serif text-h3">{a.title}</p>
                   <p className="mt-1 text-small text-muted">
-                    {a.module_unlocked ? dueLabel(a.due_at, today) : formatDate(a.due_at)}
+                    {/* Kad je predano, rok više nije informacija - datum predaje jest. */}
+                    {a.submission
+                      ? copy.assignments.submitted(formatDate(a.submission.submitted_at))
+                      : a.module_unlocked
+                        ? dueLabel(a.due_at, today)
+                        : formatDate(a.due_at)}
                   </p>
                 </div>
                 <span

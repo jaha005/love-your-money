@@ -3,7 +3,8 @@
 export type SeedLesson = {
   title: string;
   duration_min: number;
-  video_url: string;
+  /** Andreja dodaje svoj link u uredniku; demo ne nosi tuđe snimke. */
+  video_url?: string | null;
   body: string;
   worksheet?: { title: string; questions: string[] };
 };
@@ -26,7 +27,6 @@ export const modules: SeedModule[] = [
       {
         title: "Šta si naučila o novcu prije nego si ga zaradila",
         duration_min: 14,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Većina žena koje dođu u ovaj program zna sabirati i oduzimati. Problem nikad nije bio u računu. Problem je u tome što odluku o novcu donosiš u tri sekunde, a razlog za tu odluku star je dvadeset godina.
 
 Razmisli kako se o novcu govorilo u kući u kojoj si odrasla. Je li se govorilo glasno, šapatom, ili se nije govorilo uopće? Je li novac bio razlog za svađu, za tišinu za stolom, ili za osjećaj da nešto ne smiješ tražiti? To nisu sentimentalna pitanja. To su pitanja koja objašnjavaju zašto ti se danas steže u grlu kad trebaš poslati ponudu.
@@ -50,7 +50,6 @@ U ovoj lekciji te ne tražim da išta promijeniš. Tražim te samo da prepoznaš
       {
         title: "Krivnja, sram i zašto ne gledaš stanje računa",
         duration_min: 11,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Krivnja kaže: potrošila sam previše. Sram kaže: ja sam osoba koja ne zna s novcem. Razlika nije jezična. Krivnja se odnosi na postupak i može se popraviti. Sram se odnosi na identitet i zato paralizira.
 
 Kad ne otvaraš aplikaciju banke, ne bježiš od brojke. Bježiš od rečenice koju ćeš sebi reći kad je vidiš. Brojka je neutralna. Rečenica nije.
@@ -62,7 +61,6 @@ Ovo zvuči kao sitnica. Nije. Žene koje ovo urade dosljedno kroz osam sedmica p
       {
         title: "Šta želiš da novac radi za tebe",
         duration_min: 9,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Pitanje "koji je tvoj finansijski cilj" obično dobije odgovor koji zvuči kao iz časopisa. Stan. Putovanje. Sigurnost. Sve tačno, ništa upotrebljivo.
 
 Bolje pitanje je: **šta bi se u tvojoj sedmici promijenilo da novac nije problem?** Odgovor je konkretan. Ne bih računala prije nego naručim. Ne bih odgađala zubara. Rekla bih ne klijentu koji kasni s plaćanjem. Uzela bih petak popodne slobodno.
@@ -95,7 +93,6 @@ Koristi ova pitanja kao okvir, ne moraš odgovoriti na sva:
       {
         title: "Zašto procjena uvijek promaši",
         duration_min: 10,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Kad te pitam koliko mjesečno potrošiš na hranu, reći ćeš broj. Taj broj je gotovo uvijek 30 do 40 posto manji od stvarnog.
 
 Razlog nije nepoštenje. Razlog je to što pamtimo velike kupovine, a ne male. Sjećaš se mjesečne nabavke. Ne sjećaš se sedam odlazaka u trgovinu "po dvije stvari" koji zajedno koštaju više.
@@ -117,7 +114,6 @@ Dvije stvari koje ljudi rade pogrešno: mijenjaju ponašanje dok mjere, i odusta
       {
         title: "Četiri kante: fiksno, promjenjivo, povremeno, nevidljivo",
         duration_min: 13,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Ne trebaju ti dvadeset dvije kategorije. Trebaju ti četiri.
 
 **Fiksno** je ono što je svakog mjeseca isto: stanarina, rate, pretplate. Ovo je najlakše vidjeti i najteže mijenjati.
@@ -133,7 +129,6 @@ Kad rasporediš mapu u ove četiri kante, obično se dogodi ista stvar: povremen
       {
         title: "Prvi pogled bez osuđivanja",
         duration_min: 8,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Kad prvi put vidiš svoju mapu, doći će reakcija. Kod većine je to nelagoda, kod nekih olakšanje, kod nekih bijes na sebe.
 
 Pravilo je: **prvi pogled je samo gledanje.** Ne donosiš nijednu odluku istog dana. Ne otkazuješ pretplate, ne praviš pravila, ne obećavaš si ništa.
@@ -166,7 +161,6 @@ Ako želiš, priloži tablicu kao PDF ili sliku.`,
       {
         title: "Zašto restriktivni budžeti pucaju",
         duration_min: 12,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Svaka žena koja je ikad bila na dijeti zna kako ovo ide. Prva sedmica je savršena. Druga je dobra. Treća ima jedan loš dan, i taj loš dan postane dokaz da "to kod mene ne ide".
 
 Budžet radi isto. Ako ti plan zabranjuje sve što voliš, ti ga ne kršiš zato što si slaba. Kršiš ga zato što je plan bio nemoguć.
@@ -188,7 +182,6 @@ Pravilo koje koristim: ako novi plan traži više od deset minuta tvoje pažnje 
       {
         title: "Pravilo 50/30/20 i kad ga treba prekršiti",
         duration_min: 15,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Pravilo kaže: 50 posto prihoda na potrebe, 30 posto na želje, 20 posto na štednju i dugove. Korisno je kao polazna tačka i beskorisno kao pravilo.
 
 Ako živiš u gradu gdje stanarina uzima 45 posto prihoda, pravilo od 50 posto za sve potrebe je matematički nemoguće. Ako imaš dug s visokom kamatom, 20 posto je premalo. Ako ti je prihod nepredvidiv, postotak od čega uopće računaš?
@@ -200,7 +193,6 @@ Za nepredvidiv prihod postoji bolja metoda: **računaj s najnižim mjesecom zadn
       {
         title: "Prostor za život: iznos koji ne pravdaš nikome",
         duration_min: 9,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Ovo je lekcija koju žene najčešće preskoče, a najviše im treba.
 
 Odredi iznos — tjedni ili mjesečni — koji možeš potrošiti bez ikakvog objašnjenja. Ni sebi, ni partneru, ni meni. Kafa, knjiga, ništa, svejedno. Iznos je tvoj i nema izvještaja.
@@ -232,7 +224,6 @@ U odgovoru napiši i jednu rečenicu: **šta će se prvo srušiti ako mjesec bud
       {
         title: "Cijena nije procjena tvoje vrijednosti",
         duration_min: 13,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Kad ti se steže u grlu prije nego kažeš cijenu, to je zato što u tom trenutku ne govoriš o usluzi. Govoriš o sebi.
 
 Odvoji to dvoje. Cijena je broj koji pokriva tvoje vrijeme, troškove, poreze, neplaćene sate i rizik. Ona nije ocjena koliko si dobra. Klijent koji kaže "skupo" nije rekao "ti ne vrijediš". Rekao je da mu se ne uklapa u budžet, što je informacija, ne presuda.
@@ -254,7 +245,6 @@ Većina žena koje ovo prvi put izračunaju otkrije da im je trenutna cijena 30 
       {
         title: "Kako izgovoriti cijenu i onda šutjeti",
         duration_min: 10,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Postoji jedna tehnika koja mijenja više nego bilo koji izračun: **kažeš cijenu i zastaneš.**
 
 Ono što većina radi je: kaže cijenu, pa odmah doda "ali mogu i malo niže", "znam da je to možda puno", "ako treba možemo dogovoriti". Svaka od tih rečenica pregovara protiv tebe prije nego je druga strana rekla išta.
@@ -268,7 +258,6 @@ Ako te pitaju za popust, odgovor nije da ili ne. Odgovor je: "Mogu prilagoditi c
       {
         title: "Naplata: rokovi, podsjetnici i kad prestati raditi",
         duration_min: 11,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Nenaplaćen posao nije posao. To je poklon s fakturom.
 
 Tri pravila koja rješavaju 90 posto problema s naplatom:
@@ -313,7 +302,6 @@ U odgovor kopiraj tekst ponude. Gledat ćemo formulaciju zajedno.`,
       {
         title: "Tri mjeseca ili šest: koliki je tvoj broj",
         duration_min: 12,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Opće pravilo kaže tri do šest mjeseci troškova. Kao i sva opća pravila, korisno je dok ne dođeš do svoje situacije.
 
 Tvoj broj ovisi o četiri stvari: koliko ti je prihod predvidiv, koliko ljudi ovisi o tebi, koliko brzo bi našla novi posao ili klijenta, i koliko duga imaš.
@@ -337,7 +325,6 @@ Izračunaj svoj broj danas. Ne da bi ga odmah imala, nego da prestaneš strahova
       {
         title: "Gdje držati rezervu",
         duration_min: 8,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Rezerva ima dva zahtjeva: da joj možeš pristupiti za nekoliko dana, i da ti nije toliko pri ruci da je potrošiš na nešto što nije hitno.
 
 Zato ne na tekućem računu s karticom. I ne u nečemu što traje mjesecima da se unovči.
@@ -349,7 +336,6 @@ Ako ti je prihod nepredvidiv, trajni nalog zamijeni pravilom: **svaki priliv, pr
       {
         title: "Kad smiješ dirati rezervu",
         duration_min: 7,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Napiši ovo unaprijed, dok si mirna, jer u trenutku kad zatreba nećeš razmišljati jasno.
 
 Rezerva se dira kad je nešto **neplanirano, nužno i hitno.** Sve tri, ne jedna od tri.
@@ -378,7 +364,6 @@ U odgovoru navedi i gdje ćeš držati rezervu i zašto baš tamo.`,
       {
         title: "Popis svih dugova na jednom papiru",
         duration_min: 11,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Najteži dio nije otplata. Najteži dio je napisati sve na jedno mjesto.
 
 Za svaki dug trebaju ti četiri podatka: **preostali iznos**, **kamatna stopa**, **mjesečna rata**, **datum završetka**. Kartice, minus po računu, potrošački krediti, pozajmica od sestre, rate za telefon. Sve.
@@ -400,7 +385,6 @@ Kad imaš popis, dug prestaje biti oblak i postaje lista. Lista se može rješav
       {
         title: "Lavina ili gruda: koji redoslijed odabrati",
         duration_min: 12,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Postoje dvije metode i obje rade.
 
 **Lavina**: prvo otplaćuješ dug s najvišom kamatom, ostale plaćaš minimalno. Matematički je jeftinija — platiš manje kamate ukupno.
@@ -416,7 +400,6 @@ Jedno pravilo vrijedi za obje: **dok otplaćuješ, ne praviš novi dug.** Zvuči
       {
         title: "Razgovor s bankom: šta tražiti i kojim riječima",
         duration_min: 10,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Banka nije neprijatelj i nije prijatelj. Banka je institucija s procedurama, a procedure imaju mogućnosti o kojima ti niko neće reći ako ne pitaš.
 
 Tri stvari koje vrijedi tražiti: **refinansiranje** skupljeg duga jeftinijim, **reprogram** ako ti je rata preteška, i **snižavanje kamate** ako ti se kreditna sposobnost poboljšala otkad si uzela kredit.
@@ -447,7 +430,6 @@ Ako nemaš dugova, napiši umjesto toga plan šta radiš s iznosom koji bi inač
       {
         title: "Šta investiranje jest i šta nije",
         duration_min: 14,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Investiranje je kupovina nečega što bi vremenom moglo vrijediti više, uz prihvaćen rizik da bi moglo vrijediti manje. To je cijela definicija.
 
 Ono što investiranje **nije**: nije štednja (štednja ima zajamčen iznos, investiranje nema), nije brzo (razmišljaj u godinama, ne mjesecima), i nije nešto u šta ulaziš prije nego imaš rezervu i prije nego riješiš skupe dugove.
@@ -469,7 +451,6 @@ Ovaj modul nema preporuke. Ja nisam licencirana savjetnica i neću ti reći šta
       {
         title: "Rizik, vrijeme i zašto se ne gleda svaki dan",
         duration_min: 11,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Rizik u investiranju nije "možeš izgubiti sve". Rizik je **koliko vrijednost oscilira i koliko dugo možeš čekati da se oporavi.**
 
 Zato je vrijeme najvažnija varijabla. Novac koji ti treba za dvije godine i novac koji ti ne treba petnaest godina nisu ista vrsta novca i ne idu na isto mjesto.
@@ -481,7 +462,6 @@ Postavi si pravilo unaprijed: koliko često gledaš i šta te može natjerati da
       {
         title: "Prva pitanja koja postavljaš prije nego uložiš išta",
         duration_min: 10,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Kad ti neko nudi bilo kakav proizvod — banka, savjetnik, poznanica s "prilikom" — postavi ovih pet pitanja:
 
 1. **Koliko ovo košta godišnje, u postotku i u eurima?** Naknade se čine male dok ih ne pomnožiš s dvadeset godina.
@@ -514,7 +494,6 @@ Ovo nije zadatak u kojem nešto kupuješ. Ovo je zadatak u kojem provjeravaš gd
       {
         title: "Tri brojke koje pratiš i ništa više",
         duration_min: 10,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Nakon programa nemaš mene, nemaš asistenticu i nemaš sedmične pozive. Zato plan mora biti dovoljno jednostavan da ga održiš sama.
 
 Tri brojke, jednom mjesečno, deset minuta:
@@ -540,7 +519,6 @@ Upiši te tri brojke u isti dokument svakog mjeseca, na isti dan. Nakon šest mj
       {
         title: "Šta radiš kad mjesec bude loš",
         duration_min: 9,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Loš mjesec će doći. Ne dva puta u životu — dva do tri puta godišnje. Ako plan to ne predviđa, plan nije gotov.
 
 Napiši unaprijed tri koraka koje radiš u lošem mjesecu:
@@ -556,7 +534,6 @@ I jedno podsjećanje: loš mjesec nije dokaz da plan ne radi. Plan koji predviđ
       {
         title: "Kako da ti ovo ostane nakon programa",
         duration_min: 12,
-        video_url: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
         body: `Osam sedmica je dovoljno da se nešto promijeni i premalo da se navika učvrsti. Zato zadnja lekcija nije o novcu nego o održavanju.
 
 Tri stvari koje pomažu, poredane po učinku:

@@ -1,5 +1,5 @@
 import React from "react";
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill } from "remotion";
 import { z } from "zod";
 import { theme, brand } from "./theme";
 import { sans } from "./fonts";
@@ -20,16 +20,10 @@ export type ModuleIntroProps = z.infer<typeof moduleIntroSchema>;
  * teksta koji se čita kao članak.
  */
 export const ModuleIntro: React.FC<ModuleIntroProps> = ({ order, title, subtitle, lessons }) => {
-  const frame = useCurrentFrame();
-
-  // Cijeli kadar se na kraju smiri u bijelo-krem, da prijelaz u stranicu ne trza.
-  const out = interpolate(frame, [150, 180], [1, 0], {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-
+  // Klip stoji u stranici kao blok, pa mora završiti na punoj naslovnoj kartici -
+  // fade na kraju bi ostavio crni okvir kad se video zaustavi.
   return (
-    <AbsoluteFill style={{ background: theme.bg, opacity: out }}>
+    <AbsoluteFill style={{ background: theme.bg }}>
       <AbsoluteFill style={{ padding: 120, justifyContent: "center" }}>
         <Rise delay={6}>
           <Eyebrow>{brand.name}</Eyebrow>
