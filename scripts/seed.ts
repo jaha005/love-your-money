@@ -151,8 +151,44 @@ const SUBMISSION_BODIES: Record<number, string[]> = {
   ],
 };
 
+/**
+ * Seed briše sve @demo.local naloge, pa mora prvo dokazati da gleda u bazu
+ * OVOG projekta. Demo #1 (coach-portal) ima svoje @demo.local naloge i svoju
+ * profiles tabelu - bez ove provjere pogrešan URL u .env.local obrisao bi njih.
+ */
+async function assertOwnDatabase() {
+  // Tabele koje postoje samo ovdje.
+  const mine = ["modules", "lessons", "submissions", "weekly_reflections"];
+  for (const t of mine) {
+    const { error } = await db.from(t).select("*").limit(1);
+    if (error) {
+      console.error(
+        `✗ Tabela "${t}" ne postoji u bazi na ${url}.\n` +
+          `  Pokreni prvo: npm run db:migrate\n` +
+          `  Ako si je pokrenuo, provjeri pokazuje li NEXT_PUBLIC_SUPABASE_URL na pravi projekat.`,
+      );
+      process.exit(1);
+    }
+  }
+
+  // Tabele koje postoje samo u demo #1.
+  const foreign = ["checkins", "workouts", "progress_photos", "client_status"];
+  for (const t of foreign) {
+    const { error } = await db.from(t).select("*").limit(1);
+    if (!error) {
+      console.error(
+        `✗ Baza na ${url} sadrži tabelu "${t}" - to je demo #1 (coach-portal), ne ovaj projekat.\n` +
+          `  Seed je prekinut prije nego je išta obrisao.\n` +
+          `  Ovaj demo traži zasebnu Supabase instancu; ispravi .env.local.`,
+      );
+      process.exit(1);
+    }
+  }
+}
+
 async function main() {
   console.log(`Seed za ${brand.name} · ${brand.cohortName} · danas ${TODAY}`);
+  await assertOwnDatabase();
 
   // -------------------------------------------------------------------------
   // Čišćenje
