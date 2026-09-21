@@ -45,6 +45,11 @@ export const copy = {
     askQuestion: "Postavi pitanje",
     joinZoom: "Uđi na Zoom",
     notices: "Poruka od tima",
+    journey: "Gdje si u programu",
+    journeyLead: (done: number, total: number) =>
+      `${done} od ${total} otključanih lekcija · ${total - done} do kraja modula koji su otvoreni`,
+    latest: "Zadnje iz zajednice",
+    latestAll: "Sve diskusije",
   },
 
   reflection: {

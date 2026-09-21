@@ -181,16 +181,27 @@ Storage:
 
 ## Dizajn
 
-Editorial layout, namjerno suprotan od demo #1: sidebar 260 px lijevo, sadržaj do
-960 px, desno kolona 300 px za kontekst. Na mobitelu sidebar postaje hamburger,
-desna kolona ide ispod sadržaja. Nema donjeg nava.
+Editorial layout, namjerno suprotan od demo #1: sidebar 248 px lijevo na vlastitoj
+površini, sadržaj do 920 px, desno kolona 296 px za kontekst. Na mobitelu sidebar
+postaje hamburger, desna kolona ide ispod sadržaja. Nema donjeg nava.
 
-Boje, fontovi i razmaci izvedeni su iz `lib/brand.ts` → `lib/colors.ts` → CSS
-varijable koje postavlja `app/layout.tsx`. Promjena akcenta na jednom mjestu
-mijenja cijelu aplikaciju i generisane PDF radne listove.
+**Tipografija.** Naslovi **Libre Bodoni** (visok kontrast, magazinski karakter),
+tekst i sučelje **Public Sans**. Bodoni ima vrlo tanke poteze pa naslovi idu na
+težinu 500, inače djeluju krhko na ekranu.
 
-Tanke linije umjesto sjena, radius 8 px, progres kao linija a ne krug, ikone samo
-u sidebaru (lucide, stroke 1.5), prazna stanja s rečenicom umjesto ilustracije.
+**Dubina bez sjena.** Stranica je topliji, dublji krem (`#F4EEE2`), kartice su
+**svjetlije** od nje (`#FFFCF5`). Kontejneri se vide iz tona, a sjena je samo
+nagovještaj (`shadow-card`). To je razlika u odnosu na prvu verziju, gdje su
+kartice bile iste boje kao pozadina pa je ekran djelovao nedovršeno.
+
+**Dvije tople boje.** Zlatna `#B0882E` je primarni akcent, glinena `#9A5442`
+druga. Iz njih plus kadulje i šljive izvedena je paleta za avatare i oznake
+statusa — svaka članica uvijek dobije istu boju, što listama daje život bez
+ijedne slike.
+
+Sve dolazi iz `lib/brand.ts` → `lib/colors.ts` → CSS varijable koje postavlja
+`app/layout.tsx`. Promjena akcenta na jednom mjestu mijenja aplikaciju, PDF radne
+listove i Remotion video.
 
 ---
 

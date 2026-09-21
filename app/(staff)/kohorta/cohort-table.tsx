@@ -182,13 +182,13 @@ export function CohortTable({
         {message}
       </p>
 
-      <div className="overflow-x-auto">
+      <div className="card overflow-x-auto p-0">
         <table className="w-full min-w-[720px] border-collapse text-small">
           <thead>
             {table.getHeaderGroups().map((hg) => (
-              <tr key={hg.id} className="border-y border-line">
+              <tr key={hg.id} className="border-b border-line bg-tint/50">
                 {hg.headers.map((h) => (
-                  <th key={h.id} className="px-2 py-3 text-left font-medium text-muted">
+                  <th key={h.id} className="px-3 py-3 text-left font-medium text-muted first:pl-5">
                     {h.isPlaceholder ? null : h.column.getCanSort() ? (
                       <button
                         type="button"
@@ -208,9 +208,9 @@ export function CohortTable({
           </thead>
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="border-b border-line">
+              <tr key={row.id} className="border-b border-line last:border-0 transition-colors hover:bg-tint/40">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-2 py-3.5 align-middle tabular-nums">
+                  <td key={cell.id} className="px-3 py-3.5 align-middle tabular-nums first:pl-5">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}

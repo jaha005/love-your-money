@@ -1,9 +1,16 @@
-import { loadFont as loadFraunces } from "@remotion/google-fonts/Fraunces";
-import { loadFont as loadInter } from "@remotion/google-fonts/Inter";
+import { loadFont as loadHeading } from "@remotion/google-fonts/LibreBodoni";
+import { loadFont as loadBody } from "@remotion/google-fonts/PublicSans";
 
-const fraunces = loadFraunces("normal", { weights: ["400", "500", "600"], subsets: ["latin", "latin-ext"] });
-const inter = loadInter("normal", { weights: ["400", "500", "600"], subsets: ["latin", "latin-ext"] });
+// Isti par kao aplikacija (lib/brand.ts -> app/layout.tsx).
+const heading = loadHeading("normal", {
+  weights: ["400", "500", "600"],
+  subsets: ["latin", "latin-ext"],
+});
+const body = loadBody("normal", {
+  weights: ["400", "500", "600"],
+  subsets: ["latin", "latin-ext"],
+});
 
-export const serif = fraunces.fontFamily;
-export const sans = inter.fontFamily;
-export const fontsReady = Promise.all([fraunces.waitUntilDone(), inter.waitUntilDone()]);
+export const serif = heading.fontFamily;
+export const sans = body.fontFamily;
+export const fontsReady = Promise.all([heading.waitUntilDone(), body.waitUntilDone()]);

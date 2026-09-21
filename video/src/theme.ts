@@ -16,13 +16,16 @@ function mix(a: string, b: string, t: number) {
 // Iste vrijednosti kao lib/colors.ts u aplikaciji.
 export const theme = {
   bg: brand.colors.bg,
+  surface: brand.colors.surface,
   text: brand.colors.text,
   accent: brand.colors.accent,
-  accentText: mix(brand.colors.accent, brand.colors.text, 0.35),
+  accentText: mix(brand.colors.accent, brand.colors.text, 0.3),
+  accent2: brand.colors.accent2,
+  accent2Text: mix(brand.colors.accent2, brand.colors.text, 0.12),
   muted: brand.colors.muted,
   line: brand.colors.line,
-  tint: mix(brand.colors.bg, brand.colors.accent, 0.1),
-  danger: "#B0342B",
+  tint: mix(brand.colors.surface, brand.colors.accent, 0.12),
+  danger: brand.colors.danger,
 } as const;
 
 export { brand };

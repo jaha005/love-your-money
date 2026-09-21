@@ -100,8 +100,8 @@ export const Card: React.FC<{
   <div
     style={{
       border: `1px solid ${theme.line}`,
-      borderRadius: 8,
-      background: theme.bg,
+      borderRadius: 10,
+      background: theme.surface,
       padding,
       ...style,
     }}

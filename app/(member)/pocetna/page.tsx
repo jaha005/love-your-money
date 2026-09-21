@@ -4,27 +4,38 @@ import { copy } from "@/lib/copy";
 import {
   getAssignmentsForMember,
   getCalls,
+  getCommunityFeed,
   getCurrentModule,
+  getCurriculum,
+  getMyCompletedLessonIds,
   getNextLesson,
   getReflection,
   getUnreadNotices,
 } from "@/lib/data";
-import { dueLabel, formatDateTime } from "@/lib/dates";
-import { Empty } from "@/components/ui";
+import { dueLabel, formatDate, formatDateTime } from "@/lib/dates";
+import { Avatar, Empty, Meter, SectionTitle } from "@/components/ui";
 import { MemberShell } from "../member-shell";
 import { ReflectionCard } from "./reflection-card";
 
 export default async function HomePage() {
   const me = await requireRole(["member"]);
 
-  const [current, next, assignments, calls, reflection, notices] = await Promise.all([
-    getCurrentModule(me.id),
-    getNextLesson(me.id),
-    getAssignmentsForMember(me.id),
-    getCalls(),
-    getReflection(me.id),
-    getUnreadNotices(me.id),
-  ]);
+  const [current, next, assignments, calls, reflection, notices, curriculum, done, feed] =
+    await Promise.all([
+      getCurrentModule(me.id),
+      getNextLesson(me.id),
+      getAssignmentsForMember(me.id),
+      getCalls(),
+      getReflection(me.id),
+      getUnreadNotices(me.id),
+      getCurriculum(),
+      getMyCompletedLessonIds(me.id),
+      getCommunityFeed(4),
+    ]);
+
+  const unlocked = curriculum.filter((m) => m.unlocked);
+  const lessonsTotal = unlocked.flatMap((m) => m.lessons).length;
+  const lessonsDone = unlocked.flatMap((m) => m.lessons).filter((l) => done.has(l.id)).length;
 
   const openAssignment = assignments.find((a) => a.module_unlocked && !a.submission) ?? null;
   const firstName = me.full_name.split(" ")[0];
@@ -123,6 +134,97 @@ export default async function HomePage() {
           )}
         </section>
       </div>
+
+      {/* Gdje si u programu: osam modula kao traka, svaki s brojem završenih lekcija. */}
+      <section className="mt-10">
+        <SectionTitle>{copy.home.journey}</SectionTitle>
+        <div className="card">
+          <div className="flex items-end justify-between gap-4">
+            <p className="font-serif text-h2">
+              {lessonsTotal ? Math.round((lessonsDone / lessonsTotal) * 100) : 0}%
+            </p>
+            <p className="text-small text-muted">
+              {copy.common.lessonsOf(lessonsDone, lessonsTotal)}
+            </p>
+          </div>
+          <div className="mt-3">
+            <Meter value={lessonsTotal ? (lessonsDone / lessonsTotal) * 100 : 0} />
+          </div>
+
+          <ol className="mt-6 grid grid-cols-4 gap-2 sm:grid-cols-8">
+            {curriculum.map((m) => {
+              const d = m.lessons.filter((l) => done.has(l.id)).length;
+              const full = d === m.lessons.length && m.lessons.length > 0;
+              return (
+                <li key={m.id}>
+                  <div
+                    className="h-1.5 w-full rounded-full"
+                    style={{
+                      background: !m.unlocked
+                        ? "var(--line)"
+                        : full
+                          ? "var(--accent)"
+                          : d > 0
+                            ? "var(--tint)"
+                            : "var(--line)",
+                      border: d > 0 && !full ? "1px solid var(--accent)" : undefined,
+                      opacity: m.unlocked ? 1 : 0.55,
+                    }}
+                  />
+                  <p className="mt-2 text-tiny text-muted">{m.sort_order}</p>
+                  <p className="mt-0.5 line-clamp-2 text-tiny leading-snug">
+                    {m.unlocked ? m.title : copy.program.lockedShort}
+                  </p>
+                </li>
+              );
+            })}
+          </ol>
+        </div>
+      </section>
+
+      {/* Zadnje iz zajednice: dokaz da program živi, bez odlaska na drugi ekran. */}
+      <section className="mt-10">
+        <SectionTitle
+          aside={
+            <Link href="/zajednica" className="text-small text-accent-text underline underline-offset-2">
+              {copy.home.latestAll}
+            </Link>
+          }
+        >
+          {copy.home.latest}
+        </SectionTitle>
+
+        {feed.length === 0 ? (
+          <Empty>{copy.community.empty}</Empty>
+        ) : (
+          <ul className="card divide-y divide-line p-0">
+            {feed.map((c) => (
+              <li key={c.id} className="flex gap-3 px-5 py-4">
+                <Avatar name={c.author?.full_name ?? "?"} size={32} />
+                <div className="min-w-0 flex-1">
+                  <p className="flex flex-wrap items-center gap-2 text-small">
+                    <span className="font-medium">{c.author?.full_name ?? "—"}</span>
+                    {c.author?.role === "admin" ? (
+                      <span
+                        className="rounded-full border px-2 py-0.5 text-tiny"
+                        style={{
+                          borderColor: "var(--accent-text)",
+                          color: "var(--accent-text)",
+                          background: "var(--tint)",
+                        }}
+                      >
+                        {copy.program.coachLabel}
+                      </span>
+                    ) : null}
+                    <span className="text-tiny text-muted">{formatDate(c.created_at)}</span>
+                  </p>
+                  <p className="mt-1 line-clamp-2 text-small text-muted">{c.body}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+      </section>
     </MemberShell>
   );
 }

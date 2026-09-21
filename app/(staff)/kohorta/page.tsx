@@ -58,16 +58,16 @@ export default async function CohortPage() {
       </div>
 
       {/* Raspored kohorte: kolona po modulu */}
-      <section className="mt-12">
+      <section className="mt-10">
         <SectionTitle>{copy.cohort.layout}</SectionTitle>
         <p className="-mt-2 mb-5 text-small text-muted">{copy.cohort.layoutLead}</p>
 
-        <div className="overflow-x-auto">
-          <div className="flex min-w-[860px] gap-px bg-line">
+        <div className="card overflow-x-auto p-0">
+          <div className="flex min-w-[860px] divide-x divide-line">
             {curriculum.map((m) => {
               const here = rows.filter((r) => r.current_module === m.sort_order);
               return (
-                <div key={m.id} className="min-w-0 flex-1 bg-bg px-3 py-4">
+                <div key={m.id} className="min-w-0 flex-1 px-3 py-4">
                   <p className="eyebrow">{m.sort_order}</p>
                   <p className="mb-4 mt-1 text-tiny leading-snug text-muted line-clamp-2">{m.title}</p>
                   {here.length === 0 ? (
@@ -105,7 +105,7 @@ export default async function CohortPage() {
         </div>
       </section>
 
-      <section className="mt-12">
+      <section className="mt-10">
         <SectionTitle>{copy.cohort.table}</SectionTitle>
         <CohortTable
           rows={rows}

@@ -26,7 +26,7 @@ export function Shell({
       </a>
       <Sidebar items={items} userName={userName} userRole={userRole} signOut={signOut} />
       <div className="lg:pl-sidebar">
-        <div className="mx-auto flex max-w-[1320px] flex-col gap-10 px-5 py-8 lg:flex-row lg:gap-12 lg:px-10 lg:py-12">
+        <div className="mx-auto flex max-w-[1300px] flex-col gap-8 px-5 py-7 lg:flex-row lg:gap-9 lg:px-9 lg:py-9">
           <main id="sadrzaj" tabIndex={-1} className="min-w-0 flex-1 lg:max-w-content">
             {children}
           </main>

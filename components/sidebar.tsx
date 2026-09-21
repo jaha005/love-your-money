@@ -63,7 +63,7 @@ export function Sidebar({
             href={item.href}
             aria-current={active ? "page" : undefined}
             className={`flex min-h-[44px] items-center gap-3 rounded px-3 py-2 text-small transition-colors ${
-              active ? "bg-tint text-text" : "text-muted hover:text-text"
+              active ? "bg-tint font-medium text-text" : "text-muted hover:bg-bg hover:text-text"
             }`}
           >
             <Icon size={18} strokeWidth={1.5} className={active ? "text-accent-text-text" : ""} />
@@ -96,7 +96,7 @@ export function Sidebar({
   return (
     <>
       {/* Desktop: fiksan sidebar 260px */}
-      <aside className="fixed inset-y-0 left-0 hidden w-sidebar flex-col border-r border-line px-6 py-7 lg:flex">
+      <aside className="fixed inset-y-0 left-0 hidden w-sidebar flex-col border-r border-line bg-surface px-5 py-6 lg:flex">
         {logo}
         <p className="mb-8 mt-1 text-tiny text-muted">{brand.cohortName}</p>
         {nav}
@@ -104,7 +104,7 @@ export function Sidebar({
       </aside>
 
       {/* Mobitel: hamburger, nema donjeg nava */}
-      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-bg px-4 py-3 lg:hidden">
+      <div className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
         {logo}
         <button
           type="button"
@@ -117,7 +117,7 @@ export function Sidebar({
         </button>
       </div>
       {open ? (
-        <div className="fixed inset-0 top-[57px] z-20 flex flex-col overflow-y-auto border-b border-line bg-bg px-6 py-6 lg:hidden">
+        <div className="fixed inset-0 top-[57px] z-20 flex flex-col overflow-y-auto border-b border-line bg-surface px-5 py-6 lg:hidden">
           {nav}
           {footer}
         </div>
