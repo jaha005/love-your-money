@@ -15,13 +15,13 @@ export const moduleIntroSchema = z.object({
 export type ModuleIntroProps = z.infer<typeof moduleIntroSchema>;
 
 /**
- * Šest sekundi mira prije lekcije: broj modula, naslov, podnaslov.
- * Namjerno bez zvuka, bez gradijenata i bez brzog kretanja - ide ispred
- * teksta koji se čita kao članak.
+ * Six quiet seconds before a lesson: module number, title, subtitle.
+ * Deliberately silent, with no gradients and no fast motion - it sits in front of
+ * text that reads like an article.
  */
 export const ModuleIntro: React.FC<ModuleIntroProps> = ({ order, title, subtitle, lessons }) => {
-  // Klip stoji u stranici kao blok, pa mora završiti na punoj naslovnoj kartici -
-  // fade na kraju bi ostavio crni okvir kad se video zaustavi.
+  // The clip sits in the page as a block, so it has to end on the full title card -
+  // a fade at the end would leave a black frame once the video stops.
   return (
     <AbsoluteFill style={{ background: theme.bg }}>
       <AbsoluteFill style={{ padding: 120, justifyContent: "center" }}>
@@ -41,7 +41,7 @@ export const ModuleIntro: React.FC<ModuleIntroProps> = ({ order, title, subtitle
                 color: theme.accentText,
               }}
             >
-              MODUL {String(order).padStart(2, "0")}
+              MODULE {String(order).padStart(2, "0")}
             </div>
             <div style={{ flex: 1 }}>
               <Rule delay={24} duration={40} color={theme.accentText} />
@@ -65,7 +65,7 @@ export const ModuleIntro: React.FC<ModuleIntroProps> = ({ order, title, subtitle
 
         <Rise delay={58}>
           <P size={24} style={{ color: theme.muted }}>
-            {lessons} {lessons === 1 ? "lekcija" : lessons < 5 ? "lekcije" : "lekcija"} · {brand.cohortName}
+            {lessons} {lessons === 1 ? "lesson" : "lessons"} · {brand.cohortName}
           </P>
         </Rise>
       </AbsoluteFill>

@@ -1,9 +1,9 @@
-// Sadržaj programa za seed. Pravi tekst, ne lorem ipsum.
+// Programme content for the seed. Real text, not lorem ipsum.
 
 export type SeedLesson = {
   title: string;
   duration_min: number;
-  /** Andreja dodaje svoj link u uredniku; demo ne nosi tuđe snimke. */
+  /** Andreja adds her own link in the editor; the demo ships no third-party recordings. */
   video_url?: string | null;
   body: string;
   worksheet?: { title: string; questions: string[] };
@@ -19,545 +19,545 @@ export type SeedModule = {
 
 export const modules: SeedModule[] = [
   {
-    title: "Odnos s novcem",
-    subtitle: "Odakle dolaze tvoje odluke o novcu",
+    title: "Your relationship with money",
+    subtitle: "Where your money decisions really come from",
     summary:
-      "Prije nego dotaknemo ijednu tablicu, gledamo odakle dolaze tvoje odluke. Novac je rijetko samo matematika.",
+      "Before we touch a single spreadsheet, we look at where your decisions come from. Money is rarely just maths.",
     lessons: [
       {
-        title: "Šta si naučila o novcu prije nego si ga zaradila",
+        title: "What you learned about money before you ever earned it",
         duration_min: 14,
-        body: `Većina žena koje dođu u ovaj program zna sabirati i oduzimati. Problem nikad nije bio u računu. Problem je u tome što odluku o novcu donosiš u tri sekunde, a razlog za tu odluku star je dvadeset godina.
+        body: `Most women who join this programme can add and subtract perfectly well. The maths was never the problem. The problem is that you make a money decision in three seconds, and the reason behind it is twenty years old.
 
-Razmisli kako se o novcu govorilo u kući u kojoj si odrasla. Je li se govorilo glasno, šapatom, ili se nije govorilo uopće? Je li novac bio razlog za svađu, za tišinu za stolom, ili za osjećaj da nešto ne smiješ tražiti? To nisu sentimentalna pitanja. To su pitanja koja objašnjavaju zašto ti se danas steže u grlu kad trebaš poslati ponudu.
+Think about how money was talked about in the house you grew up in. Was it discussed out loud, in a whisper, or not at all? Was money the reason for arguments, for silence at the dinner table, or for a feeling that you shouldn't ask for things? These aren't sentimental questions. They're the questions that explain why your throat tightens today when you have to send a quote.
 
-Postoje tri obrasca koja vidim najčešće. Prvi je **izbjegavanje**: ne otvaraš aplikaciju banke, ne gledaš stanje, računi stoje neotvoreni. Drugi je **stezanje**: sve je škrto, ništa se ne smije potrošiti, a kad se potroši slijedi krivnja. Treći je **rasipanje kao olakšanje**: nakon teške sedmice kupovina je jedino mjesto gdje si dobra prema sebi.
+There are three patterns I see most often. The first is **avoidance**: you don't open your banking app, you don't check the balance, bills sit unopened. The second is **clamping down**: everything is tight, nothing may be spent, and when something is, guilt follows. The third is **spending as relief**: after a hard week, shopping is the only place you're kind to yourself.
 
-Nijedan od ova tri obrasca nije karakterna mana. Sva tri su naučena, i sva tri se mogu odučiti. Ali samo ako ih prvo nazoveš imenom.
+None of these three patterns is a character flaw. All three are learned, and all three can be unlearned. But only once you name them.
 
-U ovoj lekciji te ne tražim da išta promijeniš. Tražim te samo da prepoznaš koji ti je obrazac najbliži i kad si ga zadnji put vidjela na djelu.`,
+In this lesson I'm not asking you to change anything. I'm only asking you to recognise which pattern feels closest, and when you last saw it in action.`,
         worksheet: {
-          title: "Radni list 1.1 — Tvoja priča o novcu",
+          title: "Worksheet 1.1 — Your money story",
           questions: [
-            "Koja je prva rečenica o novcu koje se sjećaš iz djetinjstva?",
-            "Ko je u tvojoj kući donosio odluke o novcu i kako si to znala?",
-            "Koji od tri obrasca (izbjegavanje, stezanje, rasipanje) ti je najbliži?",
-            "Kad si zadnji put osjetila nelagodu vezanu za novac? Šta se tačno desilo?",
-            "Šta bi voljela da si naučila o novcu, a nisi?",
+            "What is the first sentence about money you remember from childhood?",
+            "Who made the money decisions in your home, and how did you know?",
+            "Which of the three patterns (avoidance, clamping down, spending as relief) feels closest?",
+            "When did you last feel uneasy about money? What exactly happened?",
+            "What do you wish you had learned about money, but didn't?",
           ],
         },
       },
       {
-        title: "Krivnja, sram i zašto ne gledaš stanje računa",
+        title: "Guilt, shame and why you don't check your balance",
         duration_min: 11,
-        body: `Krivnja kaže: potrošila sam previše. Sram kaže: ja sam osoba koja ne zna s novcem. Razlika nije jezična. Krivnja se odnosi na postupak i može se popraviti. Sram se odnosi na identitet i zato paralizira.
+        body: `Guilt says: I spent too much. Shame says: I'm someone who's bad with money. The difference isn't just linguistic. Guilt is about an action and can be fixed. Shame is about identity, and that's why it paralyses.
 
-Kad ne otvaraš aplikaciju banke, ne bježiš od brojke. Bježiš od rečenice koju ćeš sebi reći kad je vidiš. Brojka je neutralna. Rečenica nije.
+When you don't open your banking app, you aren't running from the number. You're running from the sentence you'll say to yourself when you see it. The number is neutral. The sentence isn't.
 
-Vježba koju ćeš raditi cijeli program je jednostavna: kad pogledaš brojku, opišeš je bez pridjeva. Ne "užasno malo", nego "412 eura". Ne "katastrofa", nego "tri računa nisu plaćena". Jezik bez pridjeva vraća ti mogućnost da nešto uradiš, jer se odjednom radi o zadatku, a ne o presudi.
+The exercise you'll practise throughout the programme is simple: when you look at a number, describe it without adjectives. Not "terribly low", but "412 euros". Not "a disaster", but "three bills are unpaid". Language without adjectives gives you back the ability to act, because suddenly it's a task, not a verdict.
 
-Ovo zvuči kao sitnica. Nije. Žene koje ovo urade dosljedno kroz osam sedmica prijavljuju da im je otvaranje bankovne aplikacije prestalo biti događaj. To je cilj: da novac postane dosadan.`,
+This sounds small. It isn't. Women who do this consistently for eight weeks report that opening their banking app stopped being an event. That's the goal: for money to become boring.`,
       },
       {
-        title: "Šta želiš da novac radi za tebe",
+        title: "What you want money to do for you",
         duration_min: 9,
-        body: `Pitanje "koji je tvoj finansijski cilj" obično dobije odgovor koji zvuči kao iz časopisa. Stan. Putovanje. Sigurnost. Sve tačno, ništa upotrebljivo.
+        body: `The question "what's your financial goal?" usually gets an answer that sounds like it came from a magazine. A flat. A holiday. Security. All true, none of it usable.
 
-Bolje pitanje je: **šta bi se u tvojoj sedmici promijenilo da novac nije problem?** Odgovor je konkretan. Ne bih računala prije nego naručim. Ne bih odgađala zubara. Rekla bih ne klijentu koji kasni s plaćanjem. Uzela bih petak popodne slobodno.
+A better question is: **what would change in your week if money weren't a problem?** The answer is concrete. I wouldn't do sums in my head before ordering. I wouldn't keep putting off the dentist. I'd say no to the client who pays late. I'd take Friday afternoon off.
 
-Napiši tri takve rečenice. To su tvoji ciljevi, i svaka od njih ima cijenu koju ćemo izračunati u modulu 5.
+Write three sentences like that. Those are your goals, and each one has a price we'll work out in module 5.
 
-Primijeti da nijedna od tih rečenica nije brojka. Brojke dolaze kasnije i one su lakši dio. Teži dio je dopustiti si da nešto želiš naglas.`,
+Notice that none of those sentences is a number. Numbers come later, and they're the easy part. The hard part is allowing yourself to want something out loud.`,
       },
     ],
     assignment: {
-      title: "Tvoja priča o novcu",
-      instructions: `Napiši 10-15 rečenica o svom odnosu s novcem.
+      title: "Your money story",
+      instructions: `Write 10–15 sentences about your relationship with money.
 
-Koristi ova pitanja kao okvir, ne moraš odgovoriti na sva:
+Use these questions as a frame; you don't have to answer all of them:
 
-- Koja je prva rečenica o novcu koje se sjećaš?
-- Koji od tri obrasca (izbjegavanje, stezanje, rasipanje) prepoznaješ kod sebe?
-- Šta bi se u tvojoj sedmici promijenilo da novac nije problem?
+- What is the first sentence about money you remember?
+- Which of the three patterns (avoidance, clamping down, spending as relief) do you recognise in yourself?
+- What would change in your week if money weren't a problem?
 
-**Piši bez pridjeva gdje god možeš.** Ovo čita samo tvoja asistentica i ja.`,
+**Write without adjectives wherever you can.** Only your assistant and I will read this.`,
     },
   },
 
   {
-    title: "Mapa troškova",
-    subtitle: "Gdje novac stvarno odlazi",
+    title: "Mapping your spending",
+    subtitle: "Where the money actually goes",
     summary:
-      "Četiri sedmice podataka vrijede više od bilo koje procjene. Ovaj modul je isključivo o tome da vidiš tačno.",
+      "Four weeks of real data beat any estimate. This module is only about seeing clearly.",
     lessons: [
       {
-        title: "Zašto procjena uvijek promaši",
+        title: "Why estimates always miss",
         duration_min: 10,
-        body: `Kad te pitam koliko mjesečno potrošiš na hranu, reći ćeš broj. Taj broj je gotovo uvijek 30 do 40 posto manji od stvarnog.
+        body: `If I ask how much you spend on food each month, you'll give me a number. That number is almost always 30 to 40 percent lower than the real one.
 
-Razlog nije nepoštenje. Razlog je to što pamtimo velike kupovine, a ne male. Sjećaš se mjesečne nabavke. Ne sjećaš se sedam odlazaka u trgovinu "po dvije stvari" koji zajedno koštaju više.
+The reason isn't dishonesty. It's that we remember big purchases, not small ones. You remember the monthly shop. You don't remember the seven trips to the shop for "just two things" that add up to more.
 
-Zato ne počinjemo s budžetom. Počinjemo s mapom. Mapa je zapis onoga što se stvarno desilo, bez plana i bez osude. Četiri sedmice. Ni jedan dan manje, jer mjesec ima ritam koji kraći period ne uhvati.
+So we don't start with a budget. We start with a map. A map is a record of what actually happened, with no plan and no judgement. Four weeks. Not a day less, because a month has a rhythm that a shorter period won't catch.
 
-Dvije stvari koje ljudi rade pogrešno: mijenjaju ponašanje dok mjere, i odustanu nakon deset dana jer se "ništa ne dešava". Ne mijenjaj ništa i ne odustaj. Podatak je jedini cilj.`,
+Two things people get wrong: they change their behaviour while measuring, and they give up after ten days because "nothing's happening". Don't change anything and don't give up. The data is the only goal.`,
         worksheet: {
-          title: "Radni list 2.1 — Četiri sedmice mapiranja",
+          title: "Worksheet 2.1 — Four weeks of mapping",
           questions: [
-            "Koliko misliš da mjesečno potrošiš na hranu? Zapiši broj prije mjerenja.",
-            "Koje su ti tri kategorije u kojima najčešće trošiš bez razmišljanja?",
-            "Koji dan u sedmici najviše trošiš i zašto?",
-            "Koji trošak si prošli mjesec platila, a da ga nisi primijetila?",
-            "Šta bi te iznenadilo da vidiš u svojoj mapi?",
+            "How much do you think you spend on food each month? Write the number before you measure.",
+            "Which three categories do you most often spend in without thinking?",
+            "Which day of the week do you spend the most, and why?",
+            "What did you pay for last month without noticing?",
+            "What would surprise you to see on your map?",
           ],
         },
       },
       {
-        title: "Četiri kante: fiksno, promjenjivo, povremeno, nevidljivo",
+        title: "Four buckets: fixed, variable, occasional, invisible",
         duration_min: 13,
-        body: `Ne trebaju ti dvadeset dvije kategorije. Trebaju ti četiri.
+        body: `You don't need twenty-two categories. You need four.
 
-**Fiksno** je ono što je svakog mjeseca isto: stanarina, rate, pretplate. Ovo je najlakše vidjeti i najteže mijenjati.
+**Fixed** is whatever is the same every month: rent, loan repayments, subscriptions. The easiest to see and the hardest to change.
 
-**Promjenjivo** je ono što trošiš svaki mjesec, ali u različitim iznosima: hrana, gorivo, higijena. Ovdje je najviše prostora, ali i najviše otpora.
+**Variable** is what you spend every month, but in different amounts: food, fuel, toiletries. This is where the most room is, and the most resistance.
 
-**Povremeno** je ono što dolazi nekoliko puta godišnje i svaki put te iznenadi: registracija auta, rođendani, zimska jakna, zubar. Ovo je kategorija koja ruši budžete, jer je svi računaju kao "izvanredno", a dešava se svakog mjeseca nešto iz nje.
+**Occasional** is what arrives a few times a year and surprises you every time: car registration, birthdays, a winter coat, the dentist. This is the category that breaks budgets, because everyone treats it as "unexpected" — yet something from it happens every single month.
 
-**Nevidljivo** su pretplate koje se same obnavljaju, provizije, zaokruživanja, sitni iznosi ispod pet eura. Prosječno domaćinstvo ovdje izgubi iznos jedne mjesečne rate, a da nikad ne donese odluku o tome.
+**Invisible** is subscriptions that renew themselves, fees, round-ups, small amounts under five euros. The average household loses the equivalent of one monthly repayment here without ever making a decision about it.
 
-Kad rasporediš mapu u ove četiri kante, obično se dogodi ista stvar: povremeno i nevidljivo zajedno budu veći nego što si očekivala. To nije loša vijest. To je prostor.`,
+When you sort your map into these four buckets, the same thing usually happens: occasional and invisible together turn out bigger than you expected. That isn't bad news. That's room.`,
       },
       {
-        title: "Prvi pogled bez osuđivanja",
+        title: "A first look, without judgement",
         duration_min: 8,
-        body: `Kad prvi put vidiš svoju mapu, doći će reakcija. Kod većine je to nelagoda, kod nekih olakšanje, kod nekih bijes na sebe.
+        body: `The first time you see your map, there will be a reaction. For most people it's discomfort, for some it's relief, for some it's anger at themselves.
 
-Pravilo je: **prvi pogled je samo gledanje.** Ne donosiš nijednu odluku istog dana. Ne otkazuješ pretplate, ne praviš pravila, ne obećavaš si ništa.
+The rule is: **the first look is only looking.** You make no decisions on the same day. You don't cancel subscriptions, make rules or promise yourself anything.
 
-Razlog je praktičan. Odluke donesene iz nelagode su prestroge i ne traju. Ti ne trebaš plan koji izdrži tri dana. Trebaš plan koji izdrži do proljeća.
+The reason is practical. Decisions made from discomfort are too strict and don't last. You don't need a plan that survives three days. You need a plan that survives until spring.
 
-Sjedni s mapom, pročitaj je naglas ako možeš, i napiši samo tri rečenice: šta me iznenadilo, šta sam očekivala, šta ne razumijem. Ostalo radimo u modulu 3.`,
+Sit down with the map, read it out loud if you can, and write only three sentences: what surprised me, what I expected, what I don't understand. Everything else we do in module 3.`,
       },
     ],
     assignment: {
-      title: "Mapa troškova za četiri sedmice",
-      instructions: `Zapiši sve troškove iz zadnje četiri sedmice i rasporedi ih u četiri kante: **fiksno**, **promjenjivo**, **povremeno**, **nevidljivo**.
+      title: "A four-week spending map",
+      instructions: `Record every expense from the last four weeks and sort it into four buckets: **fixed**, **variable**, **occasional**, **invisible**.
 
-Možeš koristiti izvod iz banke, aplikaciju, ili papir — nije bitno kako.
+You can use a bank statement, an app or paper — it doesn't matter how.
 
-U odgovor napiši:
-1. Ukupan iznos po svakoj kanti
-2. Tri rečenice: šta me iznenadilo, šta sam očekivala, šta ne razumijem
+In your answer, write:
+1. The total for each bucket
+2. Three sentences: what surprised me, what I expected, what I don't understand
 
-Ako želiš, priloži tablicu kao PDF ili sliku.`,
+If you like, attach your table as a PDF or image.`,
     },
   },
 
   {
-    title: "Budžet bez odricanja",
-    subtitle: "Plan koji izdrži i loš mjesec",
+    title: "A budget without sacrifice",
+    subtitle: "A plan that survives a bad month",
     summary:
-      "Budžet koji zabranjuje ne traje. Ovdje gradimo plan koji ima ugrađen prostor za život.",
+      "A budget that forbids doesn't last. Here we build a plan with room for life built in.",
     lessons: [
       {
-        title: "Zašto restriktivni budžeti pucaju",
+        title: "Why restrictive budgets break",
         duration_min: 12,
-        body: `Svaka žena koja je ikad bila na dijeti zna kako ovo ide. Prva sedmica je savršena. Druga je dobra. Treća ima jedan loš dan, i taj loš dan postane dokaz da "to kod mene ne ide".
+        body: `Anyone who has ever been on a diet knows how this goes. The first week is perfect. The second is good. The third has one bad day, and that bad day becomes proof that "it just doesn't work for me".
 
-Budžet radi isto. Ako ti plan zabranjuje sve što voliš, ti ga ne kršiš zato što si slaba. Kršiš ga zato što je plan bio nemoguć.
+Budgets work the same way. If your plan forbids everything you enjoy, you don't break it because you're weak. You break it because the plan was impossible.
 
-Dobar budžet ima tri osobine. **Ima prostor za život** — iznos koji smiješ potrošiti bez objašnjenja. **Pretpostavlja loš mjesec** — jer loš mjesec dolazi dva-tri puta godišnje. I **ne traži dnevnu pažnju** — ako ga moraš gledati svaki dan, napustit ćeš ga.
+A good budget has three qualities. **It has room for life** — an amount you can spend without explaining. **It assumes a bad month** — because a bad month comes two or three times a year. And **it doesn't need daily attention** — if you have to look at it every day, you'll abandon it.
 
-Pravilo koje koristim: ako novi plan traži više od deset minuta tvoje pažnje sedmično, prekompliciran je.`,
+The rule I use: if a new plan needs more than ten minutes of your attention a week, it's too complicated.`,
         worksheet: {
-          title: "Radni list 3.1 — Tvoj prvi budžet",
+          title: "Worksheet 3.1 — Your first budget",
           questions: [
-            "Koliki ti je prosječni mjesečni prihod u zadnja tri mjeseca?",
-            "Koliko iznosi tvoja kanta 'fiksno'?",
-            "Koji iznos želiš odvojiti kao 'prostor za život' (bez objašnjenja)?",
-            "Koliko mjesečno moraš odvojiti za kantu 'povremeno'?",
-            "Koji je iznos koji ostaje i šta s njim radiš?",
+            "What was your average monthly income over the last three months?",
+            "How much is your 'fixed' bucket?",
+            "What amount do you want to set aside as 'room for life' (no explanation needed)?",
+            "How much do you need to put aside each month for the 'occasional' bucket?",
+            "What amount is left, and what do you do with it?",
           ],
         },
       },
       {
-        title: "Pravilo 50/30/20 i kad ga treba prekršiti",
+        title: "The 50/30/20 rule, and when to break it",
         duration_min: 15,
-        body: `Pravilo kaže: 50 posto prihoda na potrebe, 30 posto na želje, 20 posto na štednju i dugove. Korisno je kao polazna tačka i beskorisno kao pravilo.
+        body: `The rule says: 50 percent of income on needs, 30 percent on wants, 20 percent on savings and debt. Useful as a starting point, useless as a rule.
 
-Ako živiš u gradu gdje stanarina uzima 45 posto prihoda, pravilo od 50 posto za sve potrebe je matematički nemoguće. Ako imaš dug s visokom kamatom, 20 posto je premalo. Ako ti je prihod nepredvidiv, postotak od čega uopće računaš?
+If you live in a city where rent takes 45 percent of your income, a 50 percent cap on all needs is mathematically impossible. If you carry high-interest debt, 20 percent is too little. If your income is unpredictable, a percentage of what, exactly?
 
-Koristi ga ovako: izračunaj svoje stvarne postotke iz mape iz modula 2. Usporedi. Razlika ti pokazuje gdje je pritisak, ne gdje si pogriješila.
+Use it like this: work out your real percentages from the module 2 map. Compare. The gap shows you where the pressure is, not where you went wrong.
 
-Za nepredvidiv prihod postoji bolja metoda: **računaj s najnižim mjesecom zadnjih godinu dana.** Sve iznad toga je višak koji ide u rezervu. Ovo je neudobno prvih par mjeseci i spasonosno nakon toga.`,
+For unpredictable income there's a better method: **plan around your lowest month of the past year.** Anything above that is surplus and goes into your reserve. Uncomfortable for the first couple of months, a lifesaver after that.`,
       },
       {
-        title: "Prostor za život: iznos koji ne pravdaš nikome",
+        title: "Room for life: the amount you justify to nobody",
         duration_min: 9,
-        body: `Ovo je lekcija koju žene najčešće preskoče, a najviše im treba.
+        body: `This is the lesson women most often skip, and the one they need most.
 
-Odredi iznos — tjedni ili mjesečni — koji možeš potrošiti bez ikakvog objašnjenja. Ni sebi, ni partneru, ni meni. Kafa, knjiga, ništa, svejedno. Iznos je tvoj i nema izvještaja.
+Set an amount — weekly or monthly — that you can spend without any explanation. Not to yourself, not to a partner, not to me. Coffee, a book, nothing at all, whatever. The amount is yours and there's no report.
 
-Dvije stvari se dese kad ovo uvedeš. Prva: prestaje krivnja oko sitnih kupovina, jer su unaprijed dogovorene. Druga: ukupna potrošnja u toj kategoriji obično **padne**, jer je odluka donesena jednom mjesečno umjesto trideset puta.
+Two things happen when you introduce it. First: the guilt around small purchases stops, because they're agreed in advance. Second: total spending in that category usually **drops**, because the decision is made once a month instead of thirty times.
 
-Iznos neka bude realan. Ako je premali, nećeš ga poštovati. Preporuka za početak: između 5 i 10 posto prihoda, pa korigiraj nakon dva mjeseca.`,
+Keep the amount realistic. Too small and you won't respect it. A good starting point: between 5 and 10 percent of income, then adjust after two months.`,
       },
     ],
     assignment: {
-      title: "Budžet za sljedeći mjesec",
-      instructions: `Na osnovu mape iz modula 2, napravi budžet za sljedeći mjesec.
+      title: "A budget for next month",
+      instructions: `Using your map from module 2, build a budget for next month.
 
-Mora sadržavati:
-- Iznos po svakoj od četiri kante
-- **Prostor za život** — iznos koji trošiš bez objašnjenja
-- Jedan iznos za kantu "povremeno" koji odvajaš svakog mjeseca
+It must include:
+- An amount for each of the four buckets
+- **Room for life** — the amount you spend without explanation
+- One amount for the 'occasional' bucket that you set aside every month
 
-U odgovoru napiši i jednu rečenicu: **šta će se prvo srušiti ako mjesec bude loš?**`,
+In your answer, add one sentence: **what breaks first if the month goes badly?**`,
     },
   },
 
   {
-    title: "Cijene i naplata",
-    subtitle: "Koliko vrijedi tvoj rad i kako to tražiš",
+    title: "Pricing and getting paid",
+    subtitle: "What your work is worth, and how you ask for it",
     summary:
-      "Za sve koje rade svoje: kako postaviti cijenu, kako je izgovoriti i kako naplatiti bez izvinjavanja.",
+      "For everyone who works for themselves: how to set a price, how to say it out loud, and how to get paid without apologising.",
     lessons: [
       {
-        title: "Cijena nije procjena tvoje vrijednosti",
+        title: "Your price is not a verdict on your worth",
         duration_min: 13,
-        body: `Kad ti se steže u grlu prije nego kažeš cijenu, to je zato što u tom trenutku ne govoriš o usluzi. Govoriš o sebi.
+        body: `When your throat tightens before you say a price, it's because in that moment you're not talking about the service. You're talking about yourself.
 
-Odvoji to dvoje. Cijena je broj koji pokriva tvoje vrijeme, troškove, poreze, neplaćene sate i rizik. Ona nije ocjena koliko si dobra. Klijent koji kaže "skupo" nije rekao "ti ne vrijediš". Rekao je da mu se ne uklapa u budžet, što je informacija, ne presuda.
+Separate the two. A price is a number that covers your time, your costs, tax, unpaid hours and risk. It isn't a rating of how good you are. A client who says "that's expensive" hasn't said "you're not worth it". They've said it doesn't fit their budget — which is information, not a verdict.
 
-Izračun koji radiš u zadatku: koliko sati mjesečno stvarno naplaćuješ (ne koliko radiš), koliki ti je ciljani prihod, koliki su fiksni troškovi posla, i koliki postotak ide na porez i doprinose. Podijeli. Dobiješ minimalnu satnicu ispod koje radiš s gubitkom.
+The calculation you'll do in the assignment: how many hours a month you actually bill (not how many you work), your target income, your fixed business costs, and the percentage that goes to tax and contributions. Divide. You get a minimum hourly rate below which you're working at a loss.
 
-Većina žena koje ovo prvi put izračunaju otkrije da im je trenutna cijena 30 do 50 posto ispod tog minimuma.`,
+Most women who do this for the first time discover their current price is 30 to 50 percent below that minimum.`,
         worksheet: {
-          title: "Radni list 4.1 — Izračun minimalne satnice",
+          title: "Worksheet 4.1 — Your minimum hourly rate",
           questions: [
-            "Koliko sati mjesečno stvarno naplatiš (ne koliko radiš)?",
-            "Koliki je tvoj ciljani mjesečni prihod nakon poreza?",
-            "Koliki su fiksni mjesečni troškovi posla?",
-            "Koji postotak odlazi na porez i doprinose?",
-            "Koja je tvoja minimalna satnica i koliko je daleko od trenutne?",
+            "How many hours a month do you actually bill (not how many you work)?",
+            "What is your target monthly income after tax?",
+            "What are your fixed monthly business costs?",
+            "What percentage goes on tax and contributions?",
+            "What is your minimum hourly rate, and how far is it from your current one?",
           ],
         },
       },
       {
-        title: "Kako izgovoriti cijenu i onda šutjeti",
+        title: "How to say your price, then stay quiet",
         duration_min: 10,
-        body: `Postoji jedna tehnika koja mijenja više nego bilo koji izračun: **kažeš cijenu i zastaneš.**
+        body: `There's one technique that changes more than any calculation: **you say the price, and you pause.**
 
-Ono što većina radi je: kaže cijenu, pa odmah doda "ali mogu i malo niže", "znam da je to možda puno", "ako treba možemo dogovoriti". Svaka od tih rečenica pregovara protiv tebe prije nego je druga strana rekla išta.
+What most people do instead is say the price and immediately add "but I can go a bit lower", "I know that might be a lot", "we can work something out if needed". Every one of those sentences negotiates against you before the other person has said anything.
 
-Rečenica glasi: "Za ovaj opseg cijena je X." Tačka. Onda šutiš i pustiš drugu osobu da odgovori.
+The sentence is: "For this scope, the price is X." Full stop. Then you stay quiet and let the other person respond.
 
-Tišina će ti trajati beskonačno. Traje tri sekunde. Vježbaj naglas, sama, deset puta. Zvuči smiješno dok ne proradi.
+The silence will feel endless. It lasts three seconds. Practise out loud, alone, ten times. It sounds silly until it works.
 
-Ako te pitaju za popust, odgovor nije da ili ne. Odgovor je: "Mogu prilagoditi cijenu ako smanjimo opseg — šta ti je od ovoga najmanje važno?" Time cijena ostaje povezana s radom, a ne s tvojom voljom da ugodiš.`,
+If they ask for a discount, the answer isn't yes or no. It's: "I can adjust the price if we reduce the scope — which of these matters least to you?" That keeps the price tied to the work, not to your willingness to please.`,
       },
       {
-        title: "Naplata: rokovi, podsjetnici i kad prestati raditi",
+        title: "Getting paid: deadlines, reminders and when to stop working",
         duration_min: 11,
-        body: `Nenaplaćen posao nije posao. To je poklon s fakturom.
+        body: `Unpaid work isn't work. It's a gift with an invoice.
 
-Tri pravila koja rješavaju 90 posto problema s naplatom:
+Three rules solve 90 percent of payment problems:
 
-**Avans.** Za nove klijente 30 do 50 posto unaprijed. Ovo nije nepovjerenje, to je standard. Klijent koji odbije avans obično je isti onaj koji kasni s ostatkom.
+**A deposit.** For new clients, 30 to 50 percent up front. This isn't mistrust; it's standard. A client who refuses a deposit is usually the same one who pays the rest late.
 
-**Rok napisan brojem.** Ne "po završetku", nego "15 dana od datuma računa". Datum se ne pregovara, jer je bio na ponudi koju je potpisao.
+**A deadline written as a number.** Not "on completion", but "15 days from the invoice date". The date isn't up for negotiation, because it was on the quote they signed.
 
-**Podsjetnik bez izvinjenja.** Dan nakon roka: "Podsjećam na račun broj 24, dospio jučer. Hvala." Bez "oprosti što gnjavim". Nisi ti ta koja gnjavi.
+**A reminder without an apology.** The day after the deadline: "A reminder about invoice 24, due yesterday. Thank you." No "sorry to bother you". You're not the one bothering anyone.
 
-I zadnje: odredi unaprijed tačku na kojoj prestaješ raditi ako nije plaćeno. Napiši je u ponudu. Ne moraš je koristiti često, ali moraš je imati.`,
+And finally: decide in advance the point at which you stop working if you haven't been paid. Put it in your quote. You won't need it often, but you need to have it.`,
         worksheet: {
-          title: "Radni list 4.3 — Uslovi naplate",
+          title: "Worksheet 4.3 — Payment terms",
           questions: [
-            "Koliki avans tražiš od novih klijenata i kako to formuliraš?",
-            "Koji rok plaćanja pišeš na račun, izražen brojem dana?",
-            "Kako glasi tvoj prvi podsjetnik nakon isteka roka?",
-            "U kojem trenutku prestaješ raditi ako nije plaćeno?",
-            "Koji klijent ti trenutno duguje i šta mu šalješ ove sedmice?",
+            "What deposit do you ask new clients for, and how do you phrase it?",
+            "What payment term do you put on invoices, written as a number of days?",
+            "What does your first reminder say once the deadline has passed?",
+            "At what point do you stop working if you haven't been paid?",
+            "Which client owes you money right now, and what are you sending them this week?",
           ],
         },
       },
     ],
     assignment: {
-      title: "Izračun cijene i jedna poslana ponuda",
-      instructions: `Dva dijela:
+      title: "Your price, and one quote sent",
+      instructions: `Two parts:
 
-**1. Izračun.** Izračunaj svoju minimalnu satnicu po formuli iz lekcije 4.1. Napiši brojke.
+**1. The calculation.** Work out your minimum hourly rate using the formula from lesson 4.1. Show the numbers.
 
-**2. Ponuda.** Napiši (i ako možeš pošalji) jednu ponudu po novoj cijeni. Bez rečenica koje pregovaraju protiv tebe.
+**2. The quote.** Write (and, if you can, send) one quote at your new price. No sentences that negotiate against you.
 
-U odgovor kopiraj tekst ponude. Gledat ćemo formulaciju zajedno.`,
+Paste the text of the quote into your answer. We'll look at the wording together.`,
     },
   },
 
   {
-    title: "Rezerva i štednja",
-    subtitle: "Koliko ti treba da prestaneš strahovati",
+    title: "Your reserve and savings",
+    subtitle: "How much you need to stop being afraid",
     summary:
-      "Rezerva nije luksuz nego uvjet za sve ostalo. Računamo tvoj tačan iznos i put do njega.",
+      "A reserve isn't a luxury; it's the condition for everything else. We work out your exact number and the path to it.",
     lessons: [
       {
-        title: "Tri mjeseca ili šest: koliki je tvoj broj",
+        title: "Three months or six: what's your number?",
         duration_min: 12,
-        body: `Opće pravilo kaže tri do šest mjeseci troškova. Kao i sva opća pravila, korisno je dok ne dođeš do svoje situacije.
+        body: `The general rule says three to six months of expenses. Like every general rule, it's useful until you reach your own situation.
 
-Tvoj broj ovisi o četiri stvari: koliko ti je prihod predvidiv, koliko ljudi ovisi o tebi, koliko brzo bi našla novi posao ili klijenta, i koliko duga imaš.
+Your number depends on four things: how predictable your income is, how many people depend on you, how quickly you'd find a new job or client, and how much debt you carry.
 
-Stalni posao, bez djece, tražena struka — tri mjeseca je dosta. Vlastiti posao s nepredvidivim prihodom i dijete — šest mjeseci je minimum, devet je mirnije.
+A steady job, no children, an in-demand profession — three months is enough. Your own business with unpredictable income and a child — six months is the minimum, nine is calmer.
 
-Važnije od tačnog broja: **računaš mjesece troškova, ne mjesece prihoda.** To je obično 25 do 35 posto manji iznos i zato dostižniji nego što izgleda.
+More important than the exact number: **you count months of expenses, not months of income.** That's usually 25 to 35 percent less, and so more achievable than it looks.
 
-Izračunaj svoj broj danas. Ne da bi ga odmah imala, nego da prestaneš strahovati od nepoznatog iznosa.`,
+Work out your number today. Not so you'll have it straight away, but so you stop fearing an unknown amount.`,
         worksheet: {
-          title: "Radni list 5.1 — Tvoja rezerva",
+          title: "Worksheet 5.1 — Your reserve",
           questions: [
-            "Koliki su ti mjesečni troškovi u minimalnoj verziji (bez želja)?",
-            "Koliko mjeseci rezerve ti treba s obzirom na tvoju situaciju?",
-            "Koliki je ukupan iznos rezerve?",
-            "Koliko mjesečno možeš odvojiti i koliko će trebati?",
-            "Gdje ćeš držati rezervu da ti ne bude previše pri ruci?",
+            "What are your monthly expenses in their minimum version (no wants)?",
+            "How many months of reserve do you need, given your situation?",
+            "What is the total reserve amount?",
+            "How much can you put aside each month, and how long will it take?",
+            "Where will you keep the reserve so it isn't too easy to reach?",
           ],
         },
       },
       {
-        title: "Gdje držati rezervu",
+        title: "Where to keep your reserve",
         duration_min: 8,
-        body: `Rezerva ima dva zahtjeva: da joj možeš pristupiti za nekoliko dana, i da ti nije toliko pri ruci da je potrošiš na nešto što nije hitno.
+        body: `A reserve has two requirements: you can reach it within a few days, and it isn't so close to hand that you spend it on something that isn't urgent.
 
-Zato ne na tekućem računu s karticom. I ne u nečemu što traje mjesecima da se unovči.
+So not in a current account with a card attached. And not in something that takes months to turn into cash.
 
-Praktično rješenje za većinu: poseban štedni račun, po mogućnosti u drugoj banci, bez kartice, s trajnim nalogom koji prebacuje iznos na dan plaće. Automatizacija je ovdje cijeli trik — odluka se donosi jednom, ne svaki mjesec.
+The practical answer for most people: a separate savings account, ideally at a different bank, with no card, and a standing order that moves the amount across on payday. Automation is the whole trick — the decision is made once, not every month.
 
-Ako ti je prihod nepredvidiv, trajni nalog zamijeni pravilom: **svaki priliv, prvih 10 posto odmah ide u rezervu.** Prije svega ostalog.`,
+If your income is unpredictable, replace the standing order with a rule: **from every payment in, the first 10 percent goes straight to the reserve.** Before anything else.`,
       },
       {
-        title: "Kad smiješ dirati rezervu",
+        title: "When you're allowed to touch the reserve",
         duration_min: 7,
-        body: `Napiši ovo unaprijed, dok si mirna, jer u trenutku kad zatreba nećeš razmišljati jasno.
+        body: `Write this down in advance, while you're calm, because when you need it you won't be thinking clearly.
 
-Rezerva se dira kad je nešto **neplanirano, nužno i hitno.** Sve tri, ne jedna od tri.
+The reserve is for things that are **unplanned, necessary and urgent.** All three, not one of the three.
 
-Pokvaren bojler u januaru: da. Gume koje su se istrošile: to je bilo planirano, ide iz kante "povremeno". Putovanje s prijateljicama koje se "dešava jednom u životu": ne, koliko god boljelo.
+A broken boiler in January: yes. Tyres that have worn out: that was planned, it comes from the 'occasional' bucket. A once-in-a-lifetime trip with friends: no, however much it hurts.
 
-I posljednje pravilo, ono koje ljudi zaborave: **kad je potrošiš, vraćanje rezerve postaje prioritet broj jedan** — ispred štednje, ispred investiranja, ispred svega osim minimalnih rata duga.`,
+And the last rule, the one people forget: **once you've used it, rebuilding the reserve becomes priority number one** — ahead of saving, ahead of investing, ahead of everything except the minimum debt repayments.`,
       },
     ],
     assignment: {
-      title: "Izračun rezerve i prvi trajni nalog",
-      instructions: `1. Izračunaj svoj iznos rezerve (mjeseci × minimalni mjesečni troškovi).
-2. Napiši koliko mjesečno možeš odvojiti i za koliko mjeseci ćeš doći do cilja.
-3. **Postavi trajni nalog** (ili pravilo od 10 posto po prilivu) i napiši da si to uradila.
+      title: "Your reserve, and your first standing order",
+      instructions: `1. Work out your reserve amount (months × minimum monthly expenses).
+2. Write how much you can put aside each month and how many months it will take to reach the goal.
+3. **Set up a standing order** (or the 10-percent-per-payment rule) and say that you've done it.
 
-U odgovoru navedi i gdje ćeš držati rezervu i zašto baš tamo.`,
+In your answer, also say where you'll keep the reserve and why there.`,
     },
   },
 
   {
-    title: "Dugovi bez srama",
-    subtitle: "Redoslijed, plan i razgovor s bankom",
+    title: "Debt without shame",
+    subtitle: "Order, a plan and a conversation with the bank",
     summary:
-      "Dug je matematika s kamatom, ne dokaz o karakteru. Ovaj modul je najpraktičniji u programu.",
+      "Debt is maths with interest, not proof of character. This is the most practical module in the programme.",
     lessons: [
       {
-        title: "Popis svih dugova na jednom papiru",
+        title: "Every debt on one sheet of paper",
         duration_min: 11,
-        body: `Najteži dio nije otplata. Najteži dio je napisati sve na jedno mjesto.
+        body: `The hardest part isn't repaying. The hardest part is writing everything down in one place.
 
-Za svaki dug trebaju ti četiri podatka: **preostali iznos**, **kamatna stopa**, **mjesečna rata**, **datum završetka**. Kartice, minus po računu, potrošački krediti, pozajmica od sestre, rate za telefon. Sve.
+For each debt you need four facts: **the remaining balance**, **the interest rate**, **the monthly repayment**, **the end date**. Cards, overdraft, personal loans, the money you borrowed from your sister, the instalments on your phone. All of it.
 
-Skoro svaka žena koja ovo napravi kaže istu stvar: ukupan iznos je manji nego što je mislila, ali kamata na jednoj stavki je puno veća nego što je znala. To je tipično. Minus po tekućem računu i kartice su gotovo uvijek najskuplji novac koji imaš.
+Almost every woman who does this says the same thing: the total is smaller than she thought, but the interest on one item is much higher than she knew. That's typical. Overdrafts and credit cards are almost always the most expensive money you have.
 
-Kad imaš popis, dug prestaje biti oblak i postaje lista. Lista se može rješavati redom.`,
+Once you have the list, debt stops being a cloud and becomes a list. A list can be worked through in order.`,
         worksheet: {
-          title: "Radni list 6.1 — Popis dugova",
+          title: "Worksheet 6.1 — Your debt list",
           questions: [
-            "Popiši sve dugove: iznos, kamata, rata, datum završetka.",
-            "Koji dug ima najvišu kamatnu stopu?",
-            "Koji dug ima najmanji preostali iznos?",
-            "Koliko ukupno mjesečno odlazi na rate?",
-            "Koji dug bi ti najviše olakšao kad bi nestao?",
+            "List every debt: balance, interest rate, repayment, end date.",
+            "Which debt has the highest interest rate?",
+            "Which debt has the smallest remaining balance?",
+            "How much goes on repayments each month in total?",
+            "Which debt would bring the most relief if it disappeared?",
           ],
         },
       },
       {
-        title: "Lavina ili gruda: koji redoslijed odabrati",
+        title: "Avalanche or snowball: choosing an order",
         duration_min: 12,
-        body: `Postoje dvije metode i obje rade.
+        body: `There are two methods, and both work.
 
-**Lavina**: prvo otplaćuješ dug s najvišom kamatom, ostale plaćaš minimalno. Matematički je jeftinija — platiš manje kamate ukupno.
+**Avalanche**: pay off the highest-interest debt first and the rest at the minimum. It's mathematically cheaper — you pay less interest overall.
 
-**Gruda**: prvo otplaćuješ najmanji iznos, bez obzira na kamatu. Psihološki je jača — prvi dug nestane brzo i to ti da zalet.
+**Snowball**: pay off the smallest balance first, regardless of interest. It's psychologically stronger — the first debt disappears quickly and that gives you momentum.
 
-Koju odabrati? Ako je razlika u kamatama velika (recimo kartica na 18 posto naspram kredita na 5 posto), idi lavinom. Ako su kamate slične, ili ako si već pokušala i odustala, idi grudom.
+Which should you choose? If the gap in interest rates is large (say a card at 18 percent against a loan at 5 percent), go avalanche. If the rates are similar, or if you've tried before and given up, go snowball.
 
-Odabir metode nije moralno pitanje. Najbolja metoda je ona koju ćeš stvarno provesti do kraja.
+Choosing a method isn't a moral question. The best method is the one you'll actually see through.
 
-Jedno pravilo vrijedi za obje: **dok otplaćuješ, ne praviš novi dug.** Zvuči očito, ali to je mjesto gdje planovi najčešće padnu.`,
+One rule applies to both: **while you're repaying, you don't take on new debt.** It sounds obvious, but it's where plans most often fall apart.`,
       },
       {
-        title: "Razgovor s bankom: šta tražiti i kojim riječima",
+        title: "Talking to the bank: what to ask for, and in what words",
         duration_min: 10,
-        body: `Banka nije neprijatelj i nije prijatelj. Banka je institucija s procedurama, a procedure imaju mogućnosti o kojima ti niko neće reći ako ne pitaš.
+        body: `A bank isn't your enemy and isn't your friend. A bank is an institution with procedures, and procedures have options nobody will tell you about unless you ask.
 
-Tri stvari koje vrijedi tražiti: **refinansiranje** skupljeg duga jeftinijim, **reprogram** ako ti je rata preteška, i **snižavanje kamate** ako ti se kreditna sposobnost poboljšala otkad si uzela kredit.
+Three things worth asking for: **refinancing** a more expensive debt with a cheaper one, **restructuring** if your repayment is too heavy, and **a lower rate** if your credit position has improved since you took the loan.
 
-Kako to reći: "Imam kredit iz 2023. s kamatom od X. Moja situacija se u međuvremenu promijenila. Koje mogućnosti imam za snižavanje kamate ili reprogram?"
+How to say it: "I have a loan from 2023 at X percent. My situation has changed since then. What options do I have to lower the rate or restructure?"
 
-Nemoj se izvinjavati i nemoj objašnjavati privatne okolnosti više nego što treba. Ovo je poslovni razgovor.
+Don't apologise, and don't explain your private circumstances more than you need to. This is a business conversation.
 
-I obavezno: **traži ponudu u pisanom obliku** i usporedi je s postojećim stanjem prije nego potpišeš bilo šta. Refinansiranje koje produži rok može smanjiti ratu, a povećati ukupnu kamatu.`,
+And always: **ask for the offer in writing** and compare it with what you have now before you sign anything. A refinance that extends the term can lower your repayment while raising the total interest you pay.`,
       },
     ],
     assignment: {
-      title: "Popis dugova i plan otplate",
-      instructions: `1. Napravi popis svih dugova (iznos, kamata, rata, datum završetka).
-2. Odaberi metodu — **lavina** ili **gruda** — i napiši zašto baš ta.
-3. Napiši redoslijed otplate i procijenjeni datum kad prvi dug nestaje.
+      title: "Your debt list and repayment plan",
+      instructions: `1. List every debt (balance, interest rate, repayment, end date).
+2. Choose a method — **avalanche** or **snowball** — and explain why that one.
+3. Write down the repayment order and the estimated date the first debt disappears.
 
-Ako nemaš dugova, napiši umjesto toga plan šta radiš s iznosom koji bi inače išao na rate.`,
+If you have no debt, write instead a plan for what you'll do with the amount that would otherwise go on repayments.`,
     },
   },
 
   {
-    title: "Osnove investiranja",
-    subtitle: "Šta je dovoljno znati za prvi korak",
+    title: "Investing basics",
+    subtitle: "What you need to know for a first step",
     summary:
-      "Bez preporuka i bez obećanja. Samo pojmovi koji ti trebaju da razumiješ o čemu se radi.",
+      "No recommendations and no promises. Only the concepts you need to understand what's being talked about.",
     lessons: [
       {
-        title: "Šta investiranje jest i šta nije",
+        title: "What investing is, and what it isn't",
         duration_min: 14,
-        body: `Investiranje je kupovina nečega što bi vremenom moglo vrijediti više, uz prihvaćen rizik da bi moglo vrijediti manje. To je cijela definicija.
+        body: `Investing is buying something that could be worth more over time, while accepting that it could be worth less. That's the whole definition.
 
-Ono što investiranje **nije**: nije štednja (štednja ima zajamčen iznos, investiranje nema), nije brzo (razmišljaj u godinama, ne mjesecima), i nije nešto u šta ulaziš prije nego imaš rezervu i prije nego riješiš skupe dugove.
+What investing **isn't**: it isn't saving (savings have a guaranteed amount, investments don't), it isn't fast (think in years, not months), and it isn't something you start before you have a reserve and before you've dealt with expensive debt.
 
-Redoslijed je uvijek isti: **rezerva → skupi dugovi → investiranje.** Ako investiraš dok imaš dug na kartici od 18 posto, matematika radi protiv tebe bez obzira koliko je investicija dobra.
+The order is always the same: **reserve → expensive debt → investing.** If you invest while carrying 18 percent on a credit card, the maths works against you however good the investment is.
 
-Ovaj modul nema preporuke. Ja nisam licencirana savjetnica i neću ti reći šta da kupiš. Cilj je da razumiješ pojmove dovoljno da postavljaš prava pitanja kad razgovaraš s nekim ko jest licenciran.`,
+This module has no recommendations. I'm not a licensed adviser and I won't tell you what to buy. The aim is for you to understand the concepts well enough to ask the right questions when you talk to someone who is licensed.`,
         worksheet: {
-          title: "Radni list 7.1 — Jesi li spremna",
+          title: "Worksheet 7.1 — Are you ready?",
           questions: [
-            "Imaš li rezervu od barem tri mjeseca troškova?",
-            "Imaš li dug s kamatom većom od 8 posto?",
-            "Za koliko godina bi ti taj novac mogao zatrebati?",
-            "Koliki pad vrijednosti bi podnijela bez panike?",
-            "Koje pojmove još ne razumiješ dovoljno?",
+            "Do you have a reserve of at least three months of expenses?",
+            "Do you have any debt with interest above 8 percent?",
+            "In how many years might you need this money?",
+            "How big a drop in value could you live with without panicking?",
+            "Which concepts don't you understand well enough yet?",
           ],
         },
       },
       {
-        title: "Rizik, vrijeme i zašto se ne gleda svaki dan",
+        title: "Risk, time, and why you don't check it every day",
         duration_min: 11,
-        body: `Rizik u investiranju nije "možeš izgubiti sve". Rizik je **koliko vrijednost oscilira i koliko dugo možeš čekati da se oporavi.**
+        body: `Risk in investing isn't "you could lose everything". Risk is **how much the value swings, and how long you can wait for it to recover.**
 
-Zato je vrijeme najvažnija varijabla. Novac koji ti treba za dvije godine i novac koji ti ne treba petnaest godina nisu ista vrsta novca i ne idu na isto mjesto.
+That's why time is the most important variable. Money you need in two years and money you won't need for fifteen aren't the same kind of money, and they don't go in the same place.
 
-Druga stvar: gledanje vrijednosti svaki dan šteti. Ne zato što je informacija loša, nego zato što svakodnevne oscilacije izgledaju dramatično i izazivaju odluke koje dugoročno koštaju. Ljudi koji provjeravaju rijetko prolaze bolje od onih koji provjeravaju često. To je dosljedan nalaz.
+The second thing: checking the value every day does harm. Not because the information is bad, but because daily swings look dramatic and prompt decisions that cost you in the long run. People who check rarely do better than people who check often. It's a consistent finding.
 
-Postavi si pravilo unaprijed: koliko često gledaš i šta te može natjerati da prodaš. Napiši to dok si mirna.`,
+Set yourself a rule in advance: how often you look, and what could make you sell. Write it down while you're calm.`,
       },
       {
-        title: "Prva pitanja koja postavljaš prije nego uložiš išta",
+        title: "The first questions to ask before you invest anything",
         duration_min: 10,
-        body: `Kad ti neko nudi bilo kakav proizvod — banka, savjetnik, poznanica s "prilikom" — postavi ovih pet pitanja:
+        body: `When anyone offers you any kind of product — a bank, an adviser, an acquaintance with an "opportunity" — ask these five questions:
 
-1. **Koliko ovo košta godišnje, u postotku i u eurima?** Naknade se čine male dok ih ne pomnožiš s dvadeset godina.
-2. **Kako i za koliko dana mogu doći do svog novca?**
-3. **Šta se desi ako prestanem uplaćivati?**
-4. **Ko zarađuje na mojoj uplati i koliko?**
-5. **Je li ova osoba licencirana i čime je plaćena?**
+1. **What does this cost each year, as a percentage and in euros?** Fees look small until you multiply them by twenty years.
+2. **How, and within how many days, can I get my money out?**
+3. **What happens if I stop paying in?**
+4. **Who earns from my payment, and how much?**
+5. **Is this person licensed, and how are they paid?**
 
-Ako na bilo koje pitanje ne dobiješ jasan odgovor u pisanom obliku, odgovor je ne.
+If you don't get a clear answer to any of them in writing, the answer is no.
 
-I pravilo koje vrijedi uvijek: **ne ulaži u ono što ne možeš objasniti prijateljici u tri rečenice.**`,
+And one rule that always applies: **don't invest in anything you can't explain to a friend in three sentences.**`,
       },
     ],
     assignment: {
-      title: "Provjera spremnosti i pet pitanja",
-      instructions: `1. Odgovori na pitanja iz radnog lista 7.1 — jesi li spremna za prvi korak.
-2. Napiši svojim riječima **pet pitanja** koja ćeš postaviti prije nego uložiš išta.
-3. Napiši jednu rečenicu: koji pojam ti je još nejasan?
+      title: "A readiness check and your five questions",
+      instructions: `1. Answer the questions from worksheet 7.1 — are you ready for a first step?
+2. Write, in your own words, the **five questions** you'll ask before investing anything.
+3. Write one sentence: which concept is still unclear to you?
 
-Ovo nije zadatak u kojem nešto kupuješ. Ovo je zadatak u kojem provjeravaš gdje si.`,
+This isn't an assignment where you buy anything. It's one where you check where you stand.`,
     },
   },
 
   {
-    title: "Plan za 12 mjeseci",
-    subtitle: "Šta radiš kad program završi",
+    title: "Your 12-month plan",
+    subtitle: "What you do when the programme ends",
     summary:
-      "Sve iz prethodnih sedam modula pretvaramo u jedan papir koji ti stoji na vidljivom mjestu.",
+      "We turn everything from the previous seven modules into one sheet of paper that lives somewhere you can see it.",
     lessons: [
       {
-        title: "Tri brojke koje pratiš i ništa više",
+        title: "Three numbers to track, and nothing else",
         duration_min: 10,
-        body: `Nakon programa nemaš mene, nemaš asistenticu i nemaš sedmične pozive. Zato plan mora biti dovoljno jednostavan da ga održiš sama.
+        body: `After the programme you won't have me, an assistant or weekly calls. So the plan has to be simple enough to keep up on your own.
 
-Tri brojke, jednom mjesečno, deset minuta:
+Three numbers, once a month, ten minutes:
 
-**Stanje rezerve.** Raste li, stoji li, pada li.
-**Ukupan dug.** Jedan broj, svi dugovi zajedno.
-**Potrošnja u kanti "promjenjivo".** Jedina kanta koju stvarno kontroliraš iz mjeseca u mjesec.
+**Your reserve balance.** Is it growing, flat, or falling?
+**Your total debt.** One number, all debts together.
+**Spending in the 'variable' bucket.** The only bucket you genuinely control month to month.
 
-Ne prati ništa drugo. Ne prati dnevno. Ne pravi tablice s petnaest kartica jer ćeš ih napustiti do marta.
+Track nothing else. Don't track daily. Don't build spreadsheets with fifteen tabs, because you'll abandon them by March.
 
-Upiši te tri brojke u isti dokument svakog mjeseca, na isti dan. Nakon šest mjeseci imaš trend, a trend je jedino što zaista nešto govori.`,
+Write those three numbers in the same document every month, on the same day. After six months you'll have a trend, and a trend is the only thing that really tells you anything.`,
         worksheet: {
-          title: "Radni list 8.1 — Plan za 12 mjeseci",
+          title: "Worksheet 8.1 — Your 12-month plan",
           questions: [
-            "Koje tri brojke pratiš i kojeg datuma u mjesecu?",
-            "Koji je tvoj cilj za rezervu za 12 mjeseci?",
-            "Koji dug želiš da nestane i do kada?",
-            "Šta radiš kad mjesec bude loš?",
-            "Ko je tvoja osoba s kojom ćeš jednom mjesečno pričati o ovome?",
+            "Which three numbers will you track, and on which day of the month?",
+            "What is your reserve goal for the next 12 months?",
+            "Which debt do you want gone, and by when?",
+            "What do you do when a month goes badly?",
+            "Who is the person you'll talk to about this once a month?",
           ],
         },
       },
       {
-        title: "Šta radiš kad mjesec bude loš",
+        title: "What you do when a month goes badly",
         duration_min: 9,
-        body: `Loš mjesec će doći. Ne dva puta u životu — dva do tri puta godišnje. Ako plan to ne predviđa, plan nije gotov.
+        body: `A bad month will come. Not twice in a lifetime — two or three times a year. If your plan doesn't expect that, the plan isn't finished.
 
-Napiši unaprijed tri koraka koje radiš u lošem mjesecu:
+Write down in advance three steps you take in a bad month:
 
-**Prvi:** šta pauziraš. Obično su to uplate u investicije i dio "prostora za život". Ne rezerva, ne minimalne rate.
-**Drugi:** šta ne diraš ni pod koju cijenu.
-**Treći:** kad se vraćaš na normalno i po kojem znaku.
+**First:** what you pause. Usually investment contributions and part of your room for life. Not the reserve, not the minimum repayments.
+**Second:** what you don't touch under any circumstances.
+**Third:** when you go back to normal, and by what sign.
 
-Ključno je da ovo napišeš **sada**, dok ti je glava bistra. U lošem mjesecu nećeš praviti dobar plan; samo ćeš izvršiti onaj koji već imaš.
+The key is to write this **now**, while your head is clear. In a bad month you won't make a good plan; you'll only carry out the one you already have.
 
-I jedno podsjećanje: loš mjesec nije dokaz da plan ne radi. Plan koji predviđa loš mjesec upravo tada i radi.`,
+And a reminder: a bad month isn't proof the plan doesn't work. A plan that expects a bad month is exactly the plan that works then.`,
       },
       {
-        title: "Kako da ti ovo ostane nakon programa",
+        title: "How to keep this going after the programme",
         duration_min: 12,
-        body: `Osam sedmica je dovoljno da se nešto promijeni i premalo da se navika učvrsti. Zato zadnja lekcija nije o novcu nego o održavanju.
+        body: `Eight weeks is enough for something to change, and too short for the habit to set. So the last lesson isn't about money; it's about maintenance.
 
-Tri stvari koje pomažu, poredane po učinku:
+Three things that help, in order of impact:
 
-**Datum u kalendaru.** Isti dan svakog mjeseca, podsjetnik, deset minuta, tri brojke. Ako nije u kalendaru, neće se desiti.
+**A date in your calendar.** The same day each month, a reminder, ten minutes, three numbers. If it isn't in the calendar, it won't happen.
 
-**Jedna osoba.** Prijateljica, sestra, neko iz ove grupe. Jednom mjesečno pošalješ joj tri brojke, ona tebi svoje. Bez savjeta, samo brojke. Ovo je najefikasnija stvar u cijelom programu i najmanje je popularna.
+**One person.** A friend, a sister, someone from this group. Once a month you send her your three numbers, she sends you hers. No advice, just numbers. This is the most effective thing in the whole programme, and the least popular.
 
-**Jedan papir na vidljivom mjestu.** Ne aplikacija. Papir. Iznos rezerve koji ciljaš i datum do kojeg ga želiš.
+**One sheet of paper somewhere visible.** Not an app. Paper. The reserve amount you're aiming for, and the date you want it by.
 
-Za kraj: cilj nije da postaneš osoba koja stalno misli o novcu. Cilj je suprotan — da novac zauzima deset minuta mjesečno i ostatak vremena te pusti na miru.`,
+Finally: the goal isn't to become someone who thinks about money all the time. The goal is the opposite — for money to take ten minutes a month and leave you alone the rest of the time.`,
       },
     ],
     assignment: {
-      title: "Plan za 12 mjeseci na jednom papiru",
-      instructions: `Napiši svoj plan za 12 mjeseci. Mora stati na jednu stranicu.
+      title: "Your 12-month plan on one sheet",
+      instructions: `Write your 12-month plan. It must fit on one page.
 
-Sadrži:
-1. **Tri brojke** koje pratiš i datum u mjesecu kad ih upisuješ
-2. **Cilj rezerve** za 12 mjeseci i mjesečni iznos
-3. **Plan za loš mjesec** — šta pauziraš, šta ne diraš, kad se vraćaš
-4. **Ime osobe** s kojom razmjenjuješ tri brojke jednom mjesečno
+It includes:
+1. **Three numbers** you'll track, and the day of the month you record them
+2. **Your reserve goal** for 12 months, and the monthly amount
+3. **Your bad-month plan** — what you pause, what you don't touch, when you go back to normal
+4. **The name of the person** you'll swap three numbers with once a month
 
-Ovo je zadnji zadatak u programu. Uzmi si vremena.`,
+This is the last assignment in the programme. Take your time.`,
     },
   },
 ];

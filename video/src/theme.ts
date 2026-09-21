@@ -13,7 +13,7 @@ function mix(a: string, b: string, t: number) {
   return toHex([ar + (br - ar) * t, ag + (bg - ag) * t, ab + (bb - ab) * t]);
 }
 
-// Iste vrijednosti kao lib/colors.ts u aplikaciji.
+// Same values as lib/colors.ts in the app.
 export const theme = {
   bg: brand.colors.bg,
   surface: brand.colors.surface,

@@ -1,6 +1,6 @@
 import type { Config } from "tailwindcss";
 
-// Boje dolaze iz lib/brand.ts kroz CSS varijable koje postavlja app/layout.tsx.
+// Colours come from lib/brand.ts through CSS variables set in app/layout.tsx.
 const config: Config = {
   content: ["./app/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./lib/**/*.{ts,tsx}"],
   theme: {
@@ -35,7 +35,7 @@ const config: Config = {
       },
       borderRadius: { DEFAULT: "10px", lg: "10px", xl: "14px" },
       boxShadow: {
-        // Dubina dolazi prvo iz tona površine; sjena je samo nagovještaj.
+        // Depth comes from surface tone first; the shadow is only a hint.
         card: "0 1px 2px rgb(var(--text-rgb) / 0.04), 0 8px 20px -14px rgb(var(--text-rgb) / 0.18)",
         lift: "0 1px 2px rgb(var(--text-rgb) / 0.05), 0 14px 30px -16px rgb(var(--text-rgb) / 0.26)",
       },

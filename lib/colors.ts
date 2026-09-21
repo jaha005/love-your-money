@@ -13,7 +13,7 @@ function toHex(rgb: readonly number[]) {
   return "#" + rgb.map((v) => Math.round(Math.max(0, Math.min(255, v))).toString(16).padStart(2, "0")).join("");
 }
 
-/** Miješa dvije boje: amount 0 = a, 1 = b. */
+/** Mixes two colours: amount 0 = a, 1 = b. */
 export function mix(a: string, b: string, amount: number) {
   const [ar, ag, ab] = hexToRgb(a);
   const [br, bg, bb] = hexToRgb(b);
@@ -22,10 +22,10 @@ export function mix(a: string, b: string, amount: number) {
 
 const c = brand.colors;
 
-// Sve izvedeno iz brand.colors da se paleta mijenja s jednog mjesta.
+// Everything derives from brand.colors so the palette changes in one place.
 //
-// Zlatna i glinena imaju dovoljan kontrast kao površina, ali ne kao tekst.
-// Zato -text varijante: zatamnjene do 4.5:1 i na kartici i na tintu.
+// Gold and clay have enough contrast as surfaces, but not as text.
+// Hence the -text variants: darkened to 4.5:1 on both card and tint.
 export const cssVars = {
   "--bg": c.bg,
   "--surface": c.surface,
@@ -39,7 +39,7 @@ export const cssVars = {
 
   "--muted": c.muted,
   "--line": c.line,
-  // Granica polja za unos mora imati 3:1 (WCAG 1.4.11); linija kartice ne mora.
+  // Input borders need 3:1 (WCAG 1.4.11); decorative card lines don't.
   "--line-strong": mix(c.line, c.muted, 0.65),
 
   "--tint": mix(c.surface, c.accent, 0.12),
@@ -49,8 +49,8 @@ export const cssVars = {
 } as const;
 
 /**
- * Tople boje za avatare i oznake statusa. Podloga je svijetla verzija boje,
- * tekst tamna - oba izvedena iz iste nijanse, sve preko 4.5:1.
+ * Warm hues for avatars and status pills. The background is a light version of
+ * the hue, the text a dark one - both derived from the same hue, all above 4.5:1.
  */
 const HUES = {
   gold: c.accent,
@@ -68,13 +68,13 @@ export function hueText(name: HueName) {
   return mix(HUES[name], c.text, 0.34);
 }
 
-/** Podloga oznake je blago svjetlija od avatara, da pill ne bude težak. */
+/** Pill backgrounds are slightly lighter than avatars so pills don't feel heavy. */
 export function statusColors(hue: HueName | "danger") {
   const base = hue === "danger" ? c.danger : HUES[hue];
   return { bg: mix(c.surface, base, 0.13), fg: mix(base, c.text, 0.34), border: mix(c.surface, base, 0.3) };
 }
 
-/** Uvijek isti avatar za isto ime. */
+/** The same name always gets the same avatar. */
 export function hueForName(name: string): HueName {
   const keys = Object.keys(HUES) as HueName[];
   let h = 0;
@@ -82,7 +82,7 @@ export function hueForName(name: string): HueName {
   return keys[h % keys.length];
 }
 
-/** "244 238 226" - da Tailwind modifikatori prozirnosti rade. */
+/** "244 238 226" - so Tailwind opacity modifiers work. */
 function rgbTriplet(hex: string) {
   return hexToRgb(hex).join(" ");
 }

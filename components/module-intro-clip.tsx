@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 /**
- * Šestosekundni uvod u modul (Remotion, video/src/ModuleIntro.tsx).
- * Pušta se jednom, bez zvuka i bez kontrola - to je naslovna kartica, ne sadržaj.
- * Kad korisnica ima uključeno smanjeno kretanje, prikaže se samo statična sličica.
+ * Six-second module intro (Remotion, video/src/ModuleIntro.tsx).
+ * Plays once, muted, with no controls - it's a title card, not content.
+ * When the viewer has reduced motion enabled, only the still poster is shown.
  */
 export function ModuleIntroClip({
   moduleOrder,
@@ -26,11 +26,11 @@ export function ModuleIntroClip({
     return () => mq.removeEventListener("change", onChange);
   }, []);
 
-  const src = `/intro/modul-${moduleOrder}.mp4`;
-  const poster = `/intro/modul-${moduleOrder}.jpg`;
+  const src = `/intro/module-${moduleOrder}.mp4`;
+  const poster = `/intro/module-${moduleOrder}.jpg`;
   const alt = `Uvod u modul ${moduleOrder}: ${title}`;
 
-  // Prije nego znamo postavku, pokaži sličicu - nikad ne pusti video "za svaki slučaj".
+  // Until we know the setting, show the poster - never play video "just in case".
   if (reduced !== false) {
     return (
       <Image

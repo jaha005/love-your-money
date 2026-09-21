@@ -19,7 +19,7 @@ export type PublicProfile = { id: string; full_name: string; avatar_url: string 
 
 export type ModuleWithLessons = Module & { lessons: Lesson[]; unlocked: boolean };
 
-/** Stablo modula → lekcija, s oznakom je li modul otključan. */
+/** Module → lesson tree, with whether each module is unlocked. */
 export const getCurriculum = cache(async (): Promise<ModuleWithLessons[]> => {
   const supabase = createClient();
   const [{ data: modules }, { data: lessons }] = await Promise.all([
@@ -41,7 +41,7 @@ export const getMyCompletedLessonIds = cache(async (memberId: string): Promise<S
   return new Set((data ?? []).map((r) => r.lesson_id as string));
 });
 
-/** Prva nezavršena lekcija u otključanom modulu. */
+/** The first unfinished lesson in an unlocked module. */
 export async function getNextLesson(memberId: string) {
   const [curriculum, done] = await Promise.all([getCurriculum(), getMyCompletedLessonIds(memberId)]);
   for (const m of curriculum) {
@@ -53,7 +53,7 @@ export async function getNextLesson(memberId: string) {
   return null;
 }
 
-/** Modul u kojem je članica: zadnji s barem jednom završenom lekcijom (ili prvi otključan). */
+/** The member's current module: the last one with at least one completed lesson (or the first unlocked). */
 export async function getCurrentModule(memberId: string) {
   const [curriculum, done] = await Promise.all([getCurriculum(), getMyCompletedLessonIds(memberId)]);
   let current: ModuleWithLessons | null = null;
@@ -154,7 +154,7 @@ export async function getUnreadNotices(memberId: string): Promise<Notice[]> {
   return (data ?? []) as Notice[];
 }
 
-/** Imena autora komentara: puni profil je zaštićen, ovdje treba samo ime. */
+/** Comment author names: the full profile is protected, only the name is needed here. */
 export async function getPublicProfiles(ids: string[]): Promise<Map<string, PublicProfile>> {
   if (!ids.length) return new Map();
   const supabase = createClient();

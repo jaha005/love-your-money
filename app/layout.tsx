@@ -4,7 +4,7 @@ import { brand } from "@/lib/brand";
 import { cssVarsString } from "@/lib/colors";
 import "./globals.css";
 
-// Bodoni ima vrlo tanke poteze, pa naslovi idu na 500/600 da ne budu krhki.
+// Bodoni has very fine strokes, so headings use 500/600 to avoid looking fragile.
 const bodoni = Libre_Bodoni({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],

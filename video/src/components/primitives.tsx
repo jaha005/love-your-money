@@ -3,7 +3,7 @@ import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { theme } from "../theme";
 import { sans, serif } from "../fonts";
 
-/** Mirno pojavljivanje: fade + mali pomak prema gore. Bez odskakanja. */
+/** A calm entrance: fade plus a small upward drift. No bounce. */
 export const Rise: React.FC<{
   delay?: number;
   duration?: number;
@@ -24,7 +24,7 @@ export const Rise: React.FC<{
   );
 };
 
-/** Tanka linija koja se izvlači slijeva. Zamjena za sjene i gradijente. */
+/** A thin line that draws in from the left. Stands in for shadows and gradients. */
 export const Rule: React.FC<{ delay?: number; duration?: number; color?: string; width?: number | string }> = ({
   delay = 0,
   duration = 26,
@@ -91,7 +91,7 @@ export const P: React.FC<{ size?: number; children: React.ReactNode; style?: Rea
   </div>
 );
 
-/** Kartica bez sjene, 1px granica, radius 8 - kao u aplikaciji. */
+/** A card with a 1px border on the lighter surface - same as the app. */
 export const Card: React.FC<{
   children: React.ReactNode;
   style?: React.CSSProperties;
@@ -156,7 +156,7 @@ export const Avatar: React.FC<{ name: string; size?: number; stalled?: boolean }
   );
 };
 
-/** Progres kao tanka linija, ne krug. */
+/** Progress as a thin line, not a ring. */
 export const Meter: React.FC<{ value: number; delay?: number; width?: number }> = ({
   value,
   delay = 0,
@@ -188,7 +188,7 @@ export const Btn: React.FC<{ children: React.ReactNode; variant?: "primary" | "s
       fontWeight: 500,
       border: `1px solid ${variant === "primary" ? theme.accent : theme.line}`,
       background: variant === "primary" ? theme.accent : "transparent",
-      // Tamni tekst na zlatnoj: isti kontrast kao u aplikaciji (5.9:1).
+      // Dark text on gold: same contrast as the app (5.0:1).
       color: theme.text,
     }}
   >

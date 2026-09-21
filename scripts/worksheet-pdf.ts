@@ -1,6 +1,6 @@
-// Generiše PDF radni list (naslov + 5 pitanja) iz sadržaja lekcije.
-// Ako nađe sistemski TTF, koristi ga zbog naših dijakritika; inače prelazi
-// na ugrađeni Helvetica i transliteraciju.
+// Generates a PDF worksheet (title + 5 questions) from lesson content.
+// If it finds a system TTF it embeds it (so accented names render correctly);
+// otherwise it falls back to built-in Helvetica with transliteration.
 
 import { existsSync, readFileSync } from "node:fs";
 import fontkit from "@pdf-lib/fontkit";
@@ -105,7 +105,7 @@ export async function buildWorksheet(title: string, questions: string[]): Promis
       y -= 16;
     }
     y -= 8;
-    // Tri linije za pisanje.
+    // Three lines to write on.
     for (let k = 0; k < 3; k++) {
       page.drawLine({
         start: { x: M + 22, y },

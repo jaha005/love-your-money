@@ -7,10 +7,9 @@ import { copy } from "@/lib/copy";
 
 export type ActionState = { error?: string; ok?: boolean; message?: string };
 
-const REMINDER =
-  "Nedostajala si nam ove sedmice. Otvori sljedeću lekciju kad budeš mogla — i javi se ako te nešto koči.";
+const REMINDER = copy.cohort.reminderBody;
 
-/** In-app podsjetnik (v1: bez emaila). Vraća broj članica kojima je poslan. */
+/** In-app nudge (v1: no email). Returns how many members it was sent to. */
 export async function sendReminder(memberIds: string[]): Promise<ActionState> {
   const me = await requireRole(["assistant", "admin"]);
   if (!memberIds.length) return { error: copy.cohort.remindEmpty };
@@ -24,7 +23,7 @@ export async function sendReminder(memberIds: string[]): Promise<ActionState> {
     );
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/kohorta");
+  revalidatePath("/cohort");
   return { ok: true, message: copy.cohort.remindDone(count ?? memberIds.length) };
 }
 
@@ -46,8 +45,8 @@ export async function reviewSubmission(_prev: ActionState, formData: FormData): 
     .eq("id", String(formData.get("submission_id")));
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/pregled");
-  revalidatePath("/kohorta");
+  revalidatePath("/review");
+  revalidatePath("/cohort");
   return { ok: true };
 }
 
@@ -62,12 +61,12 @@ export async function answerQuestion(_prev: ActionState, formData: FormData): Pr
     .eq("id", String(formData.get("question_id")));
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/pitanja");
+  revalidatePath("/questions");
   return { ok: true };
 }
 
 // ---------------------------------------------------------------------------
-// Urednik (samo admin)
+// Editor (admin only)
 // ---------------------------------------------------------------------------
 
 export async function saveModule(_prev: ActionState, formData: FormData): Promise<ActionState> {
@@ -85,7 +84,7 @@ export async function saveModule(_prev: ActionState, formData: FormData): Promis
     .eq("id", String(formData.get("module_id")));
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/urednik/program", "layout");
+  revalidatePath("/editor/program", "layout");
   revalidatePath("/program", "layout");
   return { ok: true, message: copy.editor.saved };
 }
@@ -122,7 +121,7 @@ export async function saveLesson(_prev: ActionState, formData: FormData): Promis
     if (error) return { error: copy.common.error };
   }
 
-  revalidatePath("/urednik/program", "layout");
+  revalidatePath("/editor/program", "layout");
   revalidatePath("/program", "layout");
   return { ok: true, message: copy.editor.saved };
 }
@@ -145,8 +144,8 @@ export async function saveAssignment(_prev: ActionState, formData: FormData): Pr
         .insert({ ...payload, module_id: String(formData.get("module_id") ?? "") });
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/urednik/program", "layout");
-  revalidatePath("/zadaci", "layout");
+  revalidatePath("/editor/program", "layout");
+  revalidatePath("/assignments", "layout");
   return { ok: true, message: copy.editor.saved };
 }
 
@@ -168,8 +167,8 @@ export async function saveCall(_prev: ActionState, formData: FormData): Promise<
     : await supabase.from("calls").insert(payload);
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/urednik/pozivi");
-  revalidatePath("/pozivi");
-  revalidatePath("/pitanja");
+  revalidatePath("/editor/calls");
+  revalidatePath("/calls");
+  revalidatePath("/questions");
   return { ok: true, message: copy.editor.saved };
 }

@@ -39,7 +39,7 @@ export function Meter({ value, label }: { value: number; label?: string }) {
   );
 }
 
-/** Inicijali na toploj podlozi; boja je uvijek ista za isto ime. */
+/** Initials on a warm background; the same name always gets the same colour. */
 export function Avatar({ name, size = 32 }: { name: string; size?: number }) {
   const initials = name
     .split(" ")
@@ -65,7 +65,7 @@ export function Avatar({ name, size = 32 }: { name: string; size?: number }) {
   );
 }
 
-/** Prazna stanja imaju rečenicu, ne ilustraciju. */
+/** Empty states get a sentence, not an illustration. */
 export function Empty({ children }: { children: ReactNode }) {
   return (
     <p className="rounded border border-dashed border-line bg-surface/60 px-5 py-6 text-small text-muted">

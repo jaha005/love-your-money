@@ -18,7 +18,7 @@ export function createClient() {
               cookieStore.set(name, value, options),
             );
           } catch {
-            // Poziv iz Server Componenta; middleware osvježava sesiju.
+            // Called from a Server Component; middleware refreshes the session.
           }
         },
       },

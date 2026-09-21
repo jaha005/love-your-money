@@ -1,7 +1,7 @@
 import { loadFont as loadHeading } from "@remotion/google-fonts/LibreBodoni";
 import { loadFont as loadBody } from "@remotion/google-fonts/PublicSans";
 
-// Isti par kao aplikacija (lib/brand.ts -> app/layout.tsx).
+// Same pairing as the app (lib/brand.ts -> app/layout.tsx).
 const heading = loadHeading("normal", {
   weights: ["400", "500", "600"],
   subsets: ["latin", "latin-ext"],

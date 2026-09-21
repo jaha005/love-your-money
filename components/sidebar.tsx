@@ -9,7 +9,7 @@ import { copy } from "@/lib/copy";
 
 export type NavItem = { href: string; label: string; icon: string };
 
-// Ikone samo u sidebaru (lucide, stroke 1.5).
+// Icons only in the sidebar (lucide, stroke 1.5).
 import {
   Home,
   BookOpen,
@@ -103,7 +103,7 @@ export function Sidebar({
         {footer}
       </aside>
 
-      {/* Mobitel: hamburger, nema donjeg nava */}
+      {/* Mobile: hamburger, no bottom nav */}
       <div className="sticky top-0 z-30 flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
         {logo}
         <button

@@ -2,7 +2,7 @@
   "name": "zsn-video",
   "version": "0.1.0",
   "private": true,
-  "description": "Remotion animacije za Zavoli svoj novac: promo video i intro po modulu.",
+  "description": "Remotion animations for Love Your Money: a promo video and one intro per module.",
   "scripts": {
     "studio": "remotion studio",
     "promo": "remotion render Promo out/promo.mp4",

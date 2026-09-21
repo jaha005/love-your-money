@@ -23,7 +23,7 @@ export async function requireRole(roles: Role[]): Promise<Profile> {
 }
 
 export function homeFor(role: Role) {
-  return role === "member" ? "/pocetna" : "/kohorta";
+  return role === "member" ? "/home" : "/cohort";
 }
 
 export function isStaff(role: Role) {

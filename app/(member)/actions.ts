@@ -24,8 +24,8 @@ export async function saveReflection(_prev: ActionState, formData: FormData): Pr
   );
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/pocetna");
-  revalidatePath("/napredak");
+  revalidatePath("/home");
+  revalidatePath("/progress");
   return { ok: true };
 }
 
@@ -42,8 +42,8 @@ export async function toggleLessonDone(lessonId: string, done: boolean) {
   }
 
   revalidatePath("/program", "layout");
-  revalidatePath("/pocetna");
-  revalidatePath("/napredak");
+  revalidatePath("/home");
+  revalidatePath("/progress");
 }
 
 export async function addComment(_prev: ActionState, formData: FormData): Promise<ActionState> {
@@ -62,7 +62,7 @@ export async function addComment(_prev: ActionState, formData: FormData): Promis
   if (error) return { error: copy.common.error };
 
   revalidatePath("/program", "layout");
-  revalidatePath("/zajednica");
+  revalidatePath("/community");
   return { ok: true };
 }
 
@@ -86,8 +86,8 @@ export async function submitAssignment(_prev: ActionState, formData: FormData): 
   );
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/zadaci", "layout");
-  revalidatePath("/pocetna");
+  revalidatePath("/assignments", "layout");
+  revalidatePath("/home");
   return { ok: true };
 }
 
@@ -104,8 +104,8 @@ export async function askQuestion(_prev: ActionState, formData: FormData): Promi
     .insert({ call_id: callId, member_id: me.id, body });
   if (error) return { error: copy.common.error };
 
-  revalidatePath("/pozivi");
-  revalidatePath("/pocetna");
+  revalidatePath("/calls");
+  revalidatePath("/home");
   return { ok: true };
 }
 
@@ -113,5 +113,5 @@ export async function markNoticeRead(noticeId: string) {
   await requireRole(["member"]);
   const supabase = createClient();
   await supabase.from("notices").update({ read_at: new Date().toISOString() }).eq("id", noticeId);
-  revalidatePath("/pocetna");
+  revalidatePath("/home");
 }

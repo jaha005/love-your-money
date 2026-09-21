@@ -5,7 +5,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { copy } from "@/lib/copy";
 
-/** Obična textarea s previewom - bez WYSIWYG editora. */
+/** A plain textarea with a preview - no WYSIWYG editor. */
 export function MarkdownField({
   name,
   label,

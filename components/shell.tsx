@@ -3,8 +3,8 @@ import { Sidebar, type NavItem } from "@/components/sidebar";
 import { signOut } from "@/app/login/actions";
 
 /**
- * Editorial layout: sidebar 260px lijevo, sadržaj max 960px,
- * desno kolona 300px za kontekst. Na mobitelu rail ide ispod sadržaja.
+ * Editorial layout: sidebar on the left, content up to 920px,
+ * a context rail on the right. On mobile the rail drops below the content.
  */
 export function Shell({
   items,
@@ -22,7 +22,7 @@ export function Shell({
   return (
     <div className="min-h-screen">
       <a href="#sadrzaj" className="skip-link">
-        Preskoči na sadržaj
+        Skip to content
       </a>
       <Sidebar items={items} userName={userName} userRole={userRole} signOut={signOut} />
       <div className="lg:pl-sidebar">

@@ -1,11 +1,11 @@
-// Demo nalozi za prijavu jednim klikom; koristi ih i scripts/seed.ts.
+// Demo accounts for one-click sign-in; scripts/seed.ts uses them too.
 
 export const DEMO_MODE = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
 export const demoAccounts = {
-  member: { email: "clanica@demo.local", label: "Uđi kao članica" },
-  assistant: { email: "petra@demo.local", label: "Uđi kao asistentica" },
-  admin: { email: "andreja@demo.local", label: "Uđi kao Andreja" },
+  member: { email: "member@demo.local", label: "Enter as a member" },
+  assistant: { email: "assistant@demo.local", label: "Enter as an assistant" },
+  admin: { email: "andreja@demo.local", label: "Enter as Andreja" },
 } as const;
 
 export type DemoRole = keyof typeof demoAccounts;

@@ -1,4 +1,4 @@
-/** Pretvara YouTube/Vimeo URL u embed URL. Nepoznat oblik vraća null. */
+/** Turns a YouTube/Vimeo URL into an embed URL. Unknown formats return null. */
 export function embedUrl(url: string | null): string | null {
   if (!url) return null;
   try {

@@ -1,5 +1,5 @@
-// Primjenjuje SQL fajlove iz supabase/migrations redom (svaki jednom).
-// Pokretanje: npm run db:migrate
+// Applies the SQL files in supabase/migrations in order (each one once).
+// Usage: npm run db:migrate
 
 import { config } from "dotenv";
 import { readdirSync, readFileSync } from "node:fs";
@@ -10,7 +10,7 @@ config({ path: ".env.local" });
 
 async function main() {
   const url = process.env.SUPABASE_DB_URL;
-  if (!url) throw new Error("SUPABASE_DB_URL nedostaje u .env.local");
+  if (!url) throw new Error("SUPABASE_DB_URL missing in .env.local");
 
   const sql = postgres(url, { ssl: "require", max: 1, onnotice: () => {} });
 
@@ -19,7 +19,7 @@ async function main() {
       name text primary key,
       applied_at timestamptz not null default now()
     )`;
-    // Evidencija migracija ne smije biti dostupna kroz API.
+    // Migration bookkeeping must not be reachable through the API.
     await sql`alter table public._migrations enable row level security`;
 
     const dir = join(process.cwd(), "supabase", "migrations");
@@ -28,7 +28,7 @@ async function main() {
 
     for (const file of files) {
       if (applied.has(file)) {
-        console.log(`✓ ${file} (već primijenjena)`);
+        console.log(`✓ ${file} (already applied)`);
         continue;
       }
       const body = readFileSync(join(dir, file), "utf8");
@@ -38,7 +38,7 @@ async function main() {
       });
       console.log(`✓ ${file}`);
     }
-    console.log("Migracije gotove.");
+    console.log("Migrations done.");
   } finally {
     await sql.end();
   }

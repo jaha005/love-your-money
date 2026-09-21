@@ -16,7 +16,7 @@
 
   h1, h2, h3 {
     font-family: var(--font-heading), Georgia, serif;
-    /* Bodoni ima tanke poteze; 500 drži naslove čvrstima na ekranu. */
+    /* Bodoni has hairline strokes; 500 keeps headings solid on screen. */
     font-weight: 500;
   }
 
@@ -39,7 +39,7 @@
   }
 }
 
-/* Poštuj sistemsku postavku za smanjeno kretanje. */
+/* Respect the system reduced-motion setting. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -52,14 +52,14 @@
 }
 
 @layer components {
-  /* Kartica je svjetlija od stranice: dubina dolazi iz tona, sjena je samo nagovještaj. */
+  /* Cards are lighter than the page: depth comes from tone, the shadow is only a hint. */
   .card {
     @apply rounded border border-line bg-surface p-5 shadow-card;
   }
   .card-lift {
     @apply card shadow-lift;
   }
-  /* Kartica s bojom: koristi se za istaknuti sadržaj (feedback, podsjetnik). */
+  /* Tinted card: for highlighted content (feedback, nudges). */
   .card-accent {
     @apply rounded border p-5;
     border-color: var(--accent);
@@ -71,7 +71,7 @@
            border px-4 py-2.5 text-small font-medium transition-colors
            disabled:cursor-not-allowed disabled:opacity-50;
   }
-  /* Tamni tekst na zlatnoj: 4.5:1. Svijetli bi bio ispod 3:1. */
+  /* Dark text on gold: 5.0:1. Light text would fall below 3:1. */
   .btn-primary {
     @apply btn border-accent text-text shadow-card;
     background-color: var(--accent);
@@ -118,7 +118,7 @@
     @apply border-t border-line;
   }
 
-  /* Preskoči navigaciju: vidljiv tek kad dobije fokus tipkovnicom. */
+  /* Skip navigation: only visible once it receives keyboard focus. */
   .skip-link {
     @apply sr-only;
   }
@@ -127,7 +127,7 @@
            px-4 py-2 text-small text-text;
   }
 
-  /* Progres: tanka traka sa zaobljenim krajevima, čitljiva i na krem podlozi. */
+  /* Progress: a thin bar with rounded ends, readable on the cream background. */
   .meter {
     @apply h-1.5 w-full overflow-hidden rounded-full;
     background-color: var(--line);
@@ -137,13 +137,13 @@
     background-color: var(--accent);
   }
 
-  /* Oznaka statusa: ispunjena, ne samo obrub. */
+  /* Status pill: filled, not just an outline. */
   .pill {
     @apply inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-tiny font-medium;
   }
 }
 
-/* Tekst lekcije se čita kao članak. */
+/* Lesson text reads like an article. */
 .prose-article {
   font-size: 17px;
   line-height: 1.7;

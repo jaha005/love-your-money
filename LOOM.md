@@ -1,69 +1,66 @@
-# Loom za Andreju — 2 minute
+# Walkthrough video — 2 minutes
 
-Prije snimanja pokreni `npm run db:seed` **na dan snimanja** (datumi u seedu su
-relativni na danas: rokovi, „prije 18 dana", sljedeći poziv za 4 dana).
+Run `npm run db:seed` **on the day you record**. The seed's dates are relative to
+today: due dates, "18 days ago", the next call in 4 days.
 
 ---
 
-**0:00 — Uđi kao članica** (`clanica@demo.local`)
+**0:00 — Enter as a member** (`member@demo.local`)
 
-Početna: „Dobrodošla nazad, Marija." · Modul 4 · Cijene i naplata · 2 od 3 lekcije.
-Klik **Nastavi lekciju** → uvodna kartica modula (Remotion klip), video, tekst kao
-članak, **Preuzmi radni list (PDF)**. *(20 s)*
+Home: "Welcome back, Mia." · Module 4 · Pricing and getting paid · 2 of 3 lessons.
+Click **Continue lesson** → the lesson text reads like an article, then
+**Download worksheet (PDF)**. *(20 s)*
 
-**0:20 — Diskusija ispod lekcije**
+**0:20 — The discussion under the lesson**
 
-Skrolaj na dno lekcije 4.3: Sarin komentar o avansu i Andrejin odgovor sa zlatnom
-labelom „Andreja". *(10 s)*
+Scroll to the bottom of lesson 4.3: Sara's comment about deposits, and Andreja's
+reply with the gold "Andreja" label. *(10 s)*
 
-**0:30 — Zadaci**
+**0:30 — Assignments**
 
-`Zadaci` → otvori zadatak modula 3 „Budžet za sljedeći mjesec" (rok je danas) →
-napiši par riječi → **Predaj**.
-Odmah se vidi „Predano. Javit ćemo se s povratnom informacijom." *(10 s)*
+`Assignments` → open module 3, "A budget for next month" → write a few words →
+**Submit**. "Submitted. We'll come back to you with feedback." appears straight
+away. *(10 s)*
 
-**0:40 — Pozivi**
+**0:40 — Calls**
 
-`Pozivi` → sljedeći poziv za 4 dana → **Postavi pitanje za ovaj poziv** → pošalji.
-Desno u „Moja pitanja" se vidi i staro pitanje s Andrejinim odgovorom. *(10 s)*
+`Calls` → the next call is in 4 days → **Ask a question for this call** → send.
+On the right, under "My questions", there's also an older question with Andreja's
+answer. *(10 s)*
 
-**0:50 — Uđi kao Andreja** (`andreja@demo.local`)
+**0:50 — Enter as Andreja** (`andreja@demo.local`)
 
-`Kohorta`. Rečenica: *„sa 115 žena ovako vidiš ko je gdje."*
+`Cohort`. Line: *"With 115 women, this is how you see who is where."*
 
-- Četiri brojke gore: članica · aktivnih ove sedmice · zadataka za pregled · **stalih**
-- **Raspored kohorte**: 8 kolona, avatari po modulima, crvena tačka na stalima
-- Tabela: filter **Stale** → dvije članice na vrhu
-- Odaberi ih i klikni **Pošalji podsjetnik** → poruka im sjeda na Početnu
+- Four numbers at the top: members enrolled · active this week · to review · **stalled**
+- **Cohort map**: 8 columns, avatars by module, a red dot on stalled members
+- The table: filter **Stalled** → two members at the top
+- Select them and click **Send a nudge** → the note lands on their Home screen
 
 *(25 s)*
 
-**1:15 — Zadaci za pregled**
+**1:15 — To review**
 
-`Zadaci za pregled` → red čekanja, najstarije prvo → napiši feedback →
-**Označi pregledano**. *(10 s)*
+`To review` → the queue, oldest first → write feedback → **Mark as reviewed**. *(10 s)*
 
-**1:25 — Pitanja za poziv**
+**1:25 — Questions for the call**
 
-`Pitanja` → pitanja grupisana po modulu, checkbox „odgovoreno" + polje za odgovor
-koji članica vidi. *(5 s)*
+`Questions` → questions grouped by module, an "Answered" checkbox and a written
+answer the member sees. *(5 s)*
 
-**1:30 — Zatvori**
+**1:30 — Close**
 
-*„Ovo je demo s tvojim programom. Pravi se za 4–5 sedmica, link je 15 minuta ispod."*
-
----
-
-## Ako želiš pokazati i uređivanje
-
-`Program` (vidi samo Andreja) → modul → naslov, datum otključavanja, tekst lekcije
-s previewom, upload PDF-a, rok zadatka. Obična forma, bez prevlačenja.
-
+*"This is a demo built around your programme. The real thing takes 4–5 weeks — link to book 15 minutes below."*
 
 ---
 
-## Ako ti ne treba Loom
+## If you want to show editing
 
-`video/out/promo.mp4` je isti tok kao gore, samo renderovan: 72 sekunde, bez
-tvog glasa, spremno za portfolio ili prvi mail. Loom je bolji za razgovor s
-Andrejom, promo za oglas.
+`Programme` (only Andreja sees it) → a module → title, unlock date, lesson text with
+a live preview, PDF upload, assignment due date. Plain forms, no drag and drop.
+
+## If you don't need a recording
+
+`video/out/promo.mp4` is the same flow, rendered: 72 seconds, no voiceover, ready
+for a portfolio or a first email. A recorded walkthrough is better for a
+conversation with the client; the promo is better for an ad.

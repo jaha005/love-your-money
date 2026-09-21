@@ -1,7 +1,7 @@
 import "server-only";
 import { createClient as createSupabaseClient } from "@supabase/supabase-js";
 
-// Service-role klijent. Samo server, zaobilazi RLS: koristi tek nakon provjere uloge.
+// Service-role client. Server only, bypasses RLS: use it only after checking the caller's role.
 export function createAdminClient() {
   return createSupabaseClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,

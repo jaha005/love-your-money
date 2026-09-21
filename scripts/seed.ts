@@ -1,7 +1,7 @@
-// Demo podaci: Andreja, 2 asistentice, 14 članica, 8 modula × 3 lekcije,
-// zadaci, predaje s feedbackom, komentari, pozivi, pitanja i refleksije.
-// Može se pokretati više puta: prvo briše prethodne @demo.local naloge i sadržaj.
-// Pokretanje: npm run db:seed
+// Demo data: Andreja, 2 assistants, 14 members, 8 modules × 3 lessons,
+// assignments, reviewed submissions, comments, calls, questions and reflections.
+// Safe to re-run: it first removes previous @demo.local accounts and content.
+// Usage: npm run db:seed
 
 import { config } from "dotenv";
 import { createClient } from "@supabase/supabase-js";
@@ -15,7 +15,7 @@ config({ path: ".env.local" });
 const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 if (!url || !serviceKey) {
-  console.error("NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY nedostaju u .env.local");
+  console.error("NEXT_PUBLIC_SUPABASE_URL / SUPABASE_SERVICE_ROLE_KEY missing in .env.local");
   process.exit(1);
 }
 const db = createClient(url, serviceKey, {
@@ -25,11 +25,11 @@ const db = createClient(url, serviceKey, {
 const PASSWORD = process.env.DEMO_PASSWORD || "demo1234";
 const TODAY = todayISO();
 
-// Kohorta je u sedmoj sedmici: moduli 1-7 su otključani (zadnji prije 3 dana),
-// modul 8 stiže za 4 dana - da se u stablu vidi i stanje "zaključano".
+// The cohort is in its seventh week: modules 1-7 are unlocked (the last one 3 days ago),
+// module 8 arrives in 4 days - so the programme tree also shows the locked state.
 const RELEASED = 7;
 const unlockFor = (order: number) => addDaysISO(TODAY, (order - RELEASED) * 7 - 3);
-// Rok zadatka: 5 sedmica nakon otključavanja modula.
+// Assignment due date: 5 weeks after the module unlocks.
 const dueFor = (order: number) => addDaysISO(unlockFor(order), 35);
 
 const daysAgo = (n: number, hour = 10) =>
@@ -44,14 +44,14 @@ function must<T = unknown>(result: { data: unknown; error: unknown }, what: stri
 }
 
 // ---------------------------------------------------------------------------
-// Ljudi
+// People
 // ---------------------------------------------------------------------------
 
-const admin = { key: "andreja", email: "andreja@demo.local", full_name: "Andreja Katić" };
+const admin = { key: "andreja", email: "andreja@demo.local", full_name: "Andreja Marin" };
 
 const assistants = [
-  { key: "petra", email: "petra@demo.local", full_name: "Petra Šimunović" },
-  { key: "ivana", email: "ivana@demo.local", full_name: "Ivana Grgić" },
+  { key: "sophie", email: "assistant@demo.local", full_name: "Sophie Walsh" },
+  { key: "hannah", email: "hannah@demo.local", full_name: "Hannah Brooks" },
 ];
 
 type SeedMember = {
@@ -59,132 +59,137 @@ type SeedMember = {
   email: string;
   full_name: string;
   assistant: string;
-  /** Modul u kojem je (ima bar jednu završenu lekciju). */
+  /** The module she's in (has at least one completed lesson there). */
   module: number;
-  /** Koliko lekcija je završila u tom modulu. */
+  /** How many lessons she has completed in that module. */
   lessonsInModule: number;
-  /** Dana od zadnje aktivnosti (postavlja se kroz zadnji lesson_progress). */
+  /** Days since last activity (set through her most recent lesson_progress). */
   lastActivity: number;
-  /** Za koje module je predala zadatak. */
+  /** Modules whose assignment she has submitted. */
   submitted: number[];
   joinedDaysAgo: number;
 };
 
-// 9 active (≤7 dana, 0 kasni) · 3 slowing (8-14 dana ILI 1 kasni) · 2 stalled (15+ ILI 2+ kasne)
+// 9 active (≤7 days, 0 overdue) · 3 slowing (8-14 days OR 1 overdue) · 2 stalled (15+ OR 2+ overdue)
 const members: SeedMember[] = [
-  { key: "marija", email: "clanica@demo.local", full_name: "Marija Kovač", assistant: "petra", module: 4, lessonsInModule: 2, lastActivity: 1, submitted: [1, 2], joinedDaysAgo: 49 },
-  { key: "ana", email: "ana@demo.local", full_name: "Ana Horvat", assistant: "petra", module: 6, lessonsInModule: 1, lastActivity: 2, submitted: [1, 2, 3], joinedDaysAgo: 49 },
-  { key: "ivana_b", email: "ivana.babic@demo.local", full_name: "Ivana Babić", assistant: "ivana", module: 7, lessonsInModule: 2, lastActivity: 0, submitted: [1, 2, 3, 4], joinedDaysAgo: 49 },
-  { key: "petra_n", email: "petra.novak@demo.local", full_name: "Petra Novak", assistant: "petra", module: 5, lessonsInModule: 3, lastActivity: 3, submitted: [1, 2, 3], joinedDaysAgo: 49 },
-  { key: "lucija", email: "lucija@demo.local", full_name: "Lucija Marić", assistant: "ivana", module: 6, lessonsInModule: 2, lastActivity: 1, submitted: [1, 2, 3], joinedDaysAgo: 49 },
-  { key: "katarina", email: "katarina@demo.local", full_name: "Katarina Vuković", assistant: "petra", module: 3, lessonsInModule: 1, lastActivity: 4, submitted: [1, 2], joinedDaysAgo: 42 },
-  { key: "dora", email: "dora@demo.local", full_name: "Dora Jurić", assistant: "ivana", module: 5, lessonsInModule: 2, lastActivity: 6, submitted: [1, 2], joinedDaysAgo: 49 },
-  { key: "nika", email: "nika@demo.local", full_name: "Nika Pavlović", assistant: "ivana", module: 7, lessonsInModule: 1, lastActivity: 2, submitted: [1, 2, 3, 4], joinedDaysAgo: 49 },
-  { key: "tea", email: "tea@demo.local", full_name: "Tea Radić", assistant: "petra", module: 4, lessonsInModule: 3, lastActivity: 5, submitted: [1, 2], joinedDaysAgo: 42 },
-  // usporile
-  { key: "maja", email: "maja@demo.local", full_name: "Maja Šimić", assistant: "petra", module: 3, lessonsInModule: 2, lastActivity: 10, submitted: [1, 2], joinedDaysAgo: 49 },
-  { key: "sara", email: "sara@demo.local", full_name: "Sara Klarić", assistant: "ivana", module: 5, lessonsInModule: 1, lastActivity: 3, submitted: [1], joinedDaysAgo: 49 },
-  { key: "lana", email: "lana@demo.local", full_name: "Lana Brkić", assistant: "petra", module: 2, lessonsInModule: 2, lastActivity: 12, submitted: [1, 2], joinedDaysAgo: 42 },
-  // stale
-  { key: "iva", email: "iva@demo.local", full_name: "Iva Perić", assistant: "ivana", module: 6, lessonsInModule: 1, lastActivity: 18, submitted: [1, 2, 3], joinedDaysAgo: 49 },
-  { key: "tena", email: "tena@demo.local", full_name: "Tena Lovrić", assistant: "petra", module: 3, lessonsInModule: 2, lastActivity: 4, submitted: [], joinedDaysAgo: 49 },
+  { key: "mia", email: "member@demo.local", full_name: "Mia Harper", assistant: "sophie", module: 4, lessonsInModule: 2, lastActivity: 1, submitted: [1, 2], joinedDaysAgo: 49 },
+  { key: "anna", email: "anna@demo.local", full_name: "Anna Reed", assistant: "sophie", module: 6, lessonsInModule: 1, lastActivity: 2, submitted: [1, 2, 3], joinedDaysAgo: 49 },
+  { key: "isla", email: "isla@demo.local", full_name: "Isla Bennett", assistant: "hannah", module: 7, lessonsInModule: 2, lastActivity: 0, submitted: [1, 2, 3, 4], joinedDaysAgo: 49 },
+  { key: "chloe", email: "chloe@demo.local", full_name: "Chloe Turner", assistant: "sophie", module: 5, lessonsInModule: 3, lastActivity: 3, submitted: [1, 2, 3], joinedDaysAgo: 49 },
+  { key: "lucy", email: "lucy@demo.local", full_name: "Lucy Morgan", assistant: "hannah", module: 6, lessonsInModule: 2, lastActivity: 1, submitted: [1, 2, 3], joinedDaysAgo: 49 },
+  { key: "kate", email: "kate@demo.local", full_name: "Kate Sullivan", assistant: "sophie", module: 3, lessonsInModule: 1, lastActivity: 4, submitted: [1, 2], joinedDaysAgo: 42 },
+  { key: "daisy", email: "daisy@demo.local", full_name: "Daisy Clarke", assistant: "hannah", module: 5, lessonsInModule: 2, lastActivity: 6, submitted: [1, 2], joinedDaysAgo: 49 },
+  { key: "nina", email: "nina@demo.local", full_name: "Nina Foster", assistant: "hannah", module: 7, lessonsInModule: 1, lastActivity: 2, submitted: [1, 2, 3, 4], joinedDaysAgo: 49 },
+  { key: "tessa", email: "tessa@demo.local", full_name: "Tessa Hughes", assistant: "sophie", module: 4, lessonsInModule: 3, lastActivity: 5, submitted: [1, 2], joinedDaysAgo: 42 },
+  // slowing
+  { key: "maya", email: "maya@demo.local", full_name: "Maya Price", assistant: "sophie", module: 3, lessonsInModule: 2, lastActivity: 10, submitted: [1, 2], joinedDaysAgo: 49 },
+  { key: "sara", email: "sara@demo.local", full_name: "Sara Lindqvist", assistant: "hannah", module: 5, lessonsInModule: 1, lastActivity: 3, submitted: [1], joinedDaysAgo: 49 },
+  { key: "lena", email: "lena@demo.local", full_name: "Lena Fischer", assistant: "sophie", module: 2, lessonsInModule: 2, lastActivity: 12, submitted: [1, 2], joinedDaysAgo: 42 },
+  // stalled
+  { key: "ivy", email: "ivy@demo.local", full_name: "Ivy Russo", assistant: "hannah", module: 6, lessonsInModule: 1, lastActivity: 18, submitted: [1, 2, 3], joinedDaysAgo: 49 },
+  { key: "tara", email: "tara@demo.local", full_name: "Tara Quinn", assistant: "sophie", module: 3, lessonsInModule: 2, lastActivity: 4, submitted: [], joinedDaysAgo: 49 },
 ];
 
-// Predaje koje čekaju pregled (ostale su pregledane s feedbackom).
-const PENDING = new Set(["marija:2", "ana:3", "ivana_b:4", "dora:2", "nika:4", "lucija:3"]);
+// Submissions still waiting for review (the rest are reviewed with feedback).
+const PENDING = new Set(["mia:2", "anna:3", "isla:4", "daisy:2", "nina:4", "lucy:3"]);
 
 const FEEDBACK: Record<string, string> = {
-  "marija:1":
-    "Marija, ovo je iskreno napisano i to je pola posla. Obrazac stezanja koji opisuješ vidim i u tvojoj mapi troškova — kategorija „povremeno\" ti je prazna, a ti kupuješ te stvari. U modulu 3 posebno pazi na prostor za život: tvoj instinkt će biti da ga staviš premali.",
-  "ana:1":
-    "Ana, hvala na povjerenju. Rečenica „nisam smjela tražiti\" objašnjava puno toga u modulu 4. Zapamti je, vratit ćemo joj se kad budemo pisale ponudu.",
-  "ana:2":
-    "Mapa je uredna i potpuna. Nevidljiva kanta ti je 11 posto prihoda — to je najveća koju sam vidjela ove kohorte. Prođi kroz pretplate ovog vikenda, ne odlučuj ništa, samo popiši.",
-  "ivana_b:1":
-    "Jasno i bez uljepšavanja. Obrazac izbjegavanja je tu, ali ga već prepoznaješ sama, što znači da si pola koraka ispred.",
-  "ivana_b:2":
-    "Odlična mapa. Primijetila sam da si troškove za djecu stavila u fiksno — probaj ih razdvojiti, dio je zapravo povremeno i zato te iznenađuje.",
-  "ivana_b:3":
-    "Budžet je realan i to je najvažnije. Prostor za život od 6 posto je taman. Ostavi ga tako dva mjeseca prije nego bilo šta mijenjaš.",
-  "petra_n:1": "Petra, lijepo napisano. Vratit ćemo se na treću rečenicu na pozivu.",
-  "petra_n:2":
-    "Mapa je kompletna. Kanta „povremeno\" ti je 240 eura mjesečno prosječno — to je iznos koji ti je do sada rušio svaki plan. Sad ga imaš na papiru.",
-  "petra_n:3":
-    "Budžet radi. Jedina zamjerka: nisi napisala šta pada prvo ako mjesec bude loš. Dopiši to, to je najvažnija rečenica u zadatku.",
-  "lucija:1": "Hvala, Lucija. Obrazac rasipanja kao olakšanja opisan je tačno i bez osude prema sebi. Rijetko.",
-  "lucija:2": "Uredna mapa. Gorivo i hrana su ti u istoj kategoriji — razdvoji ih, ponašaju se drugačije.",
-  "katarina:1": "Katarina, dobro. U modulu 2 se fokusiraj na nevidljivu kantu, mislim da te tamo čeka iznenađenje.",
-  "katarina:2": "Mapa je dobra. Sad nemoj ništa mijenjati do poziva — prvi pogled je samo gledanje.",
-  "dora:1": "Dora, iskreno i korisno. Sviđa mi se što si pisala bez pridjeva, to nije lako iz prve.",
-  "nika:1": "Nika, jako dobro. Rečenica o zubaru se ponavlja kod pola grupe.",
-  "nika:2": "Mapa je potpuna i uredna. Nevidljiva kanta je mala, to je rijetko.",
-  "nika:3": "Budžet je dobar i konzervativan. Možda i previše — dodaj si 20 eura prostora za život.",
-  "tea:1": "Tea, hvala. Ostavi ovaj tekst negdje gdje ćeš ga naći za šest mjeseci.",
-  "tea:2": "Mapa je dobra. Tri rečenice na kraju su najbolji dio zadatka.",
-  "maja:1": "Maja, dobro napisano. Javi se asistentici ako zapneš, tu smo.",
-  "maja:2": "Mapa je uredna. Povremena kanta ti fali gotovo cijela, dopuni je iz izvoda.",
-  "sara:1": "Sara, lijepo. Obrazac izbjegavanja je tu, ali je i volja da ga se gleda.",
-  "lana:1": "Lana, hvala. Nemoj žuriti s modulom 2, mapa traži četiri sedmice i to je u redu.",
-  "lana:2": "Mapa je dobra za prvi put. Fali nekoliko sitnih troškova, ali slika je jasna.",
-  "iva:1": "Iva, iskreno i precizno. Javi se kad budeš imala vremena, rado bih čula kako ide.",
-  "iva:2": "Mapa je potpuna. Svaka čast na dosljednosti kroz četiri sedmice.",
-  "iva:3": "Budžet je realan. Prostor za život je premali — povećaj ga, inače neće izdržati.",
+  "mia:1":
+    "Mia, this is honestly written, and that's half the work. I can see the clamping-down pattern you describe in your spending map too — your 'occasional' bucket is empty, yet you do buy those things. In module 3, watch your room for life: your instinct will be to set it too small.",
+  "anna:1":
+    "Anna, thank you for trusting us with this. The sentence \"I wasn't allowed to ask\" explains a lot of what comes up in module 4. Hold on to it — we'll come back to it when we write your quote.",
+  "anna:2":
+    "A tidy, complete map. Your invisible bucket is 11 percent of income — the biggest I've seen in this cohort. Go through your subscriptions this weekend. Don't decide anything, just list them.",
+  "isla:1":
+    "Clear and unvarnished. The avoidance pattern is there, but you already recognise it yourself, which puts you half a step ahead.",
+  "isla:2":
+    "An excellent map. I noticed you put the children's costs under fixed — try splitting them. Part of it is really occasional, and that's why it keeps surprising you.",
+  "isla:3":
+    "The budget is realistic, and that's what matters most. Room for life at 6 percent is about right. Leave it for two months before changing anything.",
+  "chloe:1": "Chloe, beautifully written. We'll come back to your third sentence on the call.",
+  "chloe:2":
+    "A complete map. Your 'occasional' bucket averages 240 euros a month — that's the amount that has been breaking every plan so far. Now it's on paper.",
+  "chloe:3":
+    "The budget works. One note: you didn't write what goes first if the month goes badly. Add it — it's the most important sentence in the assignment.",
+  "lucy:1": "Thank you, Lucy. You describe spending-as-relief precisely and without judging yourself. That's rare.",
+  "lucy:2": "A tidy map. Fuel and food are in the same category — split them, they behave differently.",
+  "kate:1": "Good, Kate. In module 2, focus on the invisible bucket — I think there's a surprise waiting for you there.",
+  "kate:2": "A good map. Now don't change anything until the call — the first look is only looking.",
+  "daisy:1": "Daisy, honest and useful. I like that you wrote without adjectives — that's not easy the first time.",
+  "nina:1": "Nina, really good. The sentence about the dentist comes up for half the group.",
+  "nina:2": "A complete, tidy map. A small invisible bucket — that's rare.",
+  "nina:3": "A good, conservative budget. Maybe too conservative — give yourself another 20 euros of room for life.",
+  "tessa:1": "Tessa, thank you. Keep this text somewhere you'll find it in six months.",
+  "tessa:2": "A good map. The three sentences at the end are the best part of the assignment.",
+  "maya:1": "Maya, well written. Reach out to your assistant if you get stuck — we're here.",
+  "maya:2": "A tidy map. Your occasional bucket is almost entirely missing — fill it in from your bank statement.",
+  "sara:1": "Sara, lovely. The avoidance pattern is there, but so is the willingness to look at it.",
+  "lena:1": "Lena, thank you. Don't rush module 2 — the map needs four weeks and that's fine.",
+  "lena:2": "A good map for a first attempt. A few small costs are missing, but the picture is clear.",
+  "ivy:1": "Ivy, honest and precise. Get in touch when you have time — I'd love to hear how it's going.",
+  "ivy:2": "A complete map. Well done on keeping it up for four whole weeks.",
+  "ivy:3": "The budget is realistic. Room for life is too small — increase it, or it won't hold.",
 };
 
+// Four variants per module. Chosen by member, not by submission order,
+// so two submissions for the same module never show identical text in the review queue.
 const SUBMISSION_BODIES: Record<number, string[]> = {
   1: [
-    "Prva rečenica koje se sjećam je „nemamo za to\". Nije bila zla, samo je bila stalna. Novac se u našoj kući nije spominjao za stolom, nego u hodniku, tiho. Prepoznajem obrazac stezanja: sve mora biti opravdano, a kad potrošim nešto na sebe, dva dana nosim osjećaj da sam nešto ukrala. Da novac nije problem, ne bih računala u glavi prije nego naručim kavu i ne bih odgađala zubara treću godinu.",
-    "Kod nas se o novcu nije govorilo uopće, što je valjda svoja vrsta poruke. Mama je vodila sve, tata nije znao koliko šta košta. Najbliži mi je obrazac izbjegavanja — ne otvaram aplikaciju banke, računi stoje neotvoreni dvije sedmice. Zadnji put mi je bilo neugodno kad mi je klijentica pitala za cijenu i ja sam se počela izvinjavati prije nego sam je izgovorila.",
-    "Novac je kod nas bio razlog za svađu i naučila sam da je tema opasna. Danas radim isto: kad partner spomene troškove, ja se automatski branim. Obrazac je rasipanje kao olakšanje — poslije teške sedmice kupim nešto i to je jedini trenutak kad sam dobra prema sebi. Da novac nije problem, uzela bih petak popodne slobodno bez da to nekome pravdam.",
-    "Moja mama je vodila kućni budžet u bilježnici i nikad se nije žalila, ali sam vidjela kako broji sitniš pred kraj mjeseca. Naučila sam da se o tome ne priča. Danas imam pristojan prihod i još uvijek kupujem najjeftiniju varijantu svega, pa se poslije ljutim na sebe što mi ništa ne traje. Da novac nije problem, platila bih nekoga da mi pomogne oko kuće i ne bih to zvala luksuzom.",
+    "The first sentence I remember is \"we can't afford that\". It wasn't unkind, just constant. Money wasn't discussed at the table — it was discussed in the hallway, quietly. I recognise the clamping-down pattern: everything has to be justified, and when I spend something on myself I carry a feeling for two days that I've stolen something. If money weren't a problem, I wouldn't do sums in my head before ordering a coffee, and I wouldn't be putting off the dentist for a third year.",
+    "Money simply wasn't talked about at home, which I suppose is a message of its own. My mum ran everything; my dad didn't know what anything cost. The pattern closest to me is avoidance — I don't open my banking app and bills sit unopened for two weeks. The last time I felt uneasy was when a client asked my price and I started apologising before I'd even said it.",
+    "Money was the reason for arguments in our house, and I learned the subject was dangerous. I do the same today: when my partner mentions spending, I get defensive automatically. My pattern is spending as relief — after a hard week I buy something, and it's the only moment I'm kind to myself. If money weren't a problem, I'd take Friday afternoons off without justifying it to anyone.",
+    "My mum kept the household budget in a notebook and never complained, but I saw her counting coins at the end of the month. I learned not to talk about it. Today I earn a decent income and I still buy the cheapest version of everything, then get annoyed with myself when nothing lasts. If money weren't a problem, I'd pay someone to help around the house and I wouldn't call it a luxury.",
   ],
   2: [
-    "Fiksno 780 eura, promjenjivo 640, povremeno 210 prosječno, nevidljivo 94. Iznenadilo me nevidljivo — četiri pretplate koje ne koristim i provizije koje nisam ni primijetila. Očekivala sam da mi je hrana najveća stavka i to je tačno. Ne razumijem zašto mi je povremeno tako neravnomjerno raspoređeno, jedan mjesec 60, drugi 400.",
-    "Fiksno 1120, promjenjivo 710, povremeno 265, nevidljivo 61. Iznenadilo me koliko odlazi na sitne kupovine „po dvije stvari\" — 14 odlazaka u trgovinu u četiri sedmice. Očekivala sam da je gorivo veće nego što jest. Ne razumijem kako da rasporedim registraciju auta koja dolazi u martu.",
-    "Fiksno 690, promjenjivo 520, povremeno 180, nevidljivo 43. Iznenadilo me da je promjenjivo manje nego što sam mislila, ali povremeno dvostruko više. Očekivala sam da ću se osjećati loše kad vidim brojke, a zapravo mi je lakše. Ne razumijem zašto sam se ovoga toliko bojala.",
-    "Fiksno 950, promjenjivo 580, povremeno 320, nevidljivo 78. Iznenadilo me koliko je povremena kanta velika — registracija, rođendani i zubar u istom mjesecu daju 600 eura. Očekivala sam da je nevidljivo veće. Ne razumijem gdje da smjestim troškove za djecu, dio je fiksan a dio nije.",
+    "Fixed 780 euros, variable 640, occasional 210 on average, invisible 94. The invisible bucket surprised me — four subscriptions I don't use and fees I'd never even noticed. I expected food to be my biggest item, and it is. What I don't understand is why my occasional spending is so uneven: 60 one month, 400 the next.",
+    "Fixed 1,120, variable 710, occasional 265, invisible 61. What surprised me was how much goes on small 'just two things' trips — 14 trips to the shop in four weeks. I expected fuel to be higher than it is. I don't understand how to handle the car registration that comes in March.",
+    "Fixed 690, variable 520, occasional 180, invisible 43. It surprised me that variable was lower than I thought, but occasional was double. I expected to feel bad seeing the numbers, and actually I feel lighter. I don't understand why I was so afraid of this.",
+    "Fixed 950, variable 580, occasional 320, invisible 78. The size of the occasional bucket surprised me — registration, birthdays and the dentist in the same month come to 600 euros. I expected the invisible bucket to be bigger. I don't understand where to put the children's costs; part of it is fixed and part isn't.",
   ],
   3: [
-    "Fiksno 780, promjenjivo 600, povremeno 200 mjesečno odvajam, prostor za život 90 eura. Ostaje 140 koje idu u rezervu. Ako mjesec bude loš, prvo pada uplata u rezervu, ne prostor za život — naučila sam da mi taj dio drži plan.",
-    "Fiksno 1120, promjenjivo 650, povremeno 250, prostor za život 120. Ostaje 180 za rezervu. Ako mjesec bude loš, pada polovina prostora za život i cijela uplata u rezervu, minimalne rate ostaju.",
-    "Fiksno 690, promjenjivo 480, povremeno 180, prostor za život 70. Ostaje 210. Ako mjesec bude loš, prvo pada povremena kanta jer u njoj već imam nešto odvojeno od prošlog mjeseca.",
-    "Fiksno 950, promjenjivo 560, povremeno 300, prostor za život 100. Ostaje 90 i to mi je premalo, ali je istina. Ako mjesec bude loš, pada prostor za život na pola i ništa drugo — minimalne rate i povremena kanta ostaju netaknute.",
+    "Fixed 780, variable 600, occasional 200 set aside monthly, room for life 90. That leaves 140 for the reserve. If the month goes badly, the reserve payment goes first, not room for life — I've learned that part is what holds the plan together.",
+    "Fixed 1,120, variable 650, occasional 250, room for life 120. That leaves 180 for the reserve. If the month goes badly, half the room for life and the whole reserve payment go; the minimum repayments stay.",
+    "Fixed 690, variable 480, occasional 180, room for life 70. That leaves 210. If the month goes badly, the occasional bucket goes first, because I already have something set aside in it from last month.",
+    "Fixed 950, variable 560, occasional 300, room for life 100. That leaves 90, which is too little, but it's the truth. If the month goes badly, room for life drops by half and nothing else — minimum repayments and the occasional bucket stay untouched.",
   ],
   4: [
-    "Naplativih sati mjesečno: 62. Ciljani prihod nakon poreza: 1800. Fiksni troškovi posla: 240. Porez i doprinosi: 32 posto. Minimalna satnica mi ispada 48 eura, a trenutno naplaćujem 30. Ponuda koju sam poslala: „Za opseg od pet objava mjesečno, uključujući pripremu i objavu, cijena je 420 eura mjesečno. Rok plaćanja 15 dana od datuma računa, avans 30 posto.\" Nisam dodala nijednu rečenicu koja pregovara protiv mene i bilo mi je fizički neugodno.",
-    "Naplativih sati: 48. Ciljani prihod: 2200. Fiksni troškovi: 310. Porez 35 posto. Minimalna satnica 72 eura, trenutno naplaćujem 45. Ponuda: „Za kompletan projekt u opsegu koji smo dogovorile cijena je 1600 eura. Avans 50 posto prije početka, ostatak 15 dana od predaje.\" Poslala sam je jučer i još čekam odgovor.",
+    "Billable hours per month: 62. Target income after tax: 1,800. Fixed business costs: 240. Tax and contributions: 32 percent. My minimum hourly rate comes out at 48 euros, and I currently charge 30. The quote I sent: \"For a scope of five posts a month, including preparation and publishing, the price is 420 euros a month. Payment within 15 days of the invoice date, 30 percent deposit.\" I didn't add a single sentence negotiating against myself, and it was physically uncomfortable.",
+    "Billable hours: 48. Target income: 2,200. Fixed costs: 310. Tax 35 percent. Minimum hourly rate 72 euros; I currently charge 45. Quote: \"For the complete project in the scope we agreed, the price is 1,600 euros. 50 percent deposit before we start, the rest within 15 days of delivery.\" I sent it yesterday and I'm still waiting to hear back.",
+    "Billable hours: 35, which surprised me because I work far more than that. Target income 1,500, fixed costs 180, tax 30 percent. Minimum hourly rate 66 euros. I charge 35. Quote: \"The price for the agreed scope is 780 euros, payment within 15 days of the invoice.\" I didn't write a single \"we can work something out if needed\", and that was the hardest part.",
+    "Billable hours: 55. Target income 2,000, fixed costs 420, tax 33 percent. Minimum hourly rate 62 euros, I charge 50 — closer than I thought. Quote: \"For a package of three sessions a month, the price is 690 euros, with a 30 percent deposit.\" The client agreed without a single question, which tells me I'm still too cheap.",
   ],
 };
 
 /**
- * Seed briše sve @demo.local naloge, pa mora prvo dokazati da gleda u bazu
- * OVOG projekta. Demo #1 (coach-portal) ima svoje @demo.local naloge i svoju
- * profiles tabelu - bez ove provjere pogrešan URL u .env.local obrisao bi njih.
+ * The seed deletes every @demo.local account, so it first has to prove it is
+ * looking at THIS project's database. Demo #1 (coach-portal) has its own
+ * @demo.local accounts and its own profiles table - without this check, a wrong
+ * URL in .env.local would wipe them.
  */
 async function assertOwnDatabase() {
-  // Tabele koje postoje samo ovdje.
+  // Tables that only exist here.
   const mine = ["modules", "lessons", "submissions", "weekly_reflections"];
   for (const t of mine) {
     const { error } = await db.from(t).select("*").limit(1);
     if (error) {
       console.error(
-        `✗ Tabela "${t}" ne postoji u bazi na ${url}.\n` +
-          `  Pokreni prvo: npm run db:migrate\n` +
-          `  Ako si je pokrenuo, provjeri pokazuje li NEXT_PUBLIC_SUPABASE_URL na pravi projekat.`,
+        `✗ Table "${t}" doesn't exist in the database at ${url}.\n` +
+          `  Run this first: npm run db:migrate\n` +
+          `  If you already have, check that NEXT_PUBLIC_SUPABASE_URL points at the right project.`,
       );
       process.exit(1);
     }
   }
 
-  // Tabele koje postoje samo u demo #1.
+  // Tables that only exist in demo #1.
   const foreign = ["checkins", "workouts", "progress_photos", "client_status"];
   for (const t of foreign) {
     const { error } = await db.from(t).select("*").limit(1);
     if (!error) {
       console.error(
-        `✗ Baza na ${url} sadrži tabelu "${t}" - to je demo #1 (coach-portal), ne ovaj projekat.\n` +
-          `  Seed je prekinut prije nego je išta obrisao.\n` +
-          `  Ovaj demo traži zasebnu Supabase instancu; ispravi .env.local.`,
+        `✗ The database at ${url} has a "${t}" table - that's demo #1 (coach-portal), not this project.\n` +
+          `  The seed stopped before deleting anything.\n` +
+          `  This demo needs its own Supabase instance; fix .env.local.`,
       );
       process.exit(1);
     }
@@ -192,11 +197,11 @@ async function assertOwnDatabase() {
 }
 
 async function main() {
-  console.log(`Seed za ${brand.name} · ${brand.cohortName} · danas ${TODAY}`);
+  console.log(`Seeding ${brand.name} · ${brand.cohortName} · today ${TODAY}`);
   await assertOwnDatabase();
 
   // -------------------------------------------------------------------------
-  // Čišćenje
+  // Clean up
   // -------------------------------------------------------------------------
   const { data: existing } = await db.auth.admin.listUsers({ page: 1, perPage: 1000 });
   for (const u of existing?.users ?? []) {
@@ -204,10 +209,10 @@ async function main() {
   }
   await db.from("calls").delete().neq("id", "00000000-0000-0000-0000-000000000000");
   await db.from("modules").delete().neq("id", "00000000-0000-0000-0000-000000000000");
-  console.log("✓ prethodni demo podaci obrisani");
+  console.log("✓ previous demo data removed");
 
   // -------------------------------------------------------------------------
-  // Nalozi
+  // Accounts
   // -------------------------------------------------------------------------
   const ids = new Map<string, string>();
 
@@ -219,7 +224,7 @@ async function main() {
       user_metadata: { full_name },
     });
     if (error || !data.user) {
-      console.error(`✗ nalog ${email}`, error);
+      console.error(`✗ account ${email}`, error);
       process.exit(1);
     }
     ids.set(key, data.user.id);
@@ -255,12 +260,12 @@ async function main() {
         cohort: brand.cohortName,
       })),
     ]).select("id"),
-    "profili",
+    "profiles",
   );
-  console.log(`✓ ${1 + assistants.length + members.length} naloga`);
+  console.log(`✓ ${1 + assistants.length + members.length} accounts`);
 
   // -------------------------------------------------------------------------
-  // Moduli, lekcije, zadaci
+  // Modules, lessons, assignments
   // -------------------------------------------------------------------------
   const moduleIds: string[] = [];
   const lessonIds: string[][] = [];
@@ -283,7 +288,7 @@ async function main() {
         })
         .select("id")
         .single(),
-      `modul ${order}`,
+      `module ${order}`,
     );
     moduleIds.push(mod.id);
 
@@ -291,18 +296,18 @@ async function main() {
     for (let j = 0; j < c.lessons.length; j++) {
       const l = c.lessons[j];
 
-      // Tri lekcije imaju generisan PDF radni list (modul 1, 2 i lekcija 4.3).
+      // Three lessons get a generated PDF worksheet (modules 1 and 2, and lesson 4.3).
       let worksheetPath: string | null = null;
       const wantsWorksheet =
         l.worksheet && ((order <= 2 && j === 0) || (order === 4 && j === 2));
       if (wantsWorksheet && l.worksheet) {
         const bytes = await buildWorksheet(l.worksheet.title, l.worksheet.questions);
-        const path = `modul-${order}-lekcija-${j + 1}.pdf`;
+        const path = `module-${order}-lesson-${j + 1}.pdf`;
         const { error } = await db.storage
           .from("worksheets")
           .upload(path, bytes, { contentType: "application/pdf", upsert: true });
         if (error) {
-          console.error("✗ upload radnog lista", error);
+          console.error("✗ worksheet upload", error);
           process.exit(1);
         }
         worksheetPath = path;
@@ -323,7 +328,7 @@ async function main() {
           })
           .select("id")
           .single(),
-        `lekcija ${order}.${j + 1}`,
+        `lesson ${order}.${j + 1}`,
       );
       perModule.push(lesson.id);
     }
@@ -340,27 +345,27 @@ async function main() {
         })
         .select("id")
         .single(),
-      `zadatak ${order}`,
+      `assignment ${order}`,
     );
     assignmentIds.push(assignment.id);
   }
   console.log(
-    `✓ ${moduleIds.length} modula · ${lessonIds.flat().length} lekcija · ${assignmentIds.length} zadataka · ${worksheetCount} PDF radna lista`,
+    `✓ ${moduleIds.length} modules · ${lessonIds.flat().length} lessons · ${assignmentIds.length} assignments · ${worksheetCount} PDF worksheets`,
   );
 
   // -------------------------------------------------------------------------
-  // Napredak kroz lekcije
+  // Lesson progress
   // -------------------------------------------------------------------------
   const progressRows: { member_id: string; lesson_id: string; completed_at: string }[] = [];
 
   for (const m of members) {
     const memberId = ids.get(m.key)!;
-    // Sve lekcije modula ispred trenutnog + dio trenutnog.
+    // Every lesson in the modules before her current one, plus part of the current one.
     const completed: string[] = [];
     for (let order = 1; order < m.module; order++) completed.push(...lessonIds[order - 1]);
     completed.push(...lessonIds[m.module - 1].slice(0, m.lessonsInModule));
 
-    // Zadnja završena lekcija nosi datum zadnje aktivnosti; ostale su ranije.
+    // The most recent completed lesson carries her last-activity date; the rest are earlier.
     const span = Math.max(1, m.joinedDaysAgo - m.lastActivity);
     completed.forEach((lessonId, idx) => {
       const isLast = idx === completed.length - 1;
@@ -374,11 +379,11 @@ async function main() {
       });
     });
   }
-  must(await db.from("lesson_progress").insert(progressRows).select("id"), "napredak");
-  console.log(`✓ ${progressRows.length} završenih lekcija`);
+  must(await db.from("lesson_progress").insert(progressRows).select("id"), "lesson progress");
+  console.log(`✓ ${progressRows.length} completed lessons`);
 
   // -------------------------------------------------------------------------
-  // Predaje
+  // Submissions
   // -------------------------------------------------------------------------
   const submissionRows: Record<string, unknown>[] = [];
   const adminId = ids.get(admin.key)!;
@@ -388,14 +393,14 @@ async function main() {
     m.submitted.forEach((order) => {
       const key = `${m.key}:${order}`;
       const pending = PENDING.has(key);
-      // Predaja stiže par dana prije roka tog modula, ali nikad kasnije od
-      // zadnje aktivnosti te članice - inače bi joj pokvarila status.
+      // A submission arrives a few days before that module's deadline, but never
+      // later than the member's last activity - otherwise it would change her status.
       const submittedDaysAgo = Math.max(
         2,
         daysUntil(dueFor(order)) * -1 + 3,
         m.lastActivity + 1,
       );
-      // Po članici, da dvije predaje istog modula u redu za pregled ne budu iste.
+      // By member, so two submissions for the same module in the review queue differ.
       const bodies = SUBMISSION_BODIES[order] ?? SUBMISSION_BODIES[1];
       submissionRows.push({
         assignment_id: assignmentIds[order - 1],
@@ -406,46 +411,46 @@ async function main() {
         feedback: pending
           ? null
           : (FEEDBACK[key] ??
-            "Hvala na predaji. Zadatak je urađen kako treba — vidimo se na pozivu, tamo ćemo proći detalje."),
-        reviewed_by: pending ? null : ids.get(m.assistant === "petra" ? "petra" : "ivana")!,
+            "Thank you for submitting. The assignment is done exactly as it should be — see you on the call, where we'll go through the details."),
+        reviewed_by: pending ? null : ids.get(m.assistant)!,
         reviewed_at: pending ? null : daysAgo(Math.max(1, submittedDaysAgo - 2), 16),
       });
     });
   });
-  must(await db.from("submissions").insert(submissionRows).select("id"), "predaje");
+  must(await db.from("submissions").insert(submissionRows).select("id"), "submissions");
   console.log(
-    `✓ ${submissionRows.length} predaja (${PENDING.size} čeka pregled, ${submissionRows.length - PENDING.size} pregledano)`,
+    `✓ ${submissionRows.length} submissions (${PENDING.size} awaiting review, ${submissionRows.length - PENDING.size} reviewed)`,
   );
 
   // -------------------------------------------------------------------------
-  // Komentari ispod lekcija (25 članica + 8 Andrejinih odgovora)
+  // Lesson comments (25 from members + Andreja's replies)
   // -------------------------------------------------------------------------
   const COMMENTS: { member: string; module: number; lesson: number; body: string; daysAgo: number; reply?: string }[] = [
-    { member: "marija", module: 1, lesson: 1, daysAgo: 44, body: "Obrazac stezanja me pogodio. Mislila sam da sam „štedljiva\", a zapravo se cijeli život izvinjavam kad nešto kupim.", reply: "Marija, to je razlika koju većina nikad ne napravi. Štedljivost je odluka, stezanje je strah. Vidimo se na pozivu." },
-    { member: "ana", module: 1, lesson: 1, daysAgo: 43, body: "Kod nas se o novcu nije govorilo uopće. Tek sad vidim da je i to bila poruka." },
-    { member: "lucija", module: 1, lesson: 2, daysAgo: 42, body: "Ovo o jeziku bez pridjeva — probala sam i stvarno je drugačije. „412 eura\" umjesto „katastrofa\".", reply: "Tačno tako. Kad nestane pridjev, ostane zadatak. Drži se toga cijeli program." },
-    { member: "petra_n", module: 1, lesson: 2, daysAgo: 41, body: "Meni je najteže to što znam brojke, ali ih izbjegavam pogledati zajedno na jednom mjestu." },
-    { member: "katarina", module: 1, lesson: 3, daysAgo: 40, body: "Tri rečenice su mi ispale sve o zubaru, autu i tome da ne uzimam slobodan dan. Smiješno mi je koliko je konkretno." },
-    { member: "tena", module: 1, lesson: 3, daysAgo: 39, body: "Prvi put da mi neko kaže da cilj ne mora biti brojka." },
-    { member: "iva", module: 2, lesson: 1, daysAgo: 37, body: "Procijenila sam 300 za hranu. Ispalo je 512. Nisam ni ljuta, samo mi je čudno koliko sam bila daleko.", reply: "Iva, 40 posto razlike je prosjek. Nisi izuzetak, to je tako kod svih dok ne izmjere." },
-    { member: "nika", module: 2, lesson: 1, daysAgo: 36, body: "Deseti dan mi je bilo dosadno i skoro sam odustala. Drago mi je da nisam." },
-    { member: "dora", module: 2, lesson: 2, daysAgo: 35, body: "Kanta „nevidljivo\" mi je 94 eura. Četiri pretplate koje ne koristim već godinu dana.", reply: "To je 1128 eura godišnje. Nemoj ništa otkazivati do poziva — prvo ih samo popiši." },
-    { member: "maja", module: 2, lesson: 2, daysAgo: 34, body: "Povremena kanta je ono što mi je rušilo svaki pokušaj budžeta. Nikad je nisam računala." },
-    { member: "lana", module: 2, lesson: 3, daysAgo: 33, body: "Pravilo „prvi pogled je samo gledanje\" me spasilo. Inače bih do večeri otkazala pola stvari i za tjedan dana se vratila na staro." },
-    { member: "tea", module: 2, lesson: 3, daysAgo: 32, body: "Napisala sam tri rečenice i najviše me pogodilo ono „šta ne razumijem\"." },
-    { member: "ivana_b", module: 3, lesson: 1, daysAgo: 30, body: "Deset minuta sedmično kao mjerilo složenosti — to mi je odmah eliminiralo tri aplikacije koje sam skinula.", reply: "Upravo tako. Ako traži više pažnje od toga, napustit ćeš ga do marta." },
-    { member: "marija", module: 3, lesson: 1, daysAgo: 29, body: "Moj prošli budžet je pukao treću sedmicu i mislila sam da je problem u meni." },
-    { member: "petra_n", module: 3, lesson: 2, daysAgo: 28, body: "Pitanje za poziv: kako računati postotke kad mi prihod varira od 900 do 2400?", reply: "Petra, računaj s najnižim mjesecom zadnjih godinu dana. Sve iznad toga je višak i ide u rezervu. Neudobno prva dva mjeseca, poslije spasonosno." },
-    { member: "lucija", module: 3, lesson: 2, daysAgo: 27, body: "Stanarina mi uzima 45 posto. Pravilo 50/30/20 kod mene matematički ne postoji." },
-    { member: "ana", module: 3, lesson: 3, daysAgo: 26, body: "Prostor za život sam prvo stavila 30 eura. Poslije lekcije sam ga digla na 90 i osjećam se čudno, ali dobro čudno." },
-    { member: "katarina", module: 3, lesson: 3, daysAgo: 25, body: "Ovo je lekcija koju bih poslala svakoj prijateljici." },
-    { member: "nika", module: 4, lesson: 1, daysAgo: 24, body: "Izračunala sam minimalnu satnicu. 72 eura. Naplaćujem 45. Sjedim i gledam u to.", reply: "Nika, to je najčešći razmak u grupi. Nemoj skakati odmah na 72 — sljedeća ponuda neka bude 58, pa idemo dalje." },
-    { member: "ivana_b", module: 4, lesson: 2, daysAgo: 23, body: "Vježbala sam naglas deset puta. Prvih pet mi je bilo užasno." },
-    { member: "dora", module: 4, lesson: 2, daysAgo: 22, body: "Ono „mogu prilagoditi cijenu ako smanjimo opseg\" je promijenilo cijeli razgovor s klijentom jučer.", reply: "To je rečenica koja cijenu veže za rad umjesto za tvoju volju da ugodiš. Odlično." },
-    { member: "sara", module: 4, lesson: 3, daysAgo: 21, body: "Avans od 30 posto mi je zvučao bezobrazno dok nisam vidjela da to svi rade.", reply: "Sara, avans nije nepovjerenje nego standard. Klijent koji ga odbije obično je isti onaj koji kasni s ostatkom." },
-    { member: "tea", module: 5, lesson: 1, daysAgo: 19, body: "Rezerva mi ispada 4200 eura. Sad kad znam broj, manje me je strah nego kad nisam znala." },
-    { member: "lucija", module: 5, lesson: 2, daysAgo: 17, body: "Postavila sam trajni nalog na dan plaće. Nije me boljelo koliko sam mislila." },
-    { member: "iva", module: 5, lesson: 3, daysAgo: 20, body: "„Neplanirano, nužno i hitno — sve tri, ne jedna od tri.\" Zapisala sam i zalijepila na frižider." },
+    { member: "mia", module: 1, lesson: 1, daysAgo: 44, body: "The clamping-down pattern hit home. I thought I was just 'careful', but I've spent my whole life apologising every time I buy something.", reply: "Mia, that's a distinction most people never make. Being careful is a decision; clamping down is fear. See you on the call." },
+    { member: "anna", module: 1, lesson: 1, daysAgo: 43, body: "Money simply wasn't discussed at home. Only now do I see that was a message too." },
+    { member: "lucy", module: 1, lesson: 2, daysAgo: 42, body: "The part about language without adjectives — I tried it and it really is different. \"412 euros\" instead of \"a disaster\".", reply: "Exactly. Once the adjective goes, what's left is a task. Hold on to that for the whole programme." },
+    { member: "chloe", module: 1, lesson: 2, daysAgo: 41, body: "The hardest thing for me is that I know the numbers, but I avoid looking at them together in one place." },
+    { member: "kate", module: 1, lesson: 3, daysAgo: 40, body: "All three of my sentences turned out to be about the dentist, the car, and not taking a day off. It's funny how concrete it is." },
+    { member: "tara", module: 1, lesson: 3, daysAgo: 39, body: "The first time anyone has told me a goal doesn't have to be a number." },
+    { member: "ivy", module: 2, lesson: 1, daysAgo: 37, body: "I estimated 300 for food. It came out at 512. I'm not even angry, it's just strange how far off I was.", reply: "Ivy, a 40 percent gap is the average. You're not the exception — that's how it is for everyone until they measure." },
+    { member: "nina", module: 2, lesson: 1, daysAgo: 36, body: "By day ten I was bored and nearly gave up. I'm glad I didn't." },
+    { member: "daisy", module: 2, lesson: 2, daysAgo: 35, body: "My invisible bucket is 94 euros. Four subscriptions I haven't used in a year.", reply: "That's 1,128 euros a year. Don't cancel anything until the call — just list them first." },
+    { member: "maya", module: 2, lesson: 2, daysAgo: 34, body: "The occasional bucket is what broke every budget I ever tried. I never counted it." },
+    { member: "lena", module: 2, lesson: 3, daysAgo: 33, body: "The 'first look is only looking' rule saved me. Otherwise I'd have cancelled half of everything by evening and been back to normal within a week." },
+    { member: "tessa", module: 2, lesson: 3, daysAgo: 32, body: "I wrote my three sentences, and the one that hit hardest was 'what I don't understand'." },
+    { member: "isla", module: 3, lesson: 1, daysAgo: 30, body: "Ten minutes a week as the measure of complexity — that immediately ruled out three apps I'd downloaded.", reply: "Exactly. If it needs more attention than that, you'll have abandoned it by March." },
+    { member: "mia", module: 3, lesson: 1, daysAgo: 29, body: "My last budget broke in week three and I thought the problem was me." },
+    { member: "chloe", module: 3, lesson: 2, daysAgo: 28, body: "A question for the call: how do I work out percentages when my income swings between 900 and 2,400?", reply: "Chloe, plan around your lowest month of the past year. Anything above it is surplus and goes into the reserve. Uncomfortable for the first two months, a lifesaver after that." },
+    { member: "lucy", module: 3, lesson: 2, daysAgo: 27, body: "Rent takes 45 percent of my income. For me the 50/30/20 rule mathematically doesn't exist." },
+    { member: "anna", module: 3, lesson: 3, daysAgo: 26, body: "I first set my room for life at 30 euros. After the lesson I raised it to 90 and it feels strange — but a good strange." },
+    { member: "kate", module: 3, lesson: 3, daysAgo: 25, body: "This is the lesson I'd send to every friend I have." },
+    { member: "nina", module: 4, lesson: 1, daysAgo: 24, body: "I worked out my minimum hourly rate. 72 euros. I charge 45. I'm just sitting here looking at it.", reply: "Nina, that's the most common gap in the group. Don't jump straight to 72 — make your next quote 58, and we'll go from there." },
+    { member: "isla", module: 4, lesson: 2, daysAgo: 23, body: "I practised out loud ten times. The first five were awful." },
+    { member: "daisy", module: 4, lesson: 2, daysAgo: 22, body: "\"I can adjust the price if we reduce the scope\" changed the whole conversation with a client yesterday.", reply: "That's the sentence that ties the price to the work instead of to your willingness to please. Brilliant." },
+    { member: "sara", module: 4, lesson: 3, daysAgo: 21, body: "A 30 percent deposit sounded rude to me until I saw that everyone does it.", reply: "Sara, a deposit isn't mistrust — it's standard. The client who refuses one is usually the same one who pays the rest late." },
+    { member: "tessa", module: 5, lesson: 1, daysAgo: 19, body: "My reserve comes out at 4,200 euros. Now that I know the number, I'm less afraid than when I didn't." },
+    { member: "lucy", module: 5, lesson: 2, daysAgo: 17, body: "I set up a standing order for payday. It didn't hurt as much as I expected." },
+    { member: "ivy", module: 5, lesson: 3, daysAgo: 20, body: "\"Unplanned, necessary and urgent — all three, not one of the three.\" I wrote it down and stuck it on the fridge." },
   ];
 
   const commentRows: Record<string, unknown>[] = [];
@@ -463,7 +468,7 @@ async function main() {
 
   const insertedComments = must<{ id: string }[]>(
     await db.from("lesson_comments").insert(commentRows).select("id"),
-    "komentari",
+    "comments",
   );
 
   const replyRows = replies.map((r) => ({
@@ -473,23 +478,23 @@ async function main() {
     created_at: daysAgo(r.daysAgo, 20),
     parent_id: insertedComments[r.parentIdx].id,
   }));
-  must(await db.from("lesson_comments").insert(replyRows).select("id"), "odgovori");
-  console.log(`✓ ${commentRows.length} komentara + ${replyRows.length} Andrejinih odgovora`);
+  must(await db.from("lesson_comments").insert(replyRows).select("id"), "replies");
+  console.log(`✓ ${commentRows.length} comments + ${replyRows.length} replies from Andreja`);
 
   // -------------------------------------------------------------------------
-  // Pozivi
+  // Calls
   // -------------------------------------------------------------------------
   const callSpecs = [
-    { title: "Uvodni poziv: odakle dolaze tvoje odluke", daysAgo: 28 },
-    { title: "Mapa troškova: šta ste vidjele", daysAgo: 21 },
-    { title: "Budžet koji izdrži loš mjesec", daysAgo: 14 },
-    { title: "Cijene: izračun i izgovaranje", daysAgo: 7 },
+    { title: "Kick-off: where your decisions come from", daysAgo: 28 },
+    { title: "Spending maps: what you saw", daysAgo: 21 },
+    { title: "A budget that survives a bad month", daysAgo: 14 },
+    { title: "Pricing: the maths and saying it out loud", daysAgo: 7 },
   ];
   const NOTES = [
-    "Prošle smo tri obrasca i zaključile da ih većina ima dva istovremeno. Domaća zadaća: pisati bez pridjeva sedam dana.\n\nPitanja koja su se ponavljala: šta ako partner ne želi sudjelovati, i kako početi ako je prihod nepredvidiv. Oboje rješavamo u modulu 3.",
-    "Devet od vas je podijelilo brojke iz mape. Nevidljiva kanta je kod svih bila veća od očekivanog, prosjek 7 posto prihoda.\n\nDogovor: nitko ne otkazuje ništa do sljedećeg poziva. Prvi pogled je samo gledanje.",
-    "Napravile smo prve budžete uživo. Najčešća greška: prostor za život postavljen premalo, ispod 3 posto.\n\nDomaća zadaća: dopisati rečenicu „šta pada prvo ako mjesec bude loš\".",
-    "Vježbale smo izgovaranje cijene i tišinu poslije. Pet vas je poslalo ponudu po novoj cijeni tokom poziva.\n\nSljedeći put: naplata, avansi i podsjetnici bez izvinjenja.",
+    "We went through the three patterns and agreed most of us have two at once. Homework: write without adjectives for seven days.\n\nQuestions that kept coming up: what if a partner doesn't want to take part, and how to start when income is unpredictable. We cover both in module 3.",
+    "Nine of you shared your map numbers. The invisible bucket was bigger than expected for everyone, averaging 7 percent of income.\n\nAgreed: nobody cancels anything before the next call. The first look is only looking.",
+    "We built first budgets live. The most common mistake: room for life set too low, under 3 percent.\n\nHomework: add the sentence \"what breaks first if the month goes badly\".",
+    "We practised saying a price and then staying silent. Five of you sent a quote at your new price during the call.\n\nNext time: getting paid, deposits and reminders without apologising.",
   ];
 
   const pastCalls = must<{ id: string; scheduled_at: string }[]>(
@@ -506,107 +511,107 @@ async function main() {
       )
       .select("id, scheduled_at")
       .order("scheduled_at"),
-    "prošli pozivi",
+    "past calls",
   );
 
   const nextCall = must<{ id: string }>(
     await db
       .from("calls")
       .insert({
-        title: "Rezerva i štednja: koliki je tvoj broj",
+        title: "Reserve and savings: what's your number?",
         scheduled_at: new Date(`${addDaysISO(TODAY, 4)}T17:00:00Z`).toISOString(),
         zoom_url: "https://zoom.us/j/9812345678",
       })
       .select("id")
       .single(),
-    "sljedeći poziv",
+    "next call",
   );
-  console.log(`✓ ${pastCalls.length} prošlih poziva + 1 sljedeći za 4 dana`);
+  console.log(`✓ ${pastCalls.length} past calls + 1 next call in 4 days`);
 
   // -------------------------------------------------------------------------
-  // Pitanja za pozive
+  // Questions for calls
   // -------------------------------------------------------------------------
   const lastPast = pastCalls[pastCalls.length - 1].id;
   must(
     await db.from("call_questions").insert([
       {
         call_id: lastPast,
-        member_id: ids.get("marija")!,
-        body: "Kako da odredim cijenu kad radim nešto što nema jasnu satnicu, nego rezultat?",
+        member_id: ids.get("mia")!,
+        body: "How do I set a price when what I do doesn't have a clear hourly rate, only an outcome?",
         created_at: daysAgo(9, 12),
         answered: true,
         answer:
-          "Marija, i za rezultat prvo izračunaj satnicu — treba ti donja granica. Onda procijeni koliko sati stvarno ulazi i dodaj 25 posto za ono što uvijek iskrsne. Cijenu prezentiraš kao paket, ali je izračunaš po satu.",
+          "Mia, even for an outcome, work out your hourly rate first — you need a floor. Then estimate how many hours really go into it and add 25 percent for whatever always comes up. You present the price as a package, but you calculate it by the hour.",
       },
       {
         call_id: lastPast,
-        member_id: ids.get("tea")!,
-        body: "Šta da radim s klijentom koji kasni s plaćanjem već dva mjeseca?",
+        member_id: ids.get("tessa")!,
+        body: "What do I do with a client who has been two months late paying?",
         created_at: daysAgo(8, 13),
         answered: true,
         answer:
-          "Pošalji podsjetnik bez izvinjavanja i napiši datum do kojeg očekuješ uplatu. Ako prođe, prestaješ raditi. Reci to unaprijed, mirno, u jednoj rečenici.",
+          "Send a reminder without apologising, and state the date you expect payment by. If it passes, you stop working. Say it in advance, calmly, in one sentence.",
       },
       {
         call_id: lastPast,
-        member_id: ids.get("lana")!,
-        body: "Mogu li raditi modul 3 ako mapa još nije gotova?",
+        member_id: ids.get("lena")!,
+        body: "Can I start module 3 if my map isn't finished yet?",
         created_at: daysAgo(7, 14),
         answered: false,
       },
       {
         call_id: nextCall.id,
-        member_id: ids.get("petra_n")!,
-        body: "Koliko mjeseci rezerve ako mi je prihod od projekta do projekta i imam dijete?",
+        member_id: ids.get("chloe")!,
+        body: "How many months of reserve if I work project to project and have a child?",
         created_at: daysAgo(3, 10),
         answered: true,
         answer:
-          "Petra, u tvom slučaju šest mjeseci je minimum, a devet je ono na čemu ćeš stvarno spavati. Računaj mjesece troškova u minimalnoj verziji, ne mjesece prihoda.",
+          "Chloe, in your case six months is the minimum, and nine is what you'll actually sleep on. Count months of minimum expenses, not months of income.",
       },
       {
         call_id: nextCall.id,
-        member_id: ids.get("nika")!,
-        body: "Je li pametnije prvo skupiti rezervu ili otplatiti karticu?",
+        member_id: ids.get("nina")!,
+        body: "Is it smarter to build a reserve first or pay off my credit card?",
         created_at: daysAgo(2, 11),
         answered: true,
         answer:
-          "Prvo mali iznos rezerve (jedan mjesec troškova), pa onda kartica punom snagom, pa ostatak rezerve. Bez tog prvog mjeseca svaki kvar na autu te vrati na karticu.",
+          "A small reserve first (one month of expenses), then the card at full speed, then the rest of the reserve. Without that first month, every car repair sends you back to the card.",
       },
       {
         call_id: nextCall.id,
-        member_id: ids.get("dora")!,
-        body: "Gdje držati rezervu da mi ne bude previše pri ruci, a da dođem do nje za par dana?",
+        member_id: ids.get("daisy")!,
+        body: "Where do I keep a reserve so it isn't too easy to reach, but I can get to it within a few days?",
         created_at: daysAgo(2, 15),
         answered: false,
       },
       {
         call_id: nextCall.id,
-        member_id: ids.get("katarina")!,
-        body: "Šta ako mi je rezerva izračunata na iznos koji mi se čini nedostižan?",
+        member_id: ids.get("kate")!,
+        body: "What if the reserve I've calculated feels like an impossible amount?",
         created_at: daysAgo(1, 9),
         answered: false,
       },
     ]).select("id"),
-    "pitanja",
+    "questions",
   );
-  console.log("✓ 7 pitanja (4 odgovorena)");
+  console.log("✓ 7 questions (4 answered)");
 
   // -------------------------------------------------------------------------
-  // Sedmične refleksije
+  // Weekly reflections
   // -------------------------------------------------------------------------
   const REFLECTIONS: { member: string; weeksAgo: number; win: string; blocker: string; next: string }[] = [
-    { member: "marija", weeksAgo: 2, win: "Otvorila sam aplikaciju banke svaki dan bez da mi se steglo u grlu.", blocker: "Još uvijek računam u glavi prije nego naručim.", next: "Postaviti prostor za život i držati ga se sedam dana." },
-    { member: "marija", weeksAgo: 3, win: "Završila sam mapu za četiri sedmice, nijedan dan nisam preskočila.", blocker: "Povremena kanta mi je i dalje maglovita.", next: "Popisati sve što dolazi do kraja godine." },
-    { member: "ana", weeksAgo: 2, win: "Digla sam prostor za život s 30 na 90 eura.", blocker: "Osjećaj krivnje nakon svake sitne kupovine.", next: "Ne pravdati nijednu kupovinu iz tog iznosa." },
-    { member: "ana", weeksAgo: 3, win: "Popisala sam sve pretplate, ima ih jedanaest.", blocker: "Ne znam koje su mi stvarno potrebne.", next: "Otkazati tri koje nisam otvorila mjesec dana." },
-    { member: "petra_n", weeksAgo: 2, win: "Izračunala sam minimalnu satnicu i poslala prvu ponudu po njoj.", blocker: "Čekam odgovor i preispitujem se.", next: "Ne snižavati cijenu prije nego dobijem odgovor." },
-    { member: "lucija", weeksAgo: 2, win: "Postavila sam trajni nalog za rezervu.", blocker: "Bojim se prvog mjeseca u kojem će biti tijesno.", next: "Napisati plan za loš mjesec unaprijed." },
-    { member: "lucija", weeksAgo: 4, win: "Razdvojila sam gorivo i hranu u mapi.", blocker: "Fiksni troškovi su mi previsoki za prihod.", next: "Provjeriti stanarinu i osiguranje." },
-    { member: "ivana_b", weeksAgo: 2, win: "Rekla sam cijenu i zašutjela. Klijent je pristao.", blocker: "Tri sekunde tišine su mi trajale beskonačno.", next: "Ponoviti isto s drugim klijentom ove sedmice." },
-    { member: "nika", weeksAgo: 3, win: "Vidjela sam da mi je nevidljiva kanta mala, prvi put nešto dobro u brojkama.", blocker: "Satnica mi je 27 eura ispod minimuma.", next: "Sljedeća ponuda ide na 58 eura." },
-    { member: "tea", weeksAgo: 2, win: "Znam koliki mi je iznos rezerve. 4200 eura.", blocker: "Čini mi se daleko.", next: "Odvojiti prvih 150 eura ovaj mjesec." },
-    { member: "dora", weeksAgo: 3, win: "Otkazala sam četiri pretplate koje nisam koristila godinu dana.", blocker: "Još uvijek ne gledam stanje računa rado.", next: "Gledati stanje svaki ponedjeljak ujutro." },
-    { member: "katarina", weeksAgo: 2, win: "Prvi put sam napisala budžet koji ima prostor za život.", blocker: "Ne znam šta da pauziram u lošem mjesecu.", next: "Napisati tri koraka za loš mjesec." },
+    { member: "mia", weeksAgo: 2, win: "I opened my banking app every day without my throat tightening.", blocker: "I still do sums in my head before I order.", next: "Set my room for life and stick to it for seven days." },
+    { member: "mia", weeksAgo: 3, win: "I finished my four-week map without skipping a single day.", blocker: "The occasional bucket is still vague to me.", next: "List everything coming up before the end of the year." },
+    { member: "anna", weeksAgo: 2, win: "I raised my room for life from 30 to 90 euros.", blocker: "Guilt after every small purchase.", next: "Don't justify a single purchase from that amount." },
+    { member: "anna", weeksAgo: 3, win: "I listed every subscription — there are eleven.", blocker: "I don't know which ones I actually need.", next: "Cancel three I haven't opened in a month." },
+    { member: "chloe", weeksAgo: 2, win: "I worked out my minimum hourly rate and sent my first quote at it.", blocker: "Waiting to hear back, and second-guessing myself.", next: "Don't lower the price before I get an answer." },
+    { member: "lucy", weeksAgo: 2, win: "I set up a standing order for my reserve.", blocker: "I'm afraid of the first month when things get tight.", next: "Write my bad-month plan in advance." },
+    { member: "lucy", weeksAgo: 4, win: "I split fuel and food in my map.", blocker: "My fixed costs are too high for my income.", next: "Check rent and insurance." },
+    { member: "isla", weeksAgo: 2, win: "I said my price and stayed quiet. The client agreed.", blocker: "Those three seconds of silence felt endless.", next: "Do the same with another client this week." },
+    { member: "nina", weeksAgo: 3, win: "My invisible bucket turned out small — the first good news in my numbers.", blocker: "My hourly rate is 27 euros below my minimum.", next: "My next quote goes out at 58 euros." },
+    { member: "tessa", weeksAgo: 2, win: "I know my reserve number. 4,200 euros.", blocker: "It feels far away.", next: "Put the first 150 euros aside this month." },
+    { member: "daisy", weeksAgo: 3, win: "I cancelled four subscriptions I hadn't used in a year.", blocker: "I still don't enjoy looking at my balance.", next: "Check my balance every Monday morning." },
+    { member: "kate", weeksAgo: 2, win: "For the first time I wrote a budget that has room for life in it.", blocker: "I don't know what to pause in a bad month.", next: "Write three steps for a bad month." },
   ];
 
   must(
@@ -620,34 +625,34 @@ async function main() {
         created_at: daysAgo(r.weeksAgo * 7 - 1, 18),
       })),
     ).select("id"),
-    "refleksije",
+    "reflections",
   );
-  console.log(`✓ ${REFLECTIONS.length} refleksija`);
+  console.log(`✓ ${REFLECTIONS.length} reflections`);
 
   // -------------------------------------------------------------------------
-  // Provjera statusa
+  // Status check
   // -------------------------------------------------------------------------
   const { data: status } = await db.from("member_status").select("*").order("full_name");
   const counts = { active: 0, slowing: 0, stalled: 0 } as Record<string, number>;
   for (const row of status ?? []) counts[(row as { status: string }).status]++;
 
-  console.log("\nStatusi kohorte:");
+  console.log("\nCohort status:");
   for (const row of (status ?? []) as any[]) {
     console.log(
-      `  ${row.full_name.padEnd(20)} modul ${String(row.current_module ?? "-").padStart(2)} · ` +
-        `${String(row.lessons_done_pct).padStart(3)}% · ${String(row.days_since_activity ?? "-").padStart(3)} dana · ` +
-        `${row.overdue_assignments} kasni · ${row.status}`,
+      `  ${row.full_name.padEnd(18)} module ${String(row.current_module ?? "-").padStart(2)} · ` +
+        `${String(row.lessons_done_pct).padStart(3)}% · ${String(row.days_since_activity ?? "-").padStart(3)} days · ` +
+        `${row.overdue_assignments} overdue · ${row.status}`,
     );
   }
   console.log(
     `\n  active ${counts.active} · slowing ${counts.slowing} · stalled ${counts.stalled}` +
-      `  (cilj: 9 / 3 / 2)`,
+      `  (target: 9 / 3 / 2)`,
   );
 
-  console.log(`\nDemo nalozi (lozinka ${PASSWORD}):`);
-  console.log(`  članica     ${members[0].email}`);
-  console.log(`  asistentica ${assistants[0].email}`);
-  console.log(`  Andreja     ${admin.email}`);
+  console.log(`\nDemo accounts (password ${PASSWORD}):`);
+  console.log(`  member     ${members[0].email}`);
+  console.log(`  assistant  ${assistants[0].email}`);
+  console.log(`  Andreja    ${admin.email}`);
 }
 
 function daysUntil(iso: string) {

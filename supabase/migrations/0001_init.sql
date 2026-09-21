@@ -1,8 +1,8 @@
--- Zavoli svoj novac: šema, RLS, member_status view, storage.
--- Pokreće se jednom na svježem Supabase projektu (scripts/migrate.ts).
+-- Love Your Money: schema, RLS, member_status view, storage.
+-- Runs once on a fresh Supabase project (scripts/migrate.ts).
 
 -- =========================================================
--- Tabele
+-- Tables
 -- =========================================================
 
 create table public.profiles (
@@ -119,7 +119,7 @@ create table public.weekly_reflections (
 );
 create index weekly_reflections_member_idx on public.weekly_reflections(member_id, week_start desc);
 
--- In-app podsjetnik iz A1 Kohorta (v1: bez emaila).
+-- In-app nudge sent from the Cohort screen (v1: no email).
 create table public.notices (
   id uuid primary key default gen_random_uuid(),
   member_id uuid not null references public.profiles(id) on delete cascade,
@@ -131,10 +131,10 @@ create table public.notices (
 create index notices_member_idx on public.notices(member_id, created_at desc);
 
 -- =========================================================
--- Pomoćne funkcije (security definer: izbjegava RLS rekurziju)
+-- Helper functions (security definer: avoids RLS recursion)
 -- =========================================================
 
--- "Danas" u vremenskoj zoni programa. Mijenjaj zajedno s lib/brand.ts.
+-- "Today" in the programme's time zone. Change together with lib/brand.ts.
 create or replace function public.app_today()
 returns date language sql stable
 as $$ select (now() at time zone 'Europe/Zagreb')::date $$;
@@ -159,17 +159,17 @@ create or replace function public.my_assistant_id()
 returns uuid language sql stable security definer set search_path = public
 as $$ select assistant_id from public.profiles where id = auth.uid() $$;
 
--- Ko smije vidjeti podatke jedne članice: ona sama, admin, njena asistentica.
+-- Who may see one member's data: the member herself, the admin, her assistant.
 create or replace function public.can_access_member(mid uuid)
 returns boolean language sql stable security definer set search_path = public
 as $$ select mid = auth.uid() or public.is_admin() or public.is_assistant_of(mid) $$;
 
--- Modul je otključan kad je datum stigao (za sve osim staffa).
+-- A module is unlocked once its date has arrived.
 create or replace function public.module_unlocked(mid uuid)
 returns boolean language sql stable security definer set search_path = public
 as $$ select exists (select 1 from public.modules where id = mid and unlock_at <= public.app_today()) $$;
 
--- Članice ne mogu sebi mijenjati ulogu ni asistenticu.
+-- Members cannot change their own role or assistant.
 create or replace function public.protect_profile_fields()
 returns trigger language plpgsql security definer set search_path = public
 as $$
@@ -201,8 +201,8 @@ alter table public.call_questions enable row level security;
 alter table public.weekly_reflections enable row level security;
 alter table public.notices enable row level security;
 
--- profiles: puni red vidi samo ona sama, admin, njena asistentica (i članica svoju asistenticu).
--- Ime i avatar drugih članica idu kroz public_profiles view ispod.
+-- profiles: the full row is visible only to the member, the admin and her assistant
+-- (and a member can see her own assistant). Other members' names go through public_profiles below.
 create policy profiles_select on public.profiles for select to authenticated
 using (
   id = auth.uid()
@@ -218,8 +218,8 @@ with check (public.is_admin());
 create policy profiles_admin_delete on public.profiles for delete to authenticated
 using (public.is_admin());
 
--- moduli i lekcije: svi prijavljeni čitaju, admin piše.
--- (Zaključan modul se vidi u stablu s datumom otključavanja; tijelo lekcije skriva app.)
+-- modules and lessons: everyone signed in reads, the admin writes.
+-- (A locked module shows in the tree with its unlock date; the app hides the lesson body.)
 create policy modules_read on public.modules for select to authenticated using (true);
 create policy modules_admin_write on public.modules for all to authenticated
 using (public.is_admin()) with check (public.is_admin());
@@ -232,7 +232,7 @@ create policy assignments_read on public.assignments for select to authenticated
 create policy assignments_admin_write on public.assignments for all to authenticated
 using (public.is_admin()) with check (public.is_admin());
 
--- lesson_progress: članica piše svoje; asistentica/admin čitaju svoje članice.
+-- lesson_progress: a member writes her own; assistant/admin read their members'.
 create policy lesson_progress_read on public.lesson_progress for select to authenticated
 using (public.can_access_member(member_id));
 create policy lesson_progress_insert on public.lesson_progress for insert to authenticated
@@ -242,7 +242,7 @@ with check (member_id = auth.uid() and public.module_unlocked(
 create policy lesson_progress_delete on public.lesson_progress for delete to authenticated
 using (member_id = auth.uid() or public.is_admin());
 
--- submissions: članica predaje svoje; asistentica/admin čitaju i pišu feedback.
+-- submissions: a member submits her own; assistant/admin read them and write feedback.
 create policy submissions_read on public.submissions for select to authenticated
 using (public.can_access_member(member_id));
 create policy submissions_member_insert on public.submissions for insert to authenticated
@@ -254,7 +254,7 @@ create policy submissions_staff_review on public.submissions for update to authe
 using (public.is_admin() or public.is_assistant_of(member_id))
 with check (public.is_admin() or public.is_assistant_of(member_id));
 
--- lesson_comments: javna diskusija ispod lekcije, svi prijavljeni čitaju.
+-- lesson_comments: the public discussion under a lesson; everyone signed in reads.
 create policy lesson_comments_read on public.lesson_comments for select to authenticated using (true);
 create policy lesson_comments_insert on public.lesson_comments for insert to authenticated
 with check (author_id = auth.uid());
@@ -263,12 +263,12 @@ using (author_id = auth.uid()) with check (author_id = auth.uid());
 create policy lesson_comments_delete on public.lesson_comments for delete to authenticated
 using (author_id = auth.uid() or public.is_admin());
 
--- pozivi: svi prijavljeni čitaju, admin piše.
+-- calls: everyone signed in reads, the admin writes.
 create policy calls_read on public.calls for select to authenticated using (true);
 create policy calls_admin_write on public.calls for all to authenticated
 using (public.is_admin()) with check (public.is_admin());
 
--- pitanja za poziv: članica vidi svoja, staff vidi sva (to im je posao za poziv).
+-- call questions: a member sees her own, staff see all (preparing the call is their job).
 create policy call_questions_read on public.call_questions for select to authenticated
 using (member_id = auth.uid() or public.is_staff());
 create policy call_questions_insert on public.call_questions for insert to authenticated
@@ -276,7 +276,7 @@ with check (member_id = auth.uid() and answered = false and answer is null);
 create policy call_questions_staff_answer on public.call_questions for update to authenticated
 using (public.is_staff()) with check (public.is_staff());
 
--- refleksije: privatne, vidi ih članica, njena asistentica i admin.
+-- reflections: private; visible to the member, her assistant and the admin.
 create policy reflections_read on public.weekly_reflections for select to authenticated
 using (public.can_access_member(member_id));
 create policy reflections_insert on public.weekly_reflections for insert to authenticated
@@ -284,7 +284,7 @@ with check (member_id = auth.uid());
 create policy reflections_update on public.weekly_reflections for update to authenticated
 using (member_id = auth.uid()) with check (member_id = auth.uid());
 
--- podsjetnici: članica čita i označava pročitano, staff kreira svojima.
+-- nudges: a member reads hers and marks them read; staff create them for their members.
 create policy notices_read on public.notices for select to authenticated
 using (public.can_access_member(member_id));
 create policy notices_update on public.notices for update to authenticated
@@ -293,8 +293,8 @@ create policy notices_staff_insert on public.notices for insert to authenticated
 with check (public.is_admin() or public.is_assistant_of(member_id));
 
 -- =========================================================
--- public_profiles: samo ime i avatar, za autore komentara u javnoj diskusiji.
--- Puni red (asistentica, kohorta, joined_at) ostaje zaštićen u profiles.
+-- public_profiles: name and avatar only, for comment authors in the public discussion.
+-- The full row (assistant, cohort, joined_at) stays protected in profiles.
 -- =========================================================
 
 create or replace view public.public_profiles
@@ -306,8 +306,8 @@ from public.profiles;
 grant select on public.public_profiles to authenticated;
 
 -- =========================================================
--- member_status: gdje je svaka članica i koliko dugo je nema.
--- security_invoker = true -> asistentica kroz view vidi samo svoje članice.
+-- member_status: where each member is and how long she's been away.
+-- security_invoker = true -> through this view an assistant only sees her own members.
 -- =========================================================
 
 create or replace view public.member_status
@@ -346,8 +346,8 @@ last_activity as (
   ) t
   group by member_id
 ),
--- Kasni samo zadatak modula do kojeg je članica stigla: zadatak iz modula 7
--- nije "kasni" nekome ko je tek u modulu 3.
+-- Only assignments from modules the member has reached count as overdue: a module 7
+-- assignment isn't "overdue" for someone who is still in module 3.
 overdue as (
   select p.id as member_id, count(*)::int as overdue_assignments
   from public.profiles p
@@ -401,24 +401,24 @@ grant select on public.member_status to authenticated;
 -- Storage
 -- =========================================================
 
--- Radni listovi: čitaju svi prijavljeni, piše admin.
+-- Worksheets: everyone signed in reads, the admin writes.
 insert into storage.buckets (id, name, public)
 values ('worksheets', 'worksheets', false)
 on conflict (id) do nothing;
 
-create policy "worksheets: svi prijavljeni citaju"
+create policy "worksheets: signed-in users read"
 on storage.objects for select to authenticated
 using (bucket_id = 'worksheets');
 
-create policy "worksheets: admin pise"
+create policy "worksheets: admin uploads"
 on storage.objects for insert to authenticated
 with check (bucket_id = 'worksheets' and public.is_admin());
 
-create policy "worksheets: admin brise"
+create policy "worksheets: admin deletes"
 on storage.objects for delete to authenticated
 using (bucket_id = 'worksheets' and public.is_admin());
 
--- Predaje: privatno, folder po članici ({member_id}/fajl).
+-- Submissions: private, one folder per member ({member_id}/file).
 insert into storage.buckets (id, name, public)
 values ('submissions', 'submissions', false)
 on conflict (id) do nothing;
@@ -435,14 +435,14 @@ begin
   return public.can_access_member(folder::uuid);
 end $$;
 
-create policy "submissions: citaju clanica, njena asistentica i admin"
+create policy "submissions: member, her assistant and admin read"
 on storage.objects for select to authenticated
 using (bucket_id = 'submissions' and public.can_access_member_folder(name));
 
-create policy "submissions: clanica salje u svoj folder"
+create policy "submissions: member uploads to her own folder"
 on storage.objects for insert to authenticated
 with check (bucket_id = 'submissions' and split_part(name, '/', 1) = auth.uid()::text);
 
-create policy "submissions: clanica brise svoje"
+create policy "submissions: member deletes her own"
 on storage.objects for delete to authenticated
 using (bucket_id = 'submissions' and split_part(name, '/', 1) = auth.uid()::text);

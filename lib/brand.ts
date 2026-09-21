@@ -1,18 +1,18 @@
-// Jedino mjesto s imenom programa, bojama i fontovima.
-// Concept project - ime stvarne osobe je samo ovdje.
+// The only place with the programme name, colours and fonts.
+// Concept project - a real person's name appears here and nowhere else.
 export const brand = {
-  name: "Zavoli svoj novac",
-  tagline: "Program za žene koje žele mir s novcem.",
-  logoText: "Zavoli svoj novac", // tekstualni logo, bez slike
+  name: "Love Your Money",
+  tagline: "A programme for women who want peace with money.",
+  logoText: "Love Your Money", // text logo, no image
   colors: {
-    /** Stranica: topli, dublji krem. */
+    /** Page: warm, deeper cream. */
     bg: "#F4EEE2",
-    /** Kartice i paneli: svjetlije od stranice, pa dubina dolazi iz tona a ne iz sjene. */
+    /** Cards and panels: lighter than the page, so depth comes from tone, not shadow. */
     surface: "#FFFCF5",
     text: "#231F1A",
-    /** Primarni akcent. */
+    /** Primary accent. */
     accent: "#B0882E",
-    /** Druga topla boja: avatari, naglasci, oznake. */
+    /** Second warm colour: avatars, highlights, labels. */
     accent2: "#9A5442",
     muted: "#645C53",
     line: "#DED5C3",
@@ -23,7 +23,8 @@ export const brand = {
     body: "Public Sans",
   },
   coachName: "Andreja",
-  coachTitle: "Osnivačica programa",
-  cohortName: "Jesen 2026",
+  coachTitle: "Founder of the programme",
+  cohortName: "Autumn 2026",
   timezone: "Europe/Zagreb",
+  locale: "en-GB",
 } as const;

@@ -13,7 +13,7 @@ import {
   Reminder,
 } from "./scenes";
 
-// Kadrovi u sekundama pri 30 fps. Ukupno 72 s.
+// Scene lengths in seconds at 30 fps. 72 s in total.
 const SCENES: { component: React.FC<{ durationInFrames: number }>; seconds: number }[] = [
   { component: Opening, seconds: 5 },
   { component: Problem, seconds: 8 },

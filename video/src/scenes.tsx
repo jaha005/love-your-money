@@ -6,7 +6,7 @@ import { Avatar, Btn, Card, Eyebrow, GoldLabel, H, Meter, P, Rise, Rule } from "
 
 const PAD = 140;
 
-/** Svaki kadar se otvori i zatvori mirnim fadeom. */
+/** Every scene opens and closes with a calm fade. */
 export const Scene: React.FC<{ durationInFrames: number; children: React.ReactNode }> = ({
   durationInFrames,
   children,
@@ -48,52 +48,52 @@ export const Opening: React.FC<{ durationInFrames: number }> = ({ durationInFram
 export const Problem: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => (
   <Scene durationInFrames={durationInFrames}>
     <Rise delay={6}>
-      <Eyebrow>Grupni program</Eyebrow>
+      <Eyebrow>A group programme</Eyebrow>
     </Rise>
     <div style={{ height: 32 }} />
     <Rise delay={14} distance={20}>
       <H size={96}>
-        115 članica. Osam modula.
+        115 members. Eight modules.
         <br />
-        Ko je stala?
+        Who has stalled?
       </H>
     </Rise>
     <div style={{ height: 40 }} />
     <Rise delay={38}>
       <P size={34} style={{ maxWidth: 1100 }}>
-        WhatsApp grupa ne pokazuje ko je prestao otvarati lekcije, čiji zadatak čeka pregled
-        treću sedmicu i ko se nije javio od zadnjeg poziva.
+        A WhatsApp group won't tell you who stopped opening lessons, whose assignment has been
+        waiting three weeks for review, or who hasn't been heard from since the last call.
       </P>
     </Rise>
   </Scene>
 );
 
-/** Ekran članice: sljedeća lekcija, otvoreni zadatak, sljedeći poziv. */
+/** Member screen: next lesson, open assignment, next call. */
 export const MemberHome: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => (
   <Scene durationInFrames={durationInFrames}>
     <Rise delay={4}>
-      <Eyebrow>Članica</Eyebrow>
+      <Eyebrow>Member</Eyebrow>
     </Rise>
     <div style={{ height: 22 }} />
     <Rise delay={10} distance={18}>
-      <H size={72}>Dobrodošla nazad, Marija.</H>
+      <H size={72}>Welcome back, Mia.</H>
     </Rise>
     <div style={{ height: 16 }} />
     <Rise delay={20}>
-      <P size={28}>Modul 4 · Cijene i naplata · 2 od 3 lekcije</P>
+      <P size={28}>Module 4 · Pricing and getting paid · 2 of 3 lessons</P>
     </Rise>
 
     <div style={{ height: 44 }} />
 
     <Rise delay={30} distance={24}>
       <Card padding={40} style={{ maxWidth: 1180 }}>
-        <Eyebrow>Sljedeća lekcija</Eyebrow>
+        <Eyebrow>Next lesson</Eyebrow>
         <div style={{ height: 18 }} />
-        <H size={54}>Naplata: rokovi, podsjetnici i kad prestati raditi</H>
+        <H size={54}>Getting paid: deadlines, reminders and when to stop working</H>
         <div style={{ height: 14 }} />
-        <P size={26}>Modul 4 · 11 min</P>
+        <P size={26}>Module 4 · 11 min</P>
         <div style={{ height: 34 }} />
-        <Btn>Nastavi lekciju</Btn>
+        <Btn>Continue lesson</Btn>
       </Card>
     </Rise>
 
@@ -102,42 +102,42 @@ export const MemberHome: React.FC<{ durationInFrames: number }> = ({ durationInF
     <div style={{ display: "flex", gap: 28, maxWidth: 1180 }}>
       <Rise delay={48} style={{ flex: 1 }}>
         <Card>
-          <Eyebrow>Otvoreni zadatak</Eyebrow>
+          <Eyebrow>Open assignment</Eyebrow>
           <div style={{ height: 14 }} />
-          <H size={38}>Budžet za sljedeći mjesec</H>
+          <H size={38}>A budget for next month</H>
           <div style={{ height: 10 }} />
-          <P size={24}>Rok je danas</P>
+          <P size={24}>Due in 4 days</P>
         </Card>
       </Rise>
       <Rise delay={58} style={{ flex: 1 }}>
         <Card>
-          <Eyebrow>Sljedeći poziv</Eyebrow>
+          <Eyebrow>Next call</Eyebrow>
           <div style={{ height: 14 }} />
-          <H size={38}>Rezerva i štednja</H>
+          <H size={38}>Reserve and savings</H>
           <div style={{ height: 10 }} />
-          <P size={24}>24. rujna u 19:00</P>
+          <P size={24}>25 September, 19:00</P>
         </Card>
       </Rise>
     </div>
   </Scene>
 );
 
-/** Lekcija se čita kao članak, ispod nje diskusija s Andrejinim odgovorom. */
+/** A lesson reads like an article, with the discussion and Andreja's reply below it. */
 export const LessonAndDiscussion: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => {
   const frame = useCurrentFrame();
   const lines = [
-    "Nenaplaćen posao nije posao. To je poklon s fakturom.",
-    "Avans. Za nove klijente 30 do 50 posto unaprijed.",
-    "Rok napisan brojem: 15 dana od datuma računa, ne „po završetku“.",
+    "Unpaid work isn't work. It's a gift with an invoice.",
+    "A deposit. For new clients, 30 to 50 percent up front.",
+    "A deadline written as a number: 15 days from the invoice, not \"on completion\".",
   ];
   return (
     <Scene durationInFrames={durationInFrames}>
       <Rise delay={4}>
-        <Eyebrow>Modul 4 · Cijene i naplata</Eyebrow>
+        <Eyebrow>Module 4 · Pricing and getting paid</Eyebrow>
       </Rise>
       <div style={{ height: 20 }} />
       <Rise delay={10} distance={18}>
-        <H size={68}>Naplata bez izvinjavanja</H>
+        <H size={68}>Getting paid without apologising</H>
       </Rise>
       <div style={{ height: 30 }} />
 
@@ -159,7 +159,7 @@ export const LessonAndDiscussion: React.FC<{ durationInFrames: number }> = ({ du
 
       <div style={{ height: 34 }} />
       <Rise delay={54}>
-        <Btn variant="secondary">Preuzmi radni list (PDF)</Btn>
+        <Btn variant="secondary">Download worksheet (PDF)</Btn>
       </Rise>
 
       <div style={{ height: 40 }} />
@@ -168,17 +168,17 @@ export const LessonAndDiscussion: React.FC<{ durationInFrames: number }> = ({ du
 
       <Rise delay={76}>
         <div style={{ display: "flex", gap: 20, maxWidth: 1180 }}>
-          <Avatar name="Sara Klarić" size={52} />
+          <Avatar name="Sara Lindqvist" size={52} />
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <span style={{ fontFamily: sans, fontSize: 26, fontWeight: 500, color: theme.text }}>
-                Sara Klarić
+                Sara Lindqvist
               </span>
-              <span style={{ fontFamily: sans, fontSize: 21, color: theme.muted }}>prije 3 dana</span>
+              <span style={{ fontFamily: sans, fontSize: 21, color: theme.muted }}>3 days ago</span>
             </div>
             <div style={{ height: 8 }} />
             <P size={27} style={{ color: theme.text }}>
-              Avans od 30 posto mi je zvučao bezobrazno dok nisam vidjela da to svi rade.
+              A 30 percent deposit sounded rude to me until I saw that everyone does it.
             </P>
           </div>
         </div>
@@ -197,17 +197,17 @@ export const LessonAndDiscussion: React.FC<{ durationInFrames: number }> = ({ du
             paddingLeft: 28,
           }}
         >
-          <Avatar name="Andreja Katić" size={52} />
+          <Avatar name="Andreja Marin" size={52} />
           <div>
             <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
               <span style={{ fontFamily: sans, fontSize: 26, fontWeight: 500, color: theme.text }}>
-                Andreja Katić
+                Andreja Marin
               </span>
               <GoldLabel>Andreja</GoldLabel>
             </div>
             <div style={{ height: 8 }} />
             <P size={27} style={{ color: theme.text }}>
-              Avans nije nepovjerenje nego standard. Klijent koji ga odbije obično je isti onaj koji kasni s ostatkom.
+              A deposit isn't mistrust — it's standard. The client who refuses one is usually the same one who pays the rest late.
             </P>
           </div>
         </div>
@@ -220,11 +220,11 @@ export const LessonAndDiscussion: React.FC<{ durationInFrames: number }> = ({ du
 export const Homework: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => (
   <Scene durationInFrames={durationInFrames}>
     <Rise delay={4}>
-      <Eyebrow>Zadaci</Eyebrow>
+      <Eyebrow>Assignments</Eyebrow>
     </Rise>
     <div style={{ height: 22 }} />
     <Rise delay={10} distance={18}>
-      <H size={72}>Predaš. Neko pročita. Odgovori.</H>
+      <H size={72}>You submit. Someone reads it. They answer.</H>
     </Rise>
 
     <div style={{ height: 44 }} />
@@ -232,14 +232,14 @@ export const Homework: React.FC<{ durationInFrames: number }> = ({ durationInFra
     <div style={{ display: "flex", gap: 28, maxWidth: 1240, alignItems: "flex-start" }}>
       <Rise delay={26} style={{ flex: 1 }}>
         <Card>
-          <Eyebrow>Tvoj odgovor</Eyebrow>
+          <Eyebrow>Your answer</Eyebrow>
           <div style={{ height: 16 }} />
           <P size={25} style={{ color: theme.text }}>
-            Fiksno 780, promjenjivo 600, povremeno 200, prostor za život 90 eura. Ako mjesec bude
-            loš, prvo pada uplata u rezervu.
+            Fixed 780, variable 600, occasional 200, room for life 90 euros. If the month goes
+            badly, the reserve payment goes first.
           </P>
           <div style={{ height: 20 }} />
-          <P size={22}>Predano 14. rujna 2026.</P>
+          <P size={22}>Submitted 14 September 2026</P>
         </Card>
       </Rise>
 
@@ -252,51 +252,51 @@ export const Homework: React.FC<{ durationInFrames: number }> = ({ durationInFra
             padding: 34,
           }}
         >
-          <Eyebrow color={theme.accentText}>Povratna informacija</Eyebrow>
+          <Eyebrow color={theme.accentText}>Feedback</Eyebrow>
           <div style={{ height: 16 }} />
           <P size={25} style={{ color: theme.text }}>
-            Budžet radi. Jedina zamjerka: nisi napisala šta pada prvo ako mjesec bude loš. Dopiši
-            to, to je najvažnija rečenica u zadatku.
+            The budget works. One note: you didn't write what goes first if the month goes badly.
+            Add it — it's the most important sentence in the assignment.
           </P>
           <div style={{ height: 20 }} />
-          <P size={22}>Petra Šimunović · 16. rujna 2026.</P>
+          <P size={22}>Sophie Walsh · 16 September 2026</P>
         </div>
       </Rise>
     </div>
   </Scene>
 );
 
-/** Raspored kohorte: 8 kolona, crvena tačka na stalima. */
+/** Cohort map: 8 columns, a red dot on stalled members. */
 export const Cohort: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => {
   const columns: { members: { name: string; stalled?: boolean }[] }[] = [
     { members: [] },
-    { members: [{ name: "Lana Brkić" }] },
-    { members: [{ name: "Katarina Vuković" }, { name: "Maja Šimić" }, { name: "Tena Lovrić", stalled: true }] },
-    { members: [{ name: "Marija Kovač" }, { name: "Tea Radić" }] },
-    { members: [{ name: "Petra Novak" }, { name: "Dora Jurić" }, { name: "Sara Klarić" }] },
-    { members: [{ name: "Ana Horvat" }, { name: "Lucija Marić" }, { name: "Iva Perić", stalled: true }] },
-    { members: [{ name: "Ivana Babić" }, { name: "Nika Pavlović" }] },
+    { members: [{ name: "Lena Fischer" }] },
+    { members: [{ name: "Kate Sullivan" }, { name: "Maya Price" }, { name: "Tara Quinn", stalled: true }] },
+    { members: [{ name: "Mia Harper" }, { name: "Tessa Hughes" }] },
+    { members: [{ name: "Chloe Turner" }, { name: "Daisy Clarke" }, { name: "Sara Lindqvist" }] },
+    { members: [{ name: "Anna Reed" }, { name: "Lucy Morgan" }, { name: "Ivy Russo", stalled: true }] },
+    { members: [{ name: "Isla Bennett" }, { name: "Nina Foster" }] },
     { members: [] },
   ];
 
   return (
     <Scene durationInFrames={durationInFrames}>
       <Rise delay={4}>
-        <Eyebrow>Andreja · Kohorta</Eyebrow>
+        <Eyebrow>Andreja · Cohort</Eyebrow>
       </Rise>
       <div style={{ height: 22 }} />
       <Rise delay={10} distance={18}>
-        <H size={72}>Vidiš ko je gdje. Na jednom ekranu.</H>
+        <H size={72}>See who is where. On one screen.</H>
       </Rise>
 
       <div style={{ height: 40 }} />
 
       <div style={{ display: "flex", gap: 22 }}>
         {[
-          { v: "14", l: "Članica u programu" },
-          { v: "11", l: "Aktivnih ove sedmice" },
-          { v: "6", l: "Zadataka za pregled" },
-          { v: "2", l: "Stale", danger: true },
+          { v: "14", l: "Members enrolled" },
+          { v: "11", l: "Active this week" },
+          { v: "6", l: "Assignments to review" },
+          { v: "2", l: "Stalled", danger: true },
         ].map((s, i) => (
           <Rise key={s.l} delay={24 + i * 6} style={{ flex: 1 }}>
             <Card padding={26}>
@@ -318,7 +318,7 @@ export const Cohort: React.FC<{ durationInFrames: number }> = ({ durationInFrame
 
       <div style={{ height: 40 }} />
       <Rise delay={52}>
-        <Eyebrow>Raspored kohorte</Eyebrow>
+        <Eyebrow>Cohort map</Eyebrow>
       </Rise>
       <div style={{ height: 18 }} />
 
@@ -351,18 +351,18 @@ export const Cohort: React.FC<{ durationInFrames: number }> = ({ durationInFrame
   );
 };
 
-/** Filter na stale + podsjetnik. */
+/** Filter to stalled + send a nudge. */
 export const Reminder: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => {
   const frame = useCurrentFrame();
   const sent = frame > 74;
   return (
     <Scene durationInFrames={durationInFrames}>
       <Rise delay={4}>
-        <Eyebrow>Filter: stale</Eyebrow>
+        <Eyebrow>Filter: stalled</Eyebrow>
       </Rise>
       <div style={{ height: 22 }} />
       <Rise delay={10} distance={18}>
-        <H size={72}>Dvije su stale. Podsjetnik je jedan klik.</H>
+        <H size={72}>Two have stalled. A nudge is one click.</H>
       </Rise>
 
       <div style={{ height: 44 }} />
@@ -380,18 +380,18 @@ export const Reminder: React.FC<{ durationInFrames: number }> = ({ durationInFra
             }}
           >
             <div style={{ width: 40 }} />
-            <div style={{ flex: 2 }}>Ime</div>
-            <div style={{ flex: 1 }}>Modul</div>
-            <div style={{ flex: 1 }}>% lekcija</div>
-            <div style={{ flex: 1.4 }}>Od aktivnosti</div>
-            <div style={{ flex: 1 }}>Kasni</div>
+            <div style={{ flex: 2 }}>Name</div>
+            <div style={{ flex: 1 }}>Module</div>
+            <div style={{ flex: 1 }}>% of lessons</div>
+            <div style={{ flex: 1.4 }}>Since activity</div>
+            <div style={{ flex: 1 }}>Overdue</div>
             <div style={{ flex: 1.2 }}>Status</div>
           </div>
         </Rise>
         <Rule delay={22} duration={30} width="100%" />
         {[
-          { name: "Iva Perić", module: "6", pct: "33%", days: "18 dana", late: "—" },
-          { name: "Tena Lovrić", module: "3", pct: "67%", days: "4 dana", late: "2" },
+          { name: "Ivy Russo", module: "6", pct: "33%", days: "18 days", late: "—" },
+          { name: "Tara Quinn", module: "3", pct: "67%", days: "4 days", late: "2" },
         ].map((r, i) => (
           <Rise key={r.name} delay={30 + i * 10}>
             <div
@@ -432,7 +432,7 @@ export const Reminder: React.FC<{ durationInFrames: number }> = ({ durationInFra
                     fontSize: 20,
                   }}
                 >
-                  Stala
+                  Stalled
                 </span>
               </div>
             </div>
@@ -443,10 +443,10 @@ export const Reminder: React.FC<{ durationInFrames: number }> = ({ durationInFra
       <div style={{ height: 38 }} />
       <Rise delay={58}>
         <div style={{ display: "flex", alignItems: "center", gap: 26 }}>
-          <Btn variant="secondary">Pošalji podsjetnik</Btn>
+          <Btn variant="secondary">Send a nudge</Btn>
           <div style={{ opacity: sent ? 1 : 0, transition: "opacity 200ms" }}>
             <P size={26} style={{ color: theme.accentText }}>
-              Podsjetnik poslan: 2
+              Nudge sent to 2
             </P>
           </div>
         </div>
@@ -457,15 +457,15 @@ export const Reminder: React.FC<{ durationInFrames: number }> = ({ durationInFra
 
 export const Features: React.FC<{ durationInFrames: number }> = ({ durationInFrames }) => {
   const items = [
-    ["Kurikulum", "Moduli se otključavaju po rasporedu kohorte. Svaka lekcija ima svoj link."],
-    ["Zadaci", "Predaja s fajlom, red čekanja za pregled, feedback koji članica vidi."],
-    ["Pozivi", "Zoom, snimke, bilješke i pitanja grupisana po modulu prije poziva."],
-    ["Kohorta", "Status svake članice, stale prve, podsjetnik na jedan klik."],
+    ["Curriculum", "Modules unlock on the cohort's schedule. Every lesson has its own link."],
+    ["Assignments", "Submissions with attachments, a review queue, feedback the member sees."],
+    ["Calls", "Zoom, recordings, notes, and questions grouped by module before the call."],
+    ["Cohort", "Every member's status, stalled members first, a nudge in one click."],
   ];
   return (
     <Scene durationInFrames={durationInFrames}>
       <Rise delay={4}>
-        <Eyebrow>Šta je unutra</Eyebrow>
+        <Eyebrow>What's inside</Eyebrow>
       </Rise>
       <div style={{ height: 34 }} />
       <div style={{ maxWidth: 1300 }}>
@@ -497,7 +497,7 @@ export const Closing: React.FC<{ durationInFrames: number }> = ({ durationInFram
     </Rise>
     <div style={{ height: 28 }} />
     <Rise delay={30}>
-      <P size={36}>Demo platforme za grupni program.</P>
+      <P size={36}>A demo platform for a group programme.</P>
     </Rise>
     <div style={{ height: 44 }} />
     <Rule delay={40} duration={40} color={theme.accentText} width={520} />

@@ -24,8 +24,8 @@ export const RemotionRoot: React.FC = () => (
       schema={moduleIntroSchema}
       defaultProps={{
         order: 4,
-        title: "Budžet bez odricanja",
-        subtitle: "Plan koji izdrži i loš mjesec",
+        title: "A budget without sacrifice",
+        subtitle: "A plan that survives a bad month",
         lessons: 3,
       }}
     />

@@ -14,14 +14,14 @@ export function StaffShell({
   children: ReactNode;
 }) {
   const items = [
-    { href: "/kohorta", label: copy.nav.staff.cohort, icon: "cohort" },
-    { href: "/pregled", label: copy.nav.staff.review, icon: "review" },
-    { href: "/pitanja", label: copy.nav.staff.questions, icon: "questions" },
-    // Uređivanje programa i poziva vidi samo Andreja.
+    { href: "/cohort", label: copy.nav.staff.cohort, icon: "cohort" },
+    { href: "/review", label: copy.nav.staff.review, icon: "review" },
+    { href: "/questions", label: copy.nav.staff.questions, icon: "questions" },
+    // Only Andreja sees the programme and call editors.
     ...(profile.role === "admin"
       ? [
-          { href: "/urednik/program", label: copy.nav.staff.program, icon: "program" },
-          { href: "/urednik/pozivi", label: copy.nav.staff.calls, icon: "calls" },
+          { href: "/editor/program", label: copy.nav.staff.program, icon: "program" },
+          { href: "/editor/calls", label: copy.nav.staff.calls, icon: "calls" },
         ]
       : []),
   ];
@@ -30,7 +30,7 @@ export function StaffShell({
     <Shell
       items={items}
       userName={profile.full_name}
-      userRole={profile.role === "admin" ? brand.coachTitle : "Asistentica"}
+      userRole={profile.role === "admin" ? brand.coachTitle : copy.roles.assistant}
       rail={rail}
     >
       {children}

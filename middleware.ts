@@ -6,7 +6,7 @@ const PUBLIC_PATHS = ["/login"];
 export async function middleware(request: NextRequest) {
   let response = NextResponse.next({ request });
 
-  // Još nije konfigurisano: radi samo login stranica, koja objašnjava setup.
+  // Not configured yet: only the login page works, and it explains the setup.
   if (!process.env.NEXT_PUBLIC_SUPABASE_URL || !process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY) {
     if (request.nextUrl.pathname === "/login") return response;
     return NextResponse.redirect(new URL("/login", request.url));

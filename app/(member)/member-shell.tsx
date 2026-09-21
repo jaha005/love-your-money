@@ -4,12 +4,12 @@ import { copy } from "@/lib/copy";
 import type { Profile } from "@/lib/types";
 
 const items = [
-  { href: "/pocetna", label: copy.nav.member.home, icon: "home" },
+  { href: "/home", label: copy.nav.member.home, icon: "home" },
   { href: "/program", label: copy.nav.member.program, icon: "program" },
-  { href: "/zadaci", label: copy.nav.member.assignments, icon: "assignments" },
-  { href: "/pozivi", label: copy.nav.member.calls, icon: "calls" },
-  { href: "/zajednica", label: copy.nav.member.community, icon: "community" },
-  { href: "/napredak", label: copy.nav.member.progress, icon: "progress" },
+  { href: "/assignments", label: copy.nav.member.assignments, icon: "assignments" },
+  { href: "/calls", label: copy.nav.member.calls, icon: "calls" },
+  { href: "/community", label: copy.nav.member.community, icon: "community" },
+  { href: "/progress", label: copy.nav.member.progress, icon: "progress" },
 ];
 
 export function MemberShell({
@@ -22,7 +22,7 @@ export function MemberShell({
   children: ReactNode;
 }) {
   return (
-    <Shell items={items} userName={profile.full_name} userRole="Članica" rail={rail}>
+    <Shell items={items} userName={profile.full_name} userRole={copy.roles.member} rail={rail}>
       {children}
     </Shell>
   );

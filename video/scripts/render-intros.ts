@@ -1,6 +1,6 @@
-// Renderuje intro po modulu iz istog sadržaja koji puni bazu (scripts/content.ts),
-// pa se naslovi ne dupliraju. Izlaz ide u public/intro/ Next aplikacije.
-// Pokretanje: npm run intros   (iz video/)
+// Renders one intro per module from the same content that seeds the database (scripts/content.ts),
+// so titles are never duplicated. Output goes to the Next app's public/intro/.
+// Usage: npm run intros   (from video/)
 
 import { execFileSync } from "node:child_process";
 import { mkdirSync } from "node:fs";
@@ -10,6 +10,19 @@ import { modules } from "../../scripts/content";
 const OUT_DIR = resolve(__dirname, "../../public/intro");
 mkdirSync(OUT_DIR, { recursive: true });
 
+/** Headless Chrome occasionally dies mid-render; one retry keeps a set of clips complete. */
+function run(args: string[]) {
+  for (let attempt = 1; attempt <= 2; attempt++) {
+    try {
+      execFileSync("npx", args, { stdio: "inherit", cwd: resolve(__dirname, "..") });
+      return;
+    } catch (err) {
+      if (attempt === 2) throw err;
+      console.log("  render failed, retrying once…");
+    }
+  }
+}
+
 for (let i = 0; i < modules.length; i++) {
   const m = modules[i];
   const props = {
@@ -18,21 +31,13 @@ for (let i = 0; i < modules.length; i++) {
     subtitle: m.subtitle,
     lessons: m.lessons.length,
   };
-  const out = join(OUT_DIR, `modul-${i + 1}.mp4`);
-  const poster = join(OUT_DIR, `modul-${i + 1}.jpg`);
-  console.log(`→ Modul ${i + 1}: ${m.title}`);
-  execFileSync(
-    "npx",
-    ["remotion", "render", "ModuleIntro", out, `--props=${JSON.stringify(props)}`, "--log=error"],
-    { stdio: "inherit", cwd: resolve(__dirname, "..") },
-  );
-  // Statična sličica: poster za video i jedini prikaz kad je uključen
+  const out = join(OUT_DIR, `module-${i + 1}.mp4`);
+  const poster = join(OUT_DIR, `module-${i + 1}.jpg`);
+  console.log(`→ Module ${i + 1}: ${m.title}`);
+  run(["remotion", "render", "ModuleIntro", out, `--props=${JSON.stringify(props)}`, "--log=error"]);
+  // A still frame: the video poster, and the only thing shown when
   // prefers-reduced-motion.
-  execFileSync(
-    "npx",
-    ["remotion", "still", "ModuleIntro", poster, "--frame=120", `--props=${JSON.stringify(props)}`, "--log=error"],
-    { stdio: "inherit", cwd: resolve(__dirname, "..") },
-  );
+  run(["remotion", "still", "ModuleIntro", poster, "--frame=120", `--props=${JSON.stringify(props)}`, "--log=error"]);
 }
 
-console.log(`\nGotovo. ${modules.length} intro klipova u public/intro/`);
+console.log(`\nDone. ${modules.length} intro clips in public/intro/`);

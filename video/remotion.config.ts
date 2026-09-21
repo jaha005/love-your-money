@@ -6,7 +6,7 @@ Config.overrideWebpackConfig((config) => ({
   ...config,
   resolve: {
     ...config.resolve,
-    // Dozvoli import lib/brand.ts iz Next aplikacije - jedan izvor istine za boje.
+    // Allow importing lib/brand.ts from the Next app - one source of truth for colours.
     symlinks: false,
   },
 }));

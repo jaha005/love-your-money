@@ -52,11 +52,11 @@ export default async function LessonPage({
 
   const video = embedUrl(lesson.video_url);
 
-  // Prva lekcija modula otvara se uvodnom karticom, ako je klip izrenderovan
-  // (video/ -> npm run intros). Bez fajla se jednostavno preskoči.
+  // The first lesson of a module opens with its title card, if the clip has been
+  // rendered (video/ -> npm run intros). Without the file it is simply skipped.
   const showIntro =
     lesson.sort_order === 1 &&
-    existsSync(join(process.cwd(), "public", "intro", `modul-${mod.sort_order}.jpg`));
+    existsSync(join(process.cwd(), "public", "intro", `module-${mod.sort_order}.jpg`));
 
   return (
     <article>
@@ -81,12 +81,12 @@ export default async function LessonPage({
           </div>
         </div>
       ) : showIntro ? (
-        // Prva lekcija modula otvara se uvodnom karticom umjesto praznog okvira.
+        // The first lesson of a module shows its title card instead of an empty frame.
         <div className="mt-7">
           <ModuleIntroClip moduleOrder={mod.sort_order} title={mod.title} />
         </div>
       ) : (
-        // Demo nema tuđih snimaka: mirno prazno mjesto dok Andreja ne doda svoj link.
+        // The demo ships no third-party recordings: a quiet placeholder until Andreja adds her link.
         <div className="mt-7 rounded border border-dashed border-line">
           <div
             className="flex w-full flex-col items-center justify-center gap-1 px-6 text-center"
