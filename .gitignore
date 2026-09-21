@@ -13,3 +13,6 @@ next-env.d.ts
 # Remotion
 video/node_modules
 video/out
+
+# lokalna provjera builda
+.next-check

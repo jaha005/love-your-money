@@ -10,7 +10,8 @@
     "typecheck": "tsc --noEmit",
     "db:migrate": "tsx scripts/migrate.ts",
     "db:seed": "tsx scripts/seed.ts",
-    "test:rls": "tsx scripts/test-rls.ts"
+    "test:rls": "tsx scripts/test-rls.ts",
+    "build:check": "NEXT_DIST_DIR=.next-check next build"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

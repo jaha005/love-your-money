@@ -60,6 +60,11 @@ npm run test:rls     # provjera izolacije podataka pravim prijavama
 npm run dev
 ```
 
+> **Ne pokreći `npm run build` dok `npm run dev` radi.** Oba pišu u `.next`, pa
+> build obriše dev serveru CSS chunkove i stranica se učita bez stilova. Za
+> lokalnu provjeru builda koristi `npm run build:check` — gradi u `.next-check`
+> i ne dira dev server. Vercel i dalje pokreće obični `npm run build`.
+
 `db:seed` se može pokretati više puta — prvo obriše prethodne `@demo.local`
 naloge i sadržaj. Na kraju ispiše status svake članice, pa se odmah vidi je li
 raspodjela ispravna.
