@@ -2,7 +2,7 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "zsn-platform",
+      "name": "love-your-money",
       "runtimeExecutable": "npm",
       "runtimeArgs": [
         "run",
