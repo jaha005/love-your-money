@@ -24,7 +24,7 @@ export function ReflectionCard({ existing }: { existing: WeeklyReflection | null
   if (saved) {
     return (
       <div className="card">
-        <h2 className="font-serif text-h3">{copy.reflection.title}</h2>
+        <h2 className="font-display text-h3">{copy.reflection.title}</h2>
         <p className="mt-2 text-small text-muted">{copy.reflection.done}</p>
         {existing ? (
           <button
@@ -43,7 +43,7 @@ export function ReflectionCard({ existing }: { existing: WeeklyReflection | null
 
   return (
     <div className="card">
-      <h2 className="font-serif text-h3">{copy.reflection.title}</h2>
+      <h2 className="font-display text-h3">{copy.reflection.title}</h2>
       <p className="mt-1 text-small text-muted">{copy.reflection.lead}</p>
       <form action={formAction} className="mt-5 space-y-4">
         <div>

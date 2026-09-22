@@ -30,7 +30,7 @@ export default async function ProgramLayout({ children }: { children: React.Reac
   const rail = (
     <div className="card">
       <p className="eyebrow">{copy.progress.modules}</p>
-      <p className="mt-3 font-serif text-h2">{Math.round(pct)}%</p>
+      <p className="mt-3 font-display text-h2">{Math.round(pct)}%</p>
       <p className="mb-4 mt-1 text-small text-muted">
         {copy.common.lessonsOf(doneCount, unlockedLessons.length)}
       </p>

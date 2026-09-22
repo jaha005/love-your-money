@@ -23,7 +23,7 @@ export default async function ProgramEditorIndex() {
             >
               <div>
                 <p className="eyebrow">{copy.common.module(m.sort_order)}</p>
-                <p className="mt-1.5 font-serif text-h3">{m.title}</p>
+                <p className="mt-1.5 font-display text-h3">{m.title}</p>
                 <p className="mt-1 text-small text-muted">
                   {copy.editor.lessonCount(m.lessons.length)} · {copy.program.locked(formatDate(m.unlock_at))}
                 </p>

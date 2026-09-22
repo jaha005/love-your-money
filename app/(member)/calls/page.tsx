@@ -48,7 +48,7 @@ export default async function CallsPage() {
         <p className="eyebrow">{copy.calls.next}</p>
         {next ? (
           <>
-            <h2 className="mt-3 font-serif text-h2">{next.title}</h2>
+            <h2 className="mt-3 font-display text-h2">{next.title}</h2>
             <p className="mt-2 text-small text-muted">{formatDateTime(next.scheduled_at)}</p>
             {next.zoom_url ? (
               <a
@@ -80,7 +80,7 @@ export default async function CallsPage() {
           <ul className="divide-y divide-line border-y border-line">
             {past.map((c) => (
               <li key={c.id} className="py-6">
-                <p className="font-serif text-h3">{c.title}</p>
+                <p className="font-display text-h3">{c.title}</p>
                 <p className="mt-1 text-small text-muted">{formatDateTime(c.scheduled_at)}</p>
                 {c.recording_url ? (
                   <a

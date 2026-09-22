@@ -19,8 +19,8 @@ export const brand = {
     danger: "#A63328",
   },
   fonts: {
-    heading: "Libre Bodoni",
-    body: "Public Sans",
+    heading: "Plus Jakarta Sans",
+    body: "Inter",
   },
   coachName: "Andreja",
   coachTitle: "Founder of the programme",

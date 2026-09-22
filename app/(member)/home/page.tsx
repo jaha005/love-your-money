@@ -43,7 +43,7 @@ export default async function HomePage() {
   return (
     <MemberShell profile={me} rail={<ReflectionCard existing={reflection} />}>
       <header>
-        <h1 className="font-serif text-h1">{copy.home.greeting(firstName)}</h1>
+        <h1 className="font-display text-h1">{copy.home.greeting(firstName)}</h1>
         {current ? (
           <p className="mt-3 text-body text-muted">
             {copy.common.module(current.module.sort_order)} · {current.module.title} ·{" "}
@@ -68,7 +68,7 @@ export default async function HomePage() {
         <p className="eyebrow">{copy.home.nextLesson}</p>
         {next ? (
           <>
-            <h2 className="mt-3 font-serif text-h2">{next.lesson.title}</h2>
+            <h2 className="mt-3 font-display text-h2">{next.lesson.title}</h2>
             <p className="mt-2 text-small text-muted">
               {copy.common.module(next.module.sort_order)} · {next.module.title} ·{" "}
               {copy.program.duration(next.lesson.duration_min)}
@@ -90,7 +90,7 @@ export default async function HomePage() {
           <p className="eyebrow">{copy.home.openAssignment}</p>
           {openAssignment ? (
             <>
-              <h3 className="mt-3 font-serif text-h3">{openAssignment.title}</h3>
+              <h3 className="mt-3 font-display text-h3">{openAssignment.title}</h3>
               <p className="mt-2 text-small text-muted">
                 {copy.common.module(openAssignment.module_order)} · {dueLabel(openAssignment.due_at)}
               </p>
@@ -109,7 +109,7 @@ export default async function HomePage() {
           <p className="eyebrow">{copy.home.nextCall}</p>
           {calls.next ? (
             <>
-              <h3 className="mt-3 font-serif text-h3">{calls.next.title}</h3>
+              <h3 className="mt-3 font-display text-h3">{calls.next.title}</h3>
               <p className="mt-2 text-small text-muted">{formatDateTime(calls.next.scheduled_at)}</p>
               <div className="mt-5 flex flex-wrap gap-2">
                 {calls.next.zoom_url ? (
@@ -140,7 +140,7 @@ export default async function HomePage() {
         <SectionTitle>{copy.home.journey}</SectionTitle>
         <div className="card">
           <div className="flex items-end justify-between gap-4">
-            <p className="font-serif text-h2">
+            <p className="font-display text-h2">
               {lessonsTotal ? Math.round((lessonsDone / lessonsTotal) * 100) : 0}%
             </p>
             <p className="text-small text-muted">

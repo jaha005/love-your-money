@@ -28,7 +28,7 @@ export default async function LessonPage({
     return (
       <div>
         <p className="eyebrow">{copy.common.module(mod.sort_order)}</p>
-        <h1 className="mt-3 font-serif text-h1">{lesson.title}</h1>
+        <h1 className="mt-3 font-display text-h1">{lesson.title}</h1>
         <div className="hairline my-8" />
         <Empty>{copy.program.lockedBody}</Empty>
       </div>
@@ -63,7 +63,7 @@ export default async function LessonPage({
       <p className="eyebrow">
         {copy.common.module(mod.sort_order)} · {mod.title}
       </p>
-      <h1 className="mt-3 font-serif text-h1">{lesson.title}</h1>
+      <h1 className="mt-3 font-display text-h1">{lesson.title}</h1>
       <p className="mt-2 text-small text-muted">
         {copy.common.lesson(lesson.sort_order)} · {copy.program.duration(lesson.duration_min)}
       </p>

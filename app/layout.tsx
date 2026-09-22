@@ -1,18 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Libre_Bodoni, Public_Sans } from "next/font/google";
+import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import { brand } from "@/lib/brand";
 import { cssVarsString } from "@/lib/colors";
 import "./globals.css";
 
-// Bodoni has very fine strokes, so headings use 500/600 to avoid looking fragile.
-const bodoni = Libre_Bodoni({
+// Headings and body are both sans, so the hierarchy comes from weight, size and
+// tracking: Jakarta at 600 with tight tracking against Inter at 400.
+const jakarta = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   variable: "--font-heading",
   display: "swap",
 });
 
-const publicSans = Public_Sans({
+const inter = Inter({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600"],
   variable: "--font-body",
@@ -30,7 +31,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hr" className={`${bodoni.variable} ${publicSans.variable}`}>
+    <html lang="hr" className={`${jakarta.variable} ${inter.variable}`}>
       <head>
         <style dangerouslySetInnerHTML={{ __html: `:root{${cssVarsString()}}` }} />
       </head>

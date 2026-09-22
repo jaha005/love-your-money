@@ -130,7 +130,7 @@ export default async function MemberProfilePage({ params }: { params: { id: stri
       <header className="mb-8 flex items-center gap-4">
         <Avatar name={member.full_name} size={52} />
         <div>
-          <h1 className="font-serif text-h1">{member.full_name}</h1>
+          <h1 className="font-display text-h1">{member.full_name}</h1>
           <p className="mt-1 text-small text-muted">
             {copy.memberProfile.joined(formatDate(member.joined_at))}
             {member.assistant_id

@@ -1,7 +1,7 @@
 import React from "react";
 import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
 import { theme, brand } from "./theme";
-import { sans, serif } from "./fonts";
+import { display, sans } from "./fonts";
 import { Avatar, Btn, Card, Eyebrow, GoldLabel, H, Meter, P, Rise, Rule } from "./components/primitives";
 
 const PAD = 140;
@@ -302,7 +302,7 @@ export const Cohort: React.FC<{ durationInFrames: number }> = ({ durationInFrame
             <Card padding={26}>
               <div
                 style={{
-                  fontFamily: serif,
+                  fontFamily: display,
                   fontSize: 58,
                   color: s.danger ? theme.danger : theme.text,
                 }}
@@ -473,7 +473,7 @@ export const Features: React.FC<{ durationInFrames: number }> = ({ durationInFra
           <Rise key={t} delay={14 + i * 12}>
             <div style={{ padding: "26px 0", borderBottom: `1px solid ${theme.line}` }}>
               <div style={{ display: "flex", gap: 40, alignItems: "baseline" }}>
-                <div style={{ fontFamily: serif, fontSize: 44, color: theme.text, width: 280 }}>{t}</div>
+                <div style={{ fontFamily: display, fontSize: 44, color: theme.text, width: 280 }}>{t}</div>
                 <P size={28} style={{ flex: 1 }}>
                   {d}
                 </P>

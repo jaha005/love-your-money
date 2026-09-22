@@ -1,7 +1,7 @@
 import React from "react";
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { theme } from "../theme";
-import { sans, serif } from "../fonts";
+import { display, sans } from "../fonts";
 
 /** A calm entrance: fade plus a small upward drift. No bounce. */
 export const Rise: React.FC<{
@@ -68,11 +68,11 @@ export const H: React.FC<{ size?: number; children: React.ReactNode; style?: Rea
 }) => (
   <div
     style={{
-      fontFamily: serif,
-      fontWeight: 500,
+      fontFamily: display,
+      fontWeight: 600,
       fontSize: size,
-      lineHeight: 1.08,
-      letterSpacing: "-0.01em",
+      lineHeight: 1.1,
+      letterSpacing: "-0.025em",
       color: theme.text,
       ...style,
     }}
@@ -132,8 +132,9 @@ export const Avatar: React.FC<{ name: string; size?: number; stalled?: boolean }
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          fontFamily: serif,
-          fontSize: size * 0.4,
+          fontFamily: sans,
+          fontWeight: 600,
+          fontSize: size * 0.38,
           color: theme.muted,
         }}
       >

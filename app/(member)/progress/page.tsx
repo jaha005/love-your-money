@@ -39,7 +39,7 @@ export default async function ProgressPage() {
   const rail = (
     <div className="card">
       <p className="eyebrow">{copy.progress.title}</p>
-      <p className="mt-3 font-serif text-h2">{copy.progress.lessonsPct(pct)}</p>
+      <p className="mt-3 font-display text-h2">{copy.progress.lessonsPct(pct)}</p>
       <p className="mt-1 text-small text-muted">{copy.progress.submissionsCount(submitted)}</p>
       <div className="mt-4">
         <Meter value={pct} />

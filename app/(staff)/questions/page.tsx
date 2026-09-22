@@ -35,7 +35,7 @@ export default async function QuestionsPage() {
   const rail = (
     <div className="card">
       <p className="eyebrow">{copy.calls.next}</p>
-      <p className="mt-2 font-serif text-[17px] leading-snug">{next.title}</p>
+      <p className="mt-2 font-display text-[17px] leading-snug">{next.title}</p>
       <p className="mt-1 text-small text-muted">{formatDateTime(next.scheduled_at)}</p>
       <div className="hairline my-4" />
       <p className="text-small text-muted">

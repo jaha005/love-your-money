@@ -34,7 +34,7 @@ export default async function AssignmentPage({ params }: { params: { id: string 
   const rail = (
     <div className="card">
       <p className="eyebrow">{copy.common.module(a.module_order)}</p>
-      <p className="mt-2 font-serif text-[17px] leading-snug">{a.module_title}</p>
+      <p className="mt-2 font-display text-[17px] leading-snug">{a.module_title}</p>
       <div className="hairline my-4" />
       <p className="text-small text-muted">{dueLabel(a.due_at)}</p>
       {submission ? (
@@ -51,7 +51,7 @@ export default async function AssignmentPage({ params }: { params: { id: string 
         ← {copy.assignments.title}
       </Link>
 
-      <h1 className="font-serif text-h1">{a.title}</h1>
+      <h1 className="font-display text-h1">{a.title}</h1>
 
       <div className="mt-6">
         <Markdown>{a.instructions}</Markdown>

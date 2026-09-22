@@ -77,7 +77,7 @@ export function Empty({ children }: { children: ReactNode }) {
 export function SectionTitle({ children, aside }: { children: ReactNode; aside?: ReactNode }) {
   return (
     <div className="mb-4 flex items-baseline justify-between gap-4">
-      <h2 className="font-serif text-h2">{children}</h2>
+      <h2 className="font-display text-h2">{children}</h2>
       {aside}
     </div>
   );
@@ -86,7 +86,7 @@ export function SectionTitle({ children, aside }: { children: ReactNode; aside?:
 export function PageHeader({ title, lead }: { title: string; lead?: string }) {
   return (
     <header className="mb-7">
-      <h1 className="font-serif text-h1">{title}</h1>
+      <h1 className="font-display text-h1">{title}</h1>
       {lead ? <p className="mt-2 text-body text-muted">{lead}</p> : null}
     </header>
   );
@@ -112,7 +112,7 @@ export function Stat({
       }
     >
       <p
-        className="font-serif text-[34px] leading-none"
+        className="font-display text-[34px] leading-none"
         style={danger ? { color: "var(--danger)" } : undefined}
       >
         {value}

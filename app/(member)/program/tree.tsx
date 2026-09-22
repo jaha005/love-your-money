@@ -28,7 +28,7 @@ export function Tree({ modules }: { modules: TreeModule[] }) {
               <span className="eyebrow-muted">{copy.common.module(m.sort_order)}</span>
               {!m.unlocked ? <Lock size={12} strokeWidth={1.5} className="text-muted" /> : null}
             </div>
-            <p className="mt-1 font-serif text-[17px] leading-snug">{m.title}</p>
+            <p className="mt-1 font-display text-[17px] leading-snug">{m.title}</p>
             {m.unlocked ? (
               <p className="mt-0.5 text-tiny text-muted">
                 {copy.common.lessonsOf(done, m.lessons.length)}

@@ -19,7 +19,7 @@ pattern. No UI component is shared.
 - Next.js 14 (App Router, TypeScript), Tailwind
 - Supabase: Auth (email + password), Postgres, Row Level Security, Storage
 - `react-markdown` for lesson text, `@tanstack/react-table` for the cohort table
-- Libre Bodoni (headings) + Public Sans (UI), via Google Fonts
+- Plus Jakarta Sans (headings) + Inter (UI), via Google Fonts
 - Remotion for the promo video and per-module intro clips (`video/`)
 - No Stripe, no push notifications, no real-time
 
@@ -206,9 +206,10 @@ own surface, content up to 920 px, and a 296 px context rail on the right. On
 mobile the sidebar becomes a hamburger menu and the rail drops below the content.
 There is no bottom nav.
 
-**Typography.** Headings in **Libre Bodoni** (high contrast, magazine character),
-body and UI in **Public Sans**. Bodoni has very fine hairlines, so headings use
-weight 500 — otherwise they look fragile on screen.
+**Typography.** Headings in **Plus Jakarta Sans**, body and UI in **Inter**. Both
+faces are sans, so the hierarchy comes from weight, size and tracking rather than
+from a serif/sans contrast: headings at 600 with tight tracking (-0.025em on h1)
+against body text at 400. The Tailwind token is `font-display`, not `font-serif`.
 
 **Depth without heavy shadows.** The page is a warm, deeper cream (`#F4EEE2`) and
 cards are **lighter** than it (`#FFFCF5`). Containers read from tone; the shadow is

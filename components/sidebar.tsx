@@ -88,7 +88,7 @@ export function Sidebar({
   );
 
   const logo = (
-    <Link href="/" className="block font-serif text-[22px] leading-tight">
+    <Link href="/" className="block font-display text-[22px] leading-tight">
       {brand.logoText}
     </Link>
   );

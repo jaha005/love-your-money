@@ -113,7 +113,7 @@ export function Discussion({
 
   return (
     <section>
-      <h2 className="mb-5 font-serif text-h2">{copy.program.discussion}</h2>
+      <h2 className="mb-5 font-display text-h2">{copy.program.discussion}</h2>
 
       {roots.length === 0 ? (
         <Empty>{copy.program.discussionEmpty}</Empty>

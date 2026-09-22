@@ -31,7 +31,7 @@ export default async function ReviewPage() {
   const rail = (
     <div className="card">
       <p className="eyebrow">{copy.review.reviewed}</p>
-      <p className="mt-3 font-serif text-h2">{recent.length}</p>
+      <p className="mt-3 font-display text-h2">{recent.length}</p>
       <p className="mt-1 text-small text-muted">{copy.review.totalReviewed}</p>
     </div>
   );

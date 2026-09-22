@@ -22,13 +22,13 @@ const config: Config = {
         "danger-tint": "rgb(var(--danger-tint-rgb) / <alpha-value>)",
       },
       fontFamily: {
-        serif: ["var(--font-heading)", "Georgia", "serif"],
+        display: ["var(--font-heading)", "system-ui", "sans-serif"],
         sans: ["var(--font-body)", "system-ui", "sans-serif"],
       },
       fontSize: {
-        h1: ["42px", { lineHeight: "1.08", letterSpacing: "-0.015em" }],
-        h2: ["27px", { lineHeight: "1.18", letterSpacing: "-0.01em" }],
-        h3: ["19px", { lineHeight: "1.3" }],
+        h1: ["40px", { lineHeight: "1.1", letterSpacing: "-0.025em" }],
+        h2: ["26px", { lineHeight: "1.2", letterSpacing: "-0.02em" }],
+        h3: ["19px", { lineHeight: "1.32", letterSpacing: "-0.015em" }],
         body: ["16px", { lineHeight: "1.62" }],
         small: ["14px", { lineHeight: "1.5" }],
         tiny: ["12px", { lineHeight: "1.4" }],

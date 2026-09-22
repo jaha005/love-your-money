@@ -59,7 +59,7 @@ export default async function AssignmentsPage() {
               <div className="flex items-baseline justify-between gap-4 py-5">
                 <div className="min-w-0">
                   <p className="eyebrow">{copy.common.module(a.module_order)}</p>
-                  <p className="mt-1.5 font-serif text-h3">{a.title}</p>
+                  <p className="mt-1.5 font-display text-h3">{a.title}</p>
                   <p className="mt-1 text-small text-muted">
                     {/* Once submitted, the due date stops being useful - the submission date is. */}
                     {a.submission
