@@ -206,7 +206,9 @@ Storage:
 2. Environment variables: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`,
    `SUPABASE_SERVICE_ROLE_KEY`, `NEXT_PUBLIC_DEMO_MODE=true`, `DEMO_PASSWORD`.
    `SUPABASE_DB_URL` is **not** needed on Vercel — only the local scripts use it.
-3. In Supabase, add the Vercel domain under **Authentication → URL Configuration**.
+3. Sign-in is email + password only, so no redirect URLs are needed in Supabase.
+   Add the Vercel domain under **Authentication → URL Configuration** only if you
+   later add OAuth or magic links.
 
 ---
 
