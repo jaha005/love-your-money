@@ -16,3 +16,6 @@ video/out
 
 # lokalna provjera builda
 .next-check
+
+# local helper, not part of the product
+vercel-env.sh
