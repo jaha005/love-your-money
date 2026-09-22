@@ -1,5 +1,8 @@
 # Love Your Money — group programme platform
 
+**Live demo:** https://love-your-money.vercel.app — three one-click sign-ins on
+the login page, no account needed.
+
 A web platform for a coach running a group education programme: eight modules,
 lessons with video and text, downloadable worksheets, assignments with a review
 queue, weekly Zoom calls, and a cohort dashboard that shows at a glance who has
