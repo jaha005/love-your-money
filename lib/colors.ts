@@ -32,7 +32,9 @@ export const cssVars = {
   "--text": c.text,
 
   "--accent": c.accent,
-  "--accent-text": mix(c.accent, c.text, 0.3),
+  // 0.3 measured 4.47:1 on the page background - under the 4.5 threshold.
+  // 0.38 clears it on the page, on cards and on tint with room to spare.
+  "--accent-text": mix(c.accent, c.text, 0.38),
   "--accent-dark": mix(c.accent, c.text, 0.16),
   "--accent2": c.accent2,
   "--accent2-text": mix(c.accent2, c.text, 0.12),

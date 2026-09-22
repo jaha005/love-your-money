@@ -292,8 +292,10 @@ been rendered, the page simply skips it.
 Checked and fixed in a dedicated pass:
 
 - **Contrast.** Gold is strong enough as a surface but not as text. So
-  `--accent-text` is used for every gold label, link and focus ring (4.5–5.1:1
-  depending on the background), while gold buttons carry dark text (5.0:1). Input
+  `--accent-text` is used for every gold label, link and focus ring (5.2–5.8:1
+  depending on the background), while gold buttons carry dark text (5.0:1).
+  An earlier value sat at 4.47:1 on the page background — just under the
+  threshold — which Lighthouse caught; it is now derived with margin. Input
   borders use `--line-strong` (3.1–3.5:1, WCAG 1.4.11); card lines stay soft because
   they're decorative. Avatar and status colours are derived as background/text
   pairs, all above 4.5:1.
