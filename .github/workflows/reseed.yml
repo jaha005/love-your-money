@@ -1,0 +1,38 @@
+# The demo's dates are relative to the day the seed runs: "18 days ago",
+# "next call in 4 days", module 8 still locked. Left alone, the cohort drifts
+# until every member reads as stalled and there is no upcoming call.
+#
+# So the seed runs every morning. It also wipes anything visitors typed into
+# the demo the day before.
+#
+# Secrets needed (Settings -> Secrets and variables -> Actions):
+#   SUPABASE_URL          the project URL
+#   SUPABASE_SECRET_KEY   the secret key (sb_secret_...)
+# The database password is NOT needed - the seed only talks to the API.
+
+name: Reseed demo data
+
+on:
+  schedule:
+    - cron: "0 4 * * *" # 04:00 UTC daily, before European working hours
+  workflow_dispatch: # also runnable by hand from the Actions tab
+
+jobs:
+  reseed:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - name: Seed
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SECRET_KEY }}
+          DEMO_PASSWORD: demo1234
+        run: npm run db:seed

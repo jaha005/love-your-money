@@ -77,6 +77,17 @@ tests only need the API keys.
 
 `npm run db:reset` drops everything the migration created so you can start over.
 
+### Keeping a public demo fresh
+
+Every date in the seed is relative to the day it runs — "18 days ago", the next
+call in 4 days, module 8 still locked. Left alone, the cohort drifts: after a week
+nobody reads as active, and after two weeks every member shows as stalled.
+
+So `.github/workflows/reseed.yml` runs the seed every morning at 04:00 UTC. It also
+clears anything visitors typed into the demo the day before. It needs two repository
+secrets — `SUPABASE_URL` and `SUPABASE_SECRET_KEY` — and not the database password,
+because the seed only talks to the API.
+
 > **Don't run `npm run build` while `npm run dev` is running.** Both write to
 > `.next`, so the build deletes the dev server's CSS chunks and the page loads
 > unstyled. For a local build check use `npm run build:check`, which builds into
