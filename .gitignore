@@ -20,3 +20,6 @@ video/out
 # local helper, not part of the product
 vercel-env.sh
 .env*
+
+# portfolio assets, kept locally
+portfolio/
